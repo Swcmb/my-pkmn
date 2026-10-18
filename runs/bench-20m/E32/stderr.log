@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\pkmn-kaggle\rl\train_selfplay.py", line 2170, in <module>
+    main()
+  File "D:\pkmn-kaggle\rl\train_selfplay.py", line 2060, in main
+    clipfracs, approx_kls, last = update_net(advantages, returns, t_pre)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\rl\train_selfplay.py", line 1216, in update_net
+    loss.backward()                          # grads ACCUMULATE across chunks (exact)
+    ^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\_tensor.py", line 623, in backward
+    torch.autograd.backward(
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\autograd\__init__.py", line 395, in backward
+    _engine_run_backward(
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\autograd\graph.py", line 1072, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+The CUDA driver logged these messages, which may provide useful details:
+Sticky error detected
+Returning 2 (CUDA_ERROR_OUT_OF_MEMORY) from cuLaunchKernel
+
+

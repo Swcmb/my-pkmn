@@ -1,0 +1,36 @@
+﻿[2026-10-17 21:43:09] PREFLIGHT out_root=D:\pkmn-kaggle\runs\bench-20m free_bytes=259615531008
+[2026-10-17 21:43:09] PREFLIGHT gpu=NVIDIA GeForce RTX 5060 Laptop GPU, 581.29, 8151
+[2026-10-17 21:43:11] PREFLIGHT python=D:\ProgramFiles\deeplearning\python.exe device=2.14.0+cu130 NVIDIA GeForce RTX 5060 Laptop GPU
+[2026-10-17 21:43:11] PREFLIGHT ram_total_mib=32491.9 ram_free_mib=13202.7
+[2026-10-17 21:43:11] PREFLIGHT env PYTHONPATH=C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim TRAIN_PROF=1
+[2026-10-17 21:43:11] [E8,E16,E32] UNKNOWN experiment name, skipped
+[2026-10-17 21:43:11] ALL DONE
+[2026-10-17 21:46:51] PREFLIGHT out_root=D:\pkmn-kaggle\runs\bench-20m free_bytes=259615531008
+[2026-10-17 21:46:51] PREFLIGHT gpu=NVIDIA GeForce RTX 5060 Laptop GPU, 581.29, 8151
+[2026-10-17 21:46:53] PREFLIGHT python=D:\ProgramFiles\deeplearning\python.exe device=2.14.0+cu130 NVIDIA GeForce RTX 5060 Laptop GPU
+[2026-10-17 21:46:54] PREFLIGHT ram_total_mib=32491.9 ram_free_mib=13235.3
+[2026-10-17 21:46:54] PREFLIGHT env PYTHONPATH=C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim TRAIN_PROF=1
+[2026-10-17 21:46:54] [E8] START envs=8 total_timesteps=20480 iters=40 out=D:\pkmn-kaggle\runs\bench-20m\E8\checkpoint
+[2026-10-17 21:46:54] [E8] pid cmd=51372 main=14932
+[2026-10-17 21:51:05] [E8] END exit=0 wall=251.4s monitor_rows=251 log_lines=45
+[2026-10-17 21:51:05] [E8] artifacts: ckpt_20480.pt=81249333;latest.pt=243747737;matchup_r0.jsonl=138
+[2026-10-17 21:51:05] [E8] cooldown 30s
+[2026-10-17 21:51:35] [E16] START envs=16 total_timesteps=40960 iters=40 out=D:\pkmn-kaggle\runs\bench-20m\E16\checkpoint
+[2026-10-17 21:51:36] [E16] pid cmd=45268 main=37328
+[2026-10-17 21:59:28] [E16] END exit=0 wall=472.8s monitor_rows=472 log_lines=45
+[2026-10-17 21:59:28] [E16] artifacts: ckpt_40960.pt=81249333;latest.pt=243747737;matchup_r0.jsonl=138
+[2026-10-17 21:59:28] [E16] cooldown 30s
+[2026-10-17 21:59:58] [E32] START envs=32 total_timesteps=81920 iters=40 out=D:\pkmn-kaggle\runs\bench-20m\E32\checkpoint
+[2026-10-17 21:59:59] [E32] pid cmd=39648 main=18248
+[2026-10-17 22:00:34] [E32] ERROR: Attempted to divide by zero.
+[2026-10-17 22:00:34] ALL DONE
+[2026-10-18 16:33:51] PREFLIGHT out_root=D:\pkmn-kaggle\runs\bench-20m free_bytes=258965913600
+[2026-10-18 16:33:51] PREFLIGHT gpu=NVIDIA GeForce RTX 5060 Laptop GPU, 581.29, 8151
+[2026-10-18 16:33:58] PREFLIGHT python=D:\ProgramFiles\deeplearning\python.exe device=2.14.0+cu130 NVIDIA GeForce RTX 5060 Laptop GPU
+[2026-10-18 16:33:58] PREFLIGHT ram_total_mib=32491.9 ram_free_mib=17530.4
+[2026-10-18 16:33:58] PREFLIGHT env PYTHONPATH=C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim TRAIN_PROF=1
+[2026-10-18 16:33:58] [E32] START envs=32 total_timesteps=81920 iters=40 out=D:\pkmn-kaggle\runs\bench-20m\E32\checkpoint
+[2026-10-18 16:33:59] [E32] pid cmd=7160 main=23928
+[2026-10-18 17:00:34] [E32] END exit=1 wall=1596.1s monitor_rows=1595 log_lines=34
+[2026-10-18 17:00:34] [E32] artifacts: matchup_r0.jsonl=138
+[2026-10-18 17:00:34] ALL DONE
