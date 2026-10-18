@@ -1,0 +1,46 @@
+[W1017 22:00:39.000000000 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 417333248 bytes (free: 2436890624, total: 8546484224).
+[W1017 22:00:54.000000000 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 417333248 bytes (free: 0, total: 8546484224).
+[W1017 22:01:10.000000000 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 417333248 bytes (free: 0, total: 8546484224).
+[W1017 22:01:23.000000000 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 417333248 bytes (free: 0, total: 8546484224).
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\pkmn-kaggle\rl\train_selfplay.py", line 2170, in <module>
+    main()
+  File "D:\pkmn-kaggle\rl\train_selfplay.py", line 2060, in main
+    clipfracs, approx_kls, last = update_net(advantages, returns, t_pre)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\rl\train_selfplay.py", line 1154, in update_net
+    s_logits, newval, vdist = update_lv(mb_obs, return_vdist=True, opt_len=_ol,
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\rl\policy.py", line 620, in logits_value
+    cls_out, opt_out, pooled, extra = self._encode(o, opt_len=opt_len, state_keep=state_keep)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\rl\policy.py", line 543, in _encode
+    enc = self.encoder(seq, src_key_padding_mask=pad)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\transformer.py", line 542, in forward
+    output = mod(
+             ^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\transformer.py", line 956, in forward
+    x = self.norm2(x + self._ff_block(x))
+                       ^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\transformer.py", line 981, in _ff_block
+    x = self.linear2(self.dropout(self.activation(self.linear1(x))))
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\functional.py", line 1777, in relu
+    result = torch.relu(input)
+             ^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 398.00 MiB. GPU 0 has a total capacity of 7.96 GiB of which 0 bytes is free. Process 7928 has 17179869184.00 GiB memory in use. Including non-PyTorch memory, this process has 17179869184.00 GiB memory in use. Of the allocated memory 7.03 GiB is allocated by PyTorch, and 223.75 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)

@@ -1,0 +1,25 @@
+﻿name=E32
+num_envs=32
+num_steps=64
+num_minibatches=16
+total_timesteps=81920
+expected_iters=40
+net=d_model=544 nhead=8 nlayers=5
+seed=1
+python=D:\ProgramFiles\deeplearning\python.exe
+shim_pythonpath=C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim
+train_prof=1
+wrapper=D:\pkmn-kaggle\runs\bench-20m\E32\wrap_E32_20261018_163358.cmd
+exit_file=D:\pkmn-kaggle\runs\bench-20m\E32\exit_E32_20261018_163358.txt
+exit_code_source=file
+cmd_pid=7160
+main_pid=23928
+start=2026-10-18 16:33:58
+end=2026-10-18 17:00:34
+wall_seconds=1596.1
+exit_code=1
+train_log_lines=34
+last_log_line=step=63488 it=31/40 sps=41 avg=41 tch_wr=nan pg=0.000 v_ce=0.000 ent=0.740 clip=0.000 kl=0.0000 collect=5.0s[step=0.5s fwd=4.6s] update=44.0s (c-sps=407)
+monitor_rows=1595
+checkpoint_dir=D:\pkmn-kaggle\runs\bench-20m\E32\checkpoint
+artifacts=matchup_r0.jsonl=138

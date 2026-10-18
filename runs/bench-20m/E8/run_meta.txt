@@ -1,0 +1,25 @@
+﻿name=E8
+num_envs=8
+num_steps=64
+num_minibatches=16
+total_timesteps=20480
+expected_iters=40
+net=d_model=544 nhead=8 nlayers=5
+seed=1
+python=D:\ProgramFiles\deeplearning\python.exe
+shim_pythonpath=C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim
+train_prof=1
+wrapper=D:\pkmn-kaggle\runs\bench-20m\E8\wrap_E8_20261017_214654.cmd
+exit_file=D:\pkmn-kaggle\runs\bench-20m\E8\exit_E8_20261017_214654.txt
+exit_code_source=file
+cmd_pid=51372
+main_pid=14932
+start=2026-10-17 21:46:54
+end=2026-10-17 21:51:05
+wall_seconds=251.4
+exit_code=0
+train_log_lines=45
+last_log_line=done.
+monitor_rows=251
+checkpoint_dir=D:\pkmn-kaggle\runs\bench-20m\E8\checkpoint
+artifacts=ckpt_20480.pt=81249333;latest.pt=243747737;matchup_r0.jsonl=138
