@@ -1,0 +1,132 @@
+{
+ "evidence": {
+  "candidate_ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "candidate_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+  "candidate_global_step": 999424,
+  "candidate_net_config": {
+   "arch": "transformer2",
+   "d_model": 544,
+   "nhead": 8,
+   "nlayers": 5,
+   "ff": 256,
+   "static": false,
+   "would_ko": true,
+   "split_heads": false,
+   "value_categorical": false,
+   "value_atoms": 51,
+   "value_vmax": 1.0
+  },
+  "ship_deck": "D:\\pkmn-kaggle\\runs\\evaluation\\card_database_migration\\best_deck.csv",
+  "ship_deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+  "seeds": [
+   20261211,
+   20261212
+  ],
+  "games_per_seed_per_direction": 60,
+  "quick": false,
+  "turn_cap": "200",
+  "native_encode": false,
+  "would_ko": true,
+  "device": "cuda",
+  "cells_done": 1,
+  "cells_total": 12,
+  "random_reference": {
+   "wr": 0.608,
+   "ci95": [
+    0.519,
+    0.691
+   ],
+   "note": "对随机合法策略的既有基线，并列呈现，不与本节混算"
+  },
+  "reconstruction_confidence": {
+   "team7_食堂不要插队": {
+    "team": "食堂不要插队",
+    "games_observed": 44,
+    "n_kinds": 16,
+    "conf_high": 12,
+    "conf_low": 0,
+    "energy_budget": 16
+   },
+   "team3_格鲁": {
+    "team": "格鲁",
+    "games_observed": 44,
+    "n_kinds": 22,
+    "conf_high": 18,
+    "conf_low": 0,
+    "energy_budget": 10
+   },
+   "team39_对对对队": {
+    "team": "对对对队",
+    "games_observed": 46,
+    "n_kinds": 21,
+    "conf_high": 12,
+    "conf_low": 1,
+    "energy_budget": 10
+   },
+   "team4_咪咪汪汪队": {
+    "team": "咪咪汪汪队",
+    "games_observed": 42,
+    "n_kinds": 21,
+    "conf_high": 17,
+    "conf_low": 0,
+    "energy_budget": 10
+   },
+   "team17_不说对不队": {
+    "team": "不说对不队",
+    "games_observed": 44,
+    "n_kinds": 20,
+    "conf_high": 17,
+    "conf_low": 0,
+    "energy_budget": 10
+   }
+  }
+ },
+ "results": [
+  {
+   "wins": 78,
+   "decided": 120,
+   "games": 120,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.65,
+   "ci95": [
+    0.561213245977243,
+    0.729481004097146
+   ],
+   "mean_turn": 35.0,
+   "seat0": {
+    "games": 60,
+    "wins": 38
+   },
+   "seat1": {
+    "games": 60,
+    "wins": 40
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 41,
+     "decided": 60
+    },
+    {
+     "seed": 20261212,
+     "wins": 37,
+     "decided": 60
+    }
+   ],
+   "deck_label": "team17_不说对不队",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team17_不说对不队_reconstructed.csv",
+   "deck_sha256": "f11eda3b37b797175e89938c2b8b135db0d4e770a8139a564621150681715d4b",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "seeds_ok": [
+    20261211,
+    20261212
+   ],
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  }
+ ]
+}

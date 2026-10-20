@@ -268,16 +268,52 @@ def write_md(path, ev, results):
     for k, c in ev["reconstruction_confidence"].items():
         L.append(f"| {c['team']} | {c['games_observed']} | {c['n_kinds']} | {c['conf_high']} | "
                  f"{c['conf_low']} | {c.get('energy_budget')} |")
-    L += ["", "## 结论口径", "",
-          "- forward（候选驾驶 `best_deck` vs 该副牌）低 → 该副牌在**牌组层面**压制自家牌组。",
-          "- reverse（候选驾驶该副牌 vs `best_deck`）高 → 同一模型换上该副牌更强，"
-          "两条同时成立才构成「换牌组」的证据；只中一条属牌组与模型的匹配效应。",
+    L += ["", "## 自动结论（是否建议换牌组）", "",
+          "判据说明：两格用的是同一对牌组，只是把**我方模型**放在不同一侧。",
+          "因为模型远强于 random，两格的绝对胜率都会被模型拉高，"
+          "**牌组本身的净效应看 Δ = reverse − forward**（把 D 交给模型时是否比把 `best_deck` "
+          "交给模型时赢得更多）。Δ>0 且两格 95% 区间不重叠，才算「该牌组值得考虑换」的候选。",
+          "",
+          "| 牌组 | forward（模型驾驶 best_deck） | reverse（模型驾驶该牌组） | Δ = rev − fwd | 区间不重叠 | 判定 |",
+          "| :--- | :--- | :--- | ---: | :---: | :--- |"]
+    by = {}
+    for m in results:
+        by.setdefault(m["deck_label"], {})[m["direction"]] = m
+    swaps = []
+    for label, pair in by.items():
+        f, r = pair.get("forward"), pair.get("reverse")
+        if not f or not r or f["wr"] is None or r["wr"] is None:
+            L.append(f"| {label} | 数据不全 | 数据不全 | - | - | 待补 |")
+            continue
+        d = r["wr"] - f["wr"]
+        disjoint = r["ci95"][0] > f["ci95"][1] or f["ci95"][0] > r["ci95"][1]
+        if d > 0 and disjoint:
+            verdict = "换牌组候选（Δ>0 且区间分离）"
+            swaps.append((d, label))
+        elif d > 0:
+            verdict = "方向偏正，但样本不足以分离（噪声内）"
+        elif disjoint:
+            verdict = "现有牌组更适配（Δ<0 且区间分离）"
+        else:
+            verdict = "无差异"
+        L.append(f"| {label} | {fmt(f['wr'])} [{fmt(f['ci95'][0])},{fmt(f['ci95'][1])}] | "
+                 f"{fmt(r['wr'])} [{fmt(r['ci95'][0])},{fmt(r['ci95'][1])}] | "
+                 f"{d:+.4f} | {'是' if disjoint else '否'} | {verdict} |")
+    L += ["", "**排序结论**：" + ("、".join(f"{l}（Δ={d:+.3f}）" for d, l in sorted(swaps, reverse=True))
+                                 if swaps else "本轮无 Δ>0 且区间分离的牌组。"), "",
+          "按 §8.5：**不因头部用某副牌就直接换**；上面任何「换牌组候选」都要再走与 A5 同等级的门禁。",
+          "", "## 读数口径与噪声底", "",
+          "- forward（模型驾驶 `best_deck` vs 该副牌）与 reverse（模型驾驶该副牌 vs `best_deck`）"
+          "是同一对牌组的两侧换位，绝对胜率受模型支配，牌组效应看 Δ。",
+          "- **GPU 前向非确定性**：同一格（同 seeds、同代码）两次跑出 0.692 与 0.650，"
+          "差 5/120 局。因此 Δ 小于 ~0.05 的行属噪声，A5 的 G-a 阈值 0.608 也压在"
+          "这条噪声底上，判定时必须看区间而非点值。",
           "- 单队样本量按上表 decided 读，CI 宽的行不足以支撑结论。",
-          "- 换牌组必须走与 A5 同等级门禁，本节只是候选依据（§8.5）。",
-          "", "## 未覆盖", "",
-          "- 对手是随机合法而非对手模型：本节测的是**牌组对牌组**的先验强弱，"
+          "- 对手动作策略是 random legal，本节测的是牌组×模型的匹配度，"
           "不等于线上对真实对手的胜率。",
-          "- 还原牌组非官方 deck，能量与低置信卡可能失真。", ""]
+          "", "## 未覆盖", "",
+          "- 还原牌组非官方 deck，能量与低置信卡可能失真（能量张数是先验）。",
+          "- 未与真实对手模型对打；未做 seat 之外的先手/后手细分（表内已给出 w/g 拆分）。", ""]
     open(path, "w", encoding="utf-8").write("\n".join(L))
 
 
