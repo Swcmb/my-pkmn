@@ -1,0 +1,108 @@
+[
+ {
+  "seat": 0,
+  "steps": 59,
+  "result": 1,
+  "trace": [
+   {
+    "step": 0,
+    "who": "agent",
+    "type": 9,
+    "context": 41,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 2,
+    "pick": [
+     1
+    ]
+   },
+   {
+    "step": 2,
+    "who": "agent",
+    "type": 1,
+    "context": 1,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 1,
+    "pick": [
+     0
+    ]
+   },
+   {
+    "step": 7,
+    "who": "agent",
+    "type": 0,
+    "context": 0,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 5,
+    "pick": [
+     4
+    ]
+   },
+   {
+    "step": 59,
+    "who": "random",
+    "type": 0,
+    "context": 7,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 0,
+    "pick": [],
+    "error": "IndexError"
+   }
+  ]
+ },
+ {
+  "seat": 1,
+  "steps": 122,
+  "result": 1,
+  "trace": [
+   {
+    "step": 2,
+    "who": "agent",
+    "type": 1,
+    "context": 1,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 2,
+    "pick": [
+     0
+    ]
+   },
+   {
+    "step": 3,
+    "who": "agent",
+    "type": 1,
+    "context": 2,
+    "minCount": 0,
+    "maxCount": 1,
+    "n_options": 1,
+    "pick": []
+   },
+   {
+    "step": 5,
+    "who": "agent",
+    "type": 0,
+    "context": 0,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 6,
+    "pick": [
+     5
+    ]
+   },
+   {
+    "step": 122,
+    "who": "agent",
+    "type": 0,
+    "context": 0,
+    "minCount": 1,
+    "maxCount": 1,
+    "n_options": 0,
+    "pick": [],
+    "error": "IndexError"
+   }
+  ]
+ }
+]

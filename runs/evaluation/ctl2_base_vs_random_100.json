@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_500736.pt",
+  "cand_step": 500736,
+  "mode": "mirror",
+  "games": 100,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs\\evaluation\\pool_top15.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 100,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 42,
+      "losses": 58,
+      "decided": 100,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.42,
+      "winrate_ci95": [
+        0.3279838267435473,
+        0.5179351329695703
+      ],
+      "winrate_all_games": 0.42,
+      "seat_balance": {
+        "games_seat0": 50,
+        "games_seat1": 50,
+        "wins_seat0": 21,
+        "wins_seat1": 21,
+        "wr_seat0": 0.42,
+        "wr_seat1": 0.42
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 98.92,
+        "median_applies": 103.0,
+        "p95_applies": 165.69999999999996,
+        "max_applies": 220,
+        "mean_turn": 37.66,
+        "median_turn": 37.5,
+        "p95_turn": 75.1,
+        "max_turn": 95
+      },
+      "elapsed_s": 28.878504991531372,
+      "games_per_s": 3.462783133314035
+    }
+  ]
+}

@@ -1,0 +1,415 @@
+```markdown
+# 任务：路线 A —— 把 20M 教师蒸馏为 ≤1 MiB 的可提交小模型（含只读支线：真实强队牌组还原）
+
+项目路径：`D:\pkmn-kaggle`
+Python：`D:\ProgramFiles\deeplearning\python.exe`
+平台：`http://115.159.47.81/`
+CLI：`D:\ptcg-arena-cli`（`python -m ptcg_arena`）
+训练输出目录：`runs\finetune-500k-e8-20261020`
+预期终局 checkpoint：`runs\finetune-500k-e8-20261020\ckpt_499712.pt`
+
+## 0. 最高优先级约束（不可违反）
+
+1. **训练与蒸馏必须由用户本人运行**。AI 不得启动、间接启动、后台启动任何
+   `rl.train_selfplay`、`scripts/bc_train.py`、`export_distill_data.py` 或任何会写
+   checkpoint / 优化器状态的进程。AI 只能：写脚本、跑 `--help`、准备命令、审查配置、
+   **只读检测训练状态**、跑不产生新权重的推理/评测/导出/校验/平台只读查询。
+2. **不得覆盖任何历史产物**：`runs/train-20m-e16-1m/**`、`runs/finetune-500k-e8-20261020/**`、
+   `runs/evaluation/**` 既有报告、四个历史 `submission_rl_transformer2*.tar.gz` 与其目录、
+   `agent/deck.csv`、`best_deck.csv`、`EN_Card_Data.csv`。新产物一律独立命名。
+3. **导出前必须检查覆盖风险**：`scripts/export_rl_submission.py` 对已存在的
+   `--builddir` 会 `shutil.rmtree`，对已存在的 `--out` 会静默覆盖。两者必须都是新名字。
+4. **上传必须经用户明确确认**。AI 可做 `--dry-run`、展示目标/大小/SHA/本地校验结果，
+   收到明确确认后才执行 `agent submit`。
+5. **不得伪造测试结果**。未运行、未验证的项必须标“未验证”。不得把本地结构检查写成
+   “平台已接受”。
+6. **不得关闭 `would_ko` 或伪造 `native_encode`**。本机 `native_encode=False` 是既有限制，
+   报告里必须标注；不得用关闭 `would_ko` 规避问题。
+7. **训练状态检测只读**。不得为了“加速完成”而杀进程、改配置、删日志、重启训练。
+   只有用户明确要求“中止训练”时才可报告停止方法，由用户执行。
+8. **不修改 `D:\ptcg-arena-cli` 的任何文件**，除非用户对每个具体改动单独明确授权。
+   CLI bug（`match_log()` 缺 `auth=True`）只能报告，不能自行修复；只读查询可以用
+   包内 `_request(..., auth=True)` 等价方式绕过，但必须在报告中注明“绕过而非修复”。
+
+## 1. 前置事实（已确认，直接引用，不要重复验证）
+
+- 权威卡池：`EN_Card_Data.csv`，SHA `05aa569e3003a838b8503a9d928795e5aea7407ab19dd9f3d9c4b1293b6bb4b4`，
+  1,267 唯一 Card ID。
+- 候选教师：`runs/train-20m-e16-1m/ckpt_999424.pt`，
+  SHA `b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e`，
+  `net_config = transformer2 / d_model 544 / nhead 8 / nlayers 5 / ff 256 / would_ko True`，
+  20,303,715 参数。
+- 旧基线：`ckpt_500736.pt`，SHA `b02b0724ebbb…`。
+- 提交牌组：`runs/evaluation/card_database_migration/best_deck.csv`，SHA `30c8c7365c75…`，60 张。
+- 平台上限：**1,048,576 B（nginx `client_max_body_size 1m`）**，已用真实提交 413 +
+  近零字节探测双重确认。非权重部分 gzip 后约 120 KB，权重预算约 926 KB，
+  fp16 参数上限约 46 万。
+- 1 MiB 内最大实测可用档：**`d_model=64 / nhead=4 / nlayers=3 / ff=128` = 384,067 参数**。
+- 参考基线（对随机合法策略，120 局，提交牌组）：
+  - 已训练 544/8/5：0.608 [0.519, 0.691]
+  - 未训练 544/8/5：0.575 [0.486, 0.660]
+  - 未训练 64/4/3/128：0.617 [0.527, 0.699]
+  → 三者 CI 大面积重叠；小网不天然劣于大网。
+- 评估池切分：`runs/evaluation/session-20261020/opp_pool_train30.json`（训练/门禁用）、
+  `eval_pool_heldout44.json`（held-out，不得用于训练）。
+- 测试：`pytest tests -q` 带
+  `PYTHONPATH=D:\pkmn-kaggle\.engine-shim;D:\pkmn-kaggle` 应 ≥51 passed。
+- 训练配置（用户已启动，勿改）：`--init-from ckpt_999424 --finetune-deck csv:best_deck.csv
+  --opponent-ckpt ckpt_999424 --ladder-decks-file pool_top50.json --num-envs 8 --num-steps 64
+  --total-timesteps 500000 --save-every 250000 --out runs\finetune-500k-e8-20261020`。
+- 平台日志事实（已实测）：`/api/matches` 全量可拿；`/api/matches/{id}/log` 带 token 返回 200；
+  日志是**中文可读文本**（卡名级），非结构化观测；他队 deck 不公开；
+  `ptcg_arena/api.py:137` 的 `match_log()` 缺 `auth=True`，`agent results --log-id` 必然 401。
+- 头部第 1 队（食堂不要插队，累计约 0.797）12 局样本显示：Crustle/Dwebble 虫系耐久，
+  不是 Dragapult ex。该结论为**小样本方向**，需扩样确认。
+
+## 2. 阶段 A0：Agent 自主检测训练状态（只读）
+
+**触发**：本任务开始后立即执行；用户后续每次唤起时重新执行一次。不等待用户报告。
+
+### 2.1 检测方法（全部只读，四路交叉）
+
+1. **进程检测**：`Get-CimInstance Win32_Process` 过滤 `CommandLine` 含 `rl.train_selfplay`
+   且 `--out` 指向 `runs\finetune-500k-e8-20261020`。记录 PID、启动时间、CPU 时间、工作集。
+2. **日志检测**：读 `runs\finetune-500k-e8-20261020\` 下训练日志（stdout 重定向文件）：
+   - 尾部是否出现 `done.` 或等价完成标记；
+   - 最后一条 `step=… it=…/…` 的 `it` 分母与 `step` 值；
+   - 是否有 `NaN`/`Inf`/`Traceback`/`OOM`/`CUDA error`；
+   - `matchup_r0.jsonl`、`value_diag.jsonl` 末行 `step` 与文件 mtime。
+3. **产物检测**：列目录：
+   - `latest.pt` 是否存在、大小约 243 MB、mtime；
+   - `ckpt_250880.pt`（若已过 250k）、`ckpt_499712.pt` 是否存在、大小约 81 MB、mtime；
+   - 各文件 mtime 是否在最近 5 分钟内（判断是否仍在写入）。
+4. **交叉判定**：
+   - 进程存在 + 无完成标记 + `latest.pt` 近 5 分钟有更新 → **R 仍在运行**；
+   - 进程不存在 + 有完成标记 + 终局 ckpt 存在且可读 → **C 正常完成**；
+   - 进程不存在 + 有 `Traceback`/`OOM`/无完成标记 → **E 异常结束**；
+   - 其余 → **U 证据不足**。
+
+### 2.2 四态分支
+
+**R（仍在运行）**：
+- 只读报告：PID、当前 `step / total`、`it`、最近 `sps`、`ckpt_250880`/终局 ckpt 是否出现、
+  两个 jsonl 末行 step、日志尾 5 行、GPU 占用与温度。
+- **停止**，不进入 A1。向用户报告进度与按当前 sps 估算的完成时间，说明“可再次唤起本任务
+  重新检测”。
+- 不得轮询等待、不得后台挂起、不得启动第二个训练。
+- 若此时用户另行要求做 A5.5 只读支线（牌组还原/平台只读查询），可以执行，因为它不写权重、
+  不与训练冲突；但必须在报告中标注“主线仍停在 A0-R”。
+
+**C（正常完成）**：
+- 记录：退出方式、日志完成标记、终局 `ckpt_*.pt` 路径/大小/SHA/`global_step`、
+  `latest.pt` 路径/大小、总耗时、最终 `sps` 均值。
+- 只读检查终局 ckpt：`torch.load(..., map_location="cpu", weights_only=True)` 读出
+  `net`/`net_config`/`global_step`；确认 544/8/5/ff256/would_ko True、20,303,715 参数、
+  无 NaN/Inf。
+- 自动进入 A1。
+
+**E（异常结束）**：
+- 原样记录日志尾部完整 traceback、退出前最后 `step`、`latest.pt`/终局 ckpt 是否留下、
+  GPU/内存当时状态（若日志有）。
+- **不假定新模型可用**；不覆盖 `ckpt_999424`；不进入 A1。
+- 报告失败证据与只给建议的修复方向，**不启动修复训练**。停止。
+
+**U（证据不足）**：
+- 列出全部检测证据，明确写“无法判定完成还是中断”。
+- **停止**，请用户确认；用户确认前不进入 A1。
+
+## 3. 阶段 A1：教师选择（状态 C 时自动执行，只读评测）
+
+1. 跑阶段 4 门禁：
+
+   ```powershell
+   cd D:\pkmn-kaggle
+   $env:PYTHONPATH = "D:\pkmn-kaggle\.engine-shim;D:\pkmn-kaggle"
+   $env:PKMN_TURN_CAP = "200"
+   D:\ProgramFiles\deeplearning\python.exe runs\evaluation\session-20261020\phase4_gate.py `
+     --ckpt runs\finetune-500k-e8-20261020\ckpt_499712.pt
+   ```
+
+   若实际终局 ckpt 名不是 `ckpt_499712.pt`，以检测到的真实路径为准并在报告中说明。
+
+2. 判定教师：
+   - 主门 G7（提交牌组纯镜像 vs `ckpt_999424`）≥ 0.55 且 Wilson 下界 > 0.5 → 教师 = 新 ckpt；
+   - 否则教师 = `ckpt_999424`，记录失败原因。
+   - 核对 G1–G8、G7b、自镜像 sanity、0 非法动作、0 异常。
+
+3. 输出 `runs/evaluation/session-20261020/distill/teacher_selection.md`：
+   检测时间、四态判定证据、教师路径/SHA/step、门禁逐项结果、选择理由。
+
+**停止点 1**：报告检测证据、门禁结果、教师选择，等用户确认再进入 A2。
+若用户在 R 状态下已另行授权 A5.5 支线，A5.5 可先行，但 A2 必须等 C。
+
+## 4. 阶段 A2：极小占位包试探上传（验证平台契约）
+
+目的：在投入蒸馏前，用 <1 MiB 的合法包确认两件从未被验证的事：
+① 平台是否接受多文件包；② 沙箱是否预装 torch。
+
+1. 用**未训练**的 64/4/3/128 小网构建占位包（只 `build_token_net` 随机初始化后存
+   `model.pt`），牌组用 `best_deck.csv`，复用 `TRANSFORMER2_HEAD` 与 `--max-bytes 1047000`。
+   - 若导出脚本不支持未训练小网，写最小脚本 `make_placeholder_pkg.py`
+     （仅构造 net + 复用模板 + 写 `model.pt`/`deck.csv`/`EN_Card_Data.csv`/`sdk_cg/*.py`），
+     产物输出到 `runs/evaluation/session-20261020/distill/placeholder/`。
+   - **不修改** `scripts/export_rl_submission.py` 的正式模板。
+2. 本地校验：
+   - `python -m ptcg_arena agent validate <placeholder.tar.gz>`；
+   - 解包检查 `main.py` 可 import、`agent({"select": None})` 返回 60 张、
+     `subsmoke_timing.py` 至少 20 决策、0 非法；
+   - 大小 <1,047,000 B，计算 SHA-256。
+3. 向用户展示：包路径、大小、SHA、validate 结果、smoke 结果、目标赛事（A 榜、当前轮次），
+   **请求明确确认上传**。
+4. 用户确认后执行：
+
+   ```powershell
+   cd D:\ptcg-arena-cli
+   D:\ProgramFiles\deeplearning\python.exe -m ptcg_arena agent submit --yes <placeholder.tar.gz>
+   ```
+
+5. 结果处理：
+   - 成功：记录服务器返回、`agent mine`；标注“多文件结构 + torch 依赖已被平台接受”。
+   - 失败：原样记录 HTTP 状态与错误体，**不重复上传**，不猜测原因。
+     413 → 预算算错；4xx 结构错误 → 多文件不被接受，需回退“单文件 main.py + deck.csv”方案。
+   - 如需清理占位提交，先查平台是否支持删除；不支持则保留并标注“占位提交”。
+
+**停止点 2**：上传结果确认后报告，等用户决定是否继续 A3。
+
+## 5. 阶段 A3：写 rollout dumper（AI 写脚本，用户运行）
+
+1. AI 编写 `scripts/export_distill_data.py`：
+   - 输入：教师 ckpt、牌组池 JSON、输出 `.npz`、局数、seed、`PKMN_TURN_CAP`；
+   - 复用 `rl.env_selfplay` 采集路径与 `rl.policy` 前向，**不重写训练循环**；
+   - 每局记录：观测张量（按 `TokenEncoder` 键）、`action_mask`、教师 argmax 动作、
+     教师 value、终局真实回报（截断局丢弃或单独标记）；
+   - `.npz` 结构：`obs/*`、`mask`、`act`、`val`、`ret`、`meta`（教师 SHA、牌组 SHA、
+     卡池 SHA、seed、turn_cap、局数、决策数）；
+   - 支持 `--limit-decisions`、`--shard`、`--max-bytes`；
+   - 不写 checkpoint、不更新权重、不产生优化器状态。
+2. AI 跑 `--help`、用 `--games 1` 只读冒烟到临时目录，确认可运行、输出结构正确，
+   删除临时产物或放到 `runs/evaluation/session-20261020/distill/_smoke/` 并标注。
+3. 交付命令（示例）：
+
+   ```powershell
+   cd D:\pkmn-kaggle
+   $env:PYTHONPATH = "D:\pkmn-kaggle\.engine-shim;D:\pkmn-kaggle"
+   $env:PKMN_TURN_CAP = "200"
+   D:\ProgramFiles\deeplearning\python.exe scripts\export_distill_data.py `
+     --ckpt <教师 ckpt> `
+     --deck-json runs\evaluation\card_database_migration\best_deck.csv `
+     --ladder-json runs\evaluation\session-20261020\opp_pool_train30.json `
+     --games 2000 --seed 20261020 `
+     --out runs\evaluation\session-20261020\distill\teacher_data.npz
+   ```
+
+   说明输出位置、预计耗时、磁盘占用、停止方式、完成后回传文件。
+
+**停止点 3**：命令交付后停止，等用户运行完成。
+
+## 6. 阶段 A4：蒸馏训练（AI 准备命令，用户运行）
+
+1. 用户报告 `.npz` 完成后，AI 只读检查：存在、大小、`meta` 完整、决策数、
+   动作分布是否退化（单动作 >90% 需警示）。
+2. 用 `scripts/bc_train.py --help` 核实参数，目标配置：
+   - `d_model=64 / nhead=4 / nlayers=3 / ff=128`（384,067 参数）；
+   - 若导出仍超 1 MiB，降级 `64/4/2/128`（334,083 参数）。
+   示例：
+
+   ```powershell
+   cd D:\pkmn-kaggle
+   $env:PYTHONPATH = "D:\pkmn-kaggle\.engine-shim;D:\pkmn-kaggle"
+   D:\ProgramFiles\deeplearning\python.exe scripts\bc_train.py `
+     --data runs\evaluation\session-20261020\distill\teacher_data.npz `
+     --d-model 64 --nhead 4 --nlayers 3 --ff 128 `
+     --epochs 10 --batch-size 256 --lr 3e-4 `
+     --out runs\evaluation\session-20261020\distill\bc_small
+   ```
+
+   实际参数以 `--help` 为准；若 `bc_train.py` 不支持 `.npz` 输入，先做最小适配
+   （加 `--npz` 读取分支）并写回归测试，再交付命令。
+3. 说明输出目录、预计耗时、显存/内存风险、停止方式、完成后回传 `ckpt_*.pt`/`latest.pt`。
+
+**停止点 4**：命令交付后停止，等用户运行完成。
+
+## 7. 阶段 A5：小网门禁评测（AI 执行，只读）
+
+1. 只读检查蒸馏产物：文件完整性、`net_config` 是否 64/4/3/128、参数量是否 384,067、
+   是否 NaN/Inf、`global_step`。
+2. 跑门禁（提交牌组 `best_deck.csv`，`PKMN_TURN_CAP=200`，`native_encode=False`，
+   `would_ko=True`，座位严格 50/50，种子不与历史重叠）：
+   - **G-a** 对随机合法策略：≥120 局，合并胜率 **≥0.608 且 Wilson 下界 >0.5**；
+   - **G-b** 对教师纯镜像（`best_deck.csv`）：≥120 局，胜率 **≥0.45**；
+   - **G-c** 自镜像 sanity：≥100 局，胜率 **0.45–0.55**，0 异常；
+   - **G-d** held-out 交叉：候选驾驶 `best_deck.csv`，教师驾驶 `eval_pool_heldout44.json`，
+     ≥120 局，Wilson 下界 **>0.40**；
+   - **G-e** 非法动作 / 异常 / turn_cap 截断：全部为 0；
+   - **G-f** 单步时延：`subsmoke_timing.py`，p99 <100ms，`SMOKE_THREADS=2` 下 >100ms 为 0，
+     峰值 RSS <2GB。
+3. 判定：
+   - 全部通过 → 晋级 A6；
+   - G-a 未过 → 蒸馏失败，保留 `ckpt_999424` 作教师，报告原因，**不强行晋级**；
+   - G-b/G-d 未过但 G-a 过 → 标注“小网在自家牌组上达标、对教师/held-out 偏弱”，
+     由用户决定是否接受。
+4. 输出 `runs/evaluation/session-20261020/distill/small_gate_report.md`。
+
+**停止点 5**：报告交付后停止，等用户决定是否进入 A6 或先做 A5.5 支线。
+
+## 8. 阶段 A5.5：只读支线 —— 真实强队牌组还原与真实对手口径评测
+
+**性质**：只读、不写权重、不训练、不阻塞主线。可在 A0-R 阶段由用户授权后先行，
+也可在 A5 之后作为补充口径。**无论何时执行，都必须明确标注它不改变 A2–A6 的主线判定。**
+
+### 8.1 目标
+
+1. 从平台日志还原头部 3–5 队的 60 张牌组（纯文本分析，不依赖引擎复现假设）。
+2. 用还原牌组在本地跑“候选 vs 真实头部牌组”交叉对局，作为对随机合法策略之外的补充口径。
+3. **不做 BC**。BC 的前置验证放在 A8，且必须用户单独授权。
+
+### 8.2 数据采集（只读）
+
+1. `GET /api/matches` 拿全量列表；按积分榜取头部 3–5 队（以累计积分排序，不是单轮）。
+2. 每队取 40–60 局，`GET /api/matches/{id}/log` 带 token。
+   - 因 `ptcg_arena/api.py:137` 的 `match_log()` 缺 `auth=True`，允许在**临时脚本内**
+     用包内 `_request(..., auth=True)` 等价方式绕过；**不修改 CLI 源文件**，
+     并在报告中注明“绕过而非修复”。
+3. 日志与 `seed`、`match_id`、队伍名、胜者一并落盘到
+   `runs/evaluation/session-20261020/platform_logs/`，文件名带 match_id，避免覆盖。
+
+### 8.3 牌组还原（纯文本，无引擎假设）
+
+1. 解析中文日志中的卡名出现次数（`▶ X 方：将「A」附着到「B」`、`打出「A」`、
+   `使用「A」`、`进化「A」→「B」` 等模式）。
+2. 用约束求解还原 60 张：
+   - 同名 ≤4（基础能量豁免）；
+   - ACE SPEC ≤1；
+   - 至少 1 张真正基础宝可梦；
+   - 卡名必须在 `EN_Card_Data.csv` 中唯一匹配或按多印刷版本合并；
+   - 出现次数 ≥ 稳定阈值（如 ≥6 次/40 局）视为核心，低于阈值的按进化链/能量需求补齐。
+3. 每队输出：
+   - `runs/evaluation/session-20261020/strong_decks/<team>_reconstructed.csv`（60 张 cardId）；
+   - `<team>_evidence.md`：样本局数、卡名词频、约束求解过程、置信度、未确定项。
+4. 用平台字段（`/api/cards/csv`）与本地字段双重校验 60 张合法性；
+   用真实 CABT 引擎做开局接受校验。
+5. **明确标注**：还原是“从日志词频推断”，不是官方 deck；置信度分级
+   （高：核心卡频次远超阈值；中：部分卡靠约束补齐；低：样本不足）。
+
+### 8.4 真实对手口径评测（只读）
+
+1. 用还原牌组作为对手池，候选（教师或 A5 小网）驾驶 `best_deck.csv`，跑交叉对局：
+   - 每队 ≥60 局，两个座位均衡，`PKMN_TURN_CAP=200`，`native_encode=False`，`would_ko=True`；
+   - 记录胜率、Wilson CI、分座位、非法动作、异常、平均长度。
+2. 同时跑“候选驾驶还原牌组 vs 对手驾驶 `best_deck.csv`”的反向对照，判断是牌组优势还是
+   模型优势。
+3. 与“对随机合法策略 0.608”并列呈现，**不混算**，因为对手分布不同。
+4. 输出 `runs/evaluation/session-20261020/distill/strong_deck_eval.md`：
+   逐队胜率、CI、样本量、还原置信度、与 Dragapult 的对比、结论（是否建议换牌组）。
+
+### 8.5 明确不做什么
+
+- 不做 BC；
+- 不修改 `best_deck.csv`；
+- 不因“头部用 Crustle”就直接换牌组；换牌组必须经过与 A5 同等级的门禁；
+- 不把 12 局样本的结论当定论，必须扩到 40–60 局/队。
+
+**停止点 5.5**：报告交付后停止，等用户决定是否采纳牌组建议、是否进入 A6。
+
+## 9. 阶段 A6：1 MiB 合规导出与本地验证（AI 执行）
+
+1. 导出前检查：
+   - 候选 ckpt 路径、SHA、参数量、`net_config`；
+   - `best_deck.csv` SHA；
+   - `--out` 与 `--builddir` 均为**新名字**，`Test-Path` 确认为不存在；
+   - `scripts/export_rl_submission.py` 含 `--max-bytes`（默认 1,047,000）与
+     `torch.set_num_threads(2)` 补丁。
+2. 执行导出：
+
+   ```powershell
+   cd D:\pkmn-kaggle
+   $env:PYTHONPATH = "D:\pkmn-kaggle\.engine-shim;D:\pkmn-kaggle"
+   D:\ProgramFiles\deeplearning\python.exe scripts\export_rl_submission.py `
+     --ckpt <小网 ckpt> `
+     --backend transformer2 `
+     --deck runs\evaluation\card_database_migration\best_deck.csv `
+     --out submission_rl_transformer2_distill_<timestamp>.tar.gz `
+     --builddir submission_rl_transformer2_distill_<timestamp> `
+     --max-bytes 1047000
+   ```
+
+   若被拦截，报告实际大小与预算，降级 `64/4/2/128` 重新蒸馏（回到 A4，用户运行），
+   **不得绕过门禁**。
+3. 导出后校验：
+   - tar 成员数、顶层结构、无 `.dll/.so/.dylib`；
+   - `deck.csv` 与 `best_deck.csv` 逐字节一致；
+   - `EN_Card_Data.csv` 与权威库逐字节一致；
+   - `model.pt` 张量与候选 ckpt 逐位一致、`net_config`/`global_step` 一致；
+   - `main.py` 含 `torch.set_num_threads(2)`；
+   - 大小 <1,047,000 B，SHA-256；
+   - `agent validate`；
+   - `subsmoke_timing.py` ≥50 决策、0 非法、p99<100ms；
+   - 平台 502 恢复则 `agent probe` 一次。
+4. 输出 `runs/evaluation/session-20261020/distill/final_export_report.md`。
+
+**停止点 6**：报告交付后停止，等用户明确确认上传。
+
+## 10. 阶段 A7：上传（用户确认后 AI 执行）
+
+1. `agent mine` 确认无相同候选提交。
+2. 展示目标赛事、大小、SHA、本地校验结果、占位包是否已存在。
+3. 用户明确确认后：
+
+   ```powershell
+   cd D:\ptcg-arena-cli
+   D:\ProgramFiles\deeplearning\python.exe -m ptcg_arena agent submit --yes <tar.gz>
+   ```
+
+4. 上传后 `agent mine` 与 `/api/submissions` 核实；成功但记录未出现时标记“待确认”，
+   **不重复上传**。
+5. 输出最终报告 `runs/evaluation/session-20261020/distill/final_report.md`：
+   训练四态检测证据、教师选择、占位包结果、A5.5 支线结论、蒸馏数据规模、小网门禁逐项值、
+   导出文件路径/大小/SHA、validate/smoke/probe 结果、上传状态与服务器记录、
+   回滚路径、未验证项。
+
+## 11. 阶段 A8：BC 复现验证（仅用户单独授权后执行）
+
+**前置**：A7 已提交小网，并观察到 1–3 轮 A 榜真实胜率；用户明确要求评估 BC。
+
+1. **只做一局验证**，不写适配层、不训练：
+   - 取一条已知 `seed` 的平台对局日志；
+   - 在本地用同 `seed` 初始化引擎，尝试复现首回合洗牌与首决策；
+   - 记录“逐手一致 / 部分一致 / 不一致”，以及不一致的首次分歧点。
+2. 若**逐手一致**：说明 BC 下标可对，写一份“BC 可行性报告”，列出数据格式、适配层工作量、
+   预期收益与风险，交用户决定是否启动 BC 工程。
+3. 若**不一致**：明确记录“同 seed 本地不可复现平台对局，BC 无下标可对”，
+   **不硬做 BC**，并在最终报告中标注为已验证的负结论。
+4. 无论结果如何，**不启动任何 BC 训练**；训练只能由用户运行。
+
+**停止点 7**：报告交付后停止。
+
+## 12. 禁止事项汇总
+
+- 不启动训练、蒸馏、任何写权重的进程。
+- 不覆盖历史 ckpt、tar、deck、报告。
+- 不绕过 `--max-bytes`。
+- 不关闭 `would_ko`、不伪造 `native_encode`。
+- 不上传未经用户确认的包。
+- 不把本地结构检查写成平台接受。
+- 不把单 seed 的 `vs 未训练` 数字当强度结论（必须跨 ≥2 初始化合并）。
+- 不把训练内 `ft_wr` 当棋力证据。
+- 不因 `agent probe` 只跑到 deck-request 就宣称决策契约已验证。
+- 不为了“等待训练完成”而轮询挂起、后台等待或启动第二个进程；每次唤起只做一次快照检测。
+- 不修改 `D:\ptcg-arena-cli` 源文件；CLI bug 只报告，不自行修复。
+- 不把 A5.5 的还原牌组当作官方 deck；必须标注置信度与推断性质。
+- 不在 A8 复现验证前启动任何 BC 工程。
+
+## 13. 立即开始
+
+先执行 A0：只读检测 `runs\finetune-500k-e8-20261020` 的训练状态（进程、日志、产物、mtime），
+按 R/C/E/U 四态判定：
+
+- **R**：报告进度与预计完成时间；若用户此前已授权 A5.5 支线，可并行执行只读支线并标注
+  “主线停在 A0-R”；否则停止；
+- **C**：自动跑 `phase4_gate.py`，输出教师选择报告，在**停止点 1** 停下；
+- **E**：报告失败证据与修复建议，停止；
+- **U**：列出证据，请用户确认，停止。
+
+不得在检测阶段做任何写操作。
+```
+

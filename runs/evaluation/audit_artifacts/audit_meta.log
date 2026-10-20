@@ -1,0 +1,58 @@
+== checkpoints ==
+ckpt_999424.pt global_step= 999424 net_config= {'arch': 'transformer2', 'd_model': 544, 'nhead': 8, 'nlayers': 5, 'ff': 256, 'static': False, 'would_ko': True, 'split_heads': False, 'value_categorical': False, 'value_atoms': 51, 'value_vmax': 1.0}
+ckpt_500736.pt global_step= 500736 net_config= {'arch': 'transformer2', 'd_model': 544, 'nhead': 8, 'nlayers': 5, 'ff': 256, 'static': False, 'would_ko': True, 'split_heads': False, 'value_categorical': False, 'value_atoms': 51, 'value_vmax': 1.0}
+
+== eval/ctl JSONs: meta vs label ==
+ctl2_base_selfmirror_100.json    label=selfmirror_ckpt_999424       winrate=0.5 seat_wr=0.84/0.16 ckpt_meta=runs\train-20m-e16-1m\ckpt_500736.pt step=500736 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+ctl2_base_vs_random_100.json     label=random_legal                 winrate=0.42 seat_wr=0.42/0.42 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+ctl2_base_vs_untrained_100.json  label=untrained_same_config        winrate=0.1 seat_wr=0.18/0.02 ckpt_meta=- step=- init_seed=20261019 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+ctl2_cand_selfmirror_100.json    label=selfmirror_ckpt_999424       winrate=0.56 seat_wr=0.66/0.46 ckpt_meta=runs\train-20m-e16-1m\ckpt_999424.pt step=999424 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+ctl2_cand_vs_baseline_100_seedB.json label=baseline_ckpt_500736         winrate=0.58 seat_wr=0.88/0.28 ckpt_meta=runs\train-20m-e16-1m\ckpt_500736.pt step=500736 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261020}
+ctl2_cand_vs_random_100_seedB.json label=random_legal                 winrate=0.45 seat_wr=0.46/0.44 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261020}
+ctl2_cand_vs_random_deckcsv_60.json label=random_legal                 winrate=0.2 seat_wr=0.26666666666666666/0.13333333333333333 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+ctl2_cand_vs_untrained_100_seedB.json label=untrained_same_config        winrate=0.7040816326530612 seat_wr=0.82/0.56 ckpt_meta=- step=- init_seed=20261020 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261020}
+ctl_base_random_30.json          label=random_legal                 winrate=0.5666666666666667 seat_wr=0.4666666666666667/0.6666666666666666 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+ctl_base_selfmirror_30.json      label=selfmirror_ckpt_999424       winrate=0.4666666666666667 seat_wr=0.8666666666666667/0.06666666666666667 ckpt_meta=runs\train-20m-e16-1m\ckpt_500736.pt step=500736 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+ctl_base_untrained_30.json       label=untrained_same_config        winrate=0.1 seat_wr=0.2/0.0 ckpt_meta=- step=- init_seed=20261019 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+ctl_selfmirror_30.json           label=selfmirror_ckpt_999424       winrate=0.5666666666666667 seat_wr=0.8666666666666667/0.26666666666666666 ckpt_meta=runs\train-20m-e16-1m\ckpt_999424.pt step=999424 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+eval_baseline_100.json           label=baseline_ckpt_500736         winrate=0.62 seat_wr=0.84/0.4 ckpt_meta=runs\train-20m-e16-1m\ckpt_500736.pt step=500736 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+eval_random_100.json             label=random_legal                 winrate=0.43 seat_wr=0.42/0.44 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+eval_untrained_100.json          label=untrained_same_config        winrate=0.22 seat_wr=0.2/0.24 ckpt_meta=- step=- init_seed=20261019 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+smoke_random.json                label=random_legal                 winrate=0.5 seat_wr=0.5/0.5 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+tmp_smoke_base_random_10.json    label=random_legal                 winrate=0.6 seat_wr=0.4/0.8 ckpt_meta=- step=- init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+tmp_smoke_base_untrained_10.json label=untrained_same_config        winrate=0.0 seat_wr=0.0/0.0 ckpt_meta=- step=- init_seed=20261019 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+tmp_smoke_cand_selfmirror_10.json label=selfmirror_ckpt_999424       winrate=0.6 seat_wr=0.8/0.4 ckpt_meta=runs\train-20m-e16-1m\ckpt_999424.pt step=999424 init_seed=- top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+wk_untrained_base_s20261019.json label=untrained_same_config        winrate=0.2 seat_wr=0.26666666666666666/0.13333333333333333 ckpt_meta=- step=- init_seed=20261019 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261019}
+wk_untrained_base_s20261021.json label=untrained_same_config        winrate=0.43333333333333335 seat_wr=0.6/0.26666666666666666 ckpt_meta=- step=- init_seed=20261021 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261021}
+wk_untrained_base_s20261022.json label=untrained_same_config        winrate=0.43333333333333335 seat_wr=0.4666666666666667/0.4 ckpt_meta=- step=- init_seed=20261022 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_500736.pt', 'cand_step': 500736, 'mode': 'mirror', 'seed': 20261022}
+wk_untrained_cand_s20261019.json label=untrained_same_config        winrate=0.3 seat_wr=0.2/0.4 ckpt_meta=- step=- init_seed=20261019 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261019}
+wk_untrained_cand_s20261021.json label=untrained_same_config        winrate=0.4827586206896552 seat_wr=0.7333333333333333/0.2 ckpt_meta=- step=- init_seed=20261021 top={'cand_ckpt': 'runs\\train-20m-e16-1m\\ckpt_999424.pt', 'cand_step': 999424, 'mode': 'mirror', 'seed': 20261021}
+
+== submission vs rl source identity ==
+DIFF                                                submission_rl_transformer2\policy.py vs rl\policy.py 10ee920a4801 f6b0673c3c72
+DIFF                                                submission_rl_transformer2\encoding.py vs rl\encoding.py 6174057a3f89 3163a374a2e4
+DIFF                                                submission_rl_transformer2\search_agent.py vs rl\search_agent.py 7a2d92e71390 8f1ddb0b0cb7
+SAME                                                submission_rl_transformer2\card_features.py vs rl\card_features.py 76c4ff3620ef 76c4ff3620ef
+SAME                                                submission_rl_transformer2\effect_data.py vs rl\effect_data.py d501364916bc d501364916bc
+SAME                                                submission_rl_transformer2\attack_data.py vs rl\attack_data.py 17ad9a8665b2 17ad9a8665b2
+SAME                                                submission_rl_transformer2\buff_data.py vs rl\buff_data.py b16940d73a46 b16940d73a46
+SAME                                                submission_rl_transformer2\enc_constants.py vs rl\enc_constants.py 1766ba6512d5 1766ba6512d5
+SAME                                                submission_rl_transformer2\decks.py vs rl\decks.py db569089d721 db569089d721
+
+== submission sdk_cg contents / model.pt meta ==
+  submission_rl_transformer2\sdk_cg\api.py
+  submission_rl_transformer2\sdk_cg\game.py
+  submission_rl_transformer2\sdk_cg\sim.py
+  submission_rl_transformer2\sdk_cg\utils.py
+  submission_rl_transformer2\sdk_cg\__init__.py
+  submission_rl_transformer2\sdk_cg\__pycache__\api.cpython-313.pyc
+  submission_rl_transformer2\sdk_cg\__pycache__\sim.cpython-313.pyc
+  submission_rl_transformer2\sdk_cg\__pycache__\__init__.cpython-313.pyc
+model.pt global_step= 999424 net_config= {'arch': 'transformer2', 'd_model': 544, 'nhead': 8, 'nlayers': 5, 'ff': 256, 'static': False, 'would_ko': True, 'split_heads': False, 'value_categorical': False, 'value_atoms': 51, 'value_vmax': 1.0}
+
+== deck.csv: submission vs agent ==
+submission_rl_transformer2\deck.csv len= 60 sha= 1156379af39e
+agent\deck.csv len= 60 sha= 1156379af39e
+
+== kaggle_environments install probe ==
+import fail: ModuleNotFoundError No module named 'kaggle_environments'

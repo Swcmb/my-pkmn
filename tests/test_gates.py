@@ -1,6 +1,6 @@
 """rl/gates schedules: small pools keep the byte-identical round-robin; pools that outgrow the
 gate (ladder_all) switch to a FIXED-SEED uniform draw (unbiased + identical every gate)."""
-from rl.gates import _gate_schedule
+from rl.gates import _field_candidates, _gate_schedule
 
 
 def test_small_pool_round_robin_unchanged():
@@ -31,4 +31,20 @@ def test_big_pool_cross_swap_blocks():
         i, j = s[2 * b]
         assert s[2 * b + 1] == (j, i) and i != j         # (i,j) then (j,i), deck strength cancels
 
+
+def test_field_candidates_cycle_pure_and_complete():
+    c = _field_candidates(30, 100)
+    assert len(c) == 100
+    assert c == _field_candidates(30, 100)               # 纯函数：每次 gate 相同
+    assert all(0 <= i < 30 for i in c)
+    assert set(c) == set(range(30))                      # 全覆盖，且每副 3-4 次
+    assert c[:32] == list(range(30)) + [0, 1]
+    # finetune 单牌组退化情形
+    assert _field_candidates(1, 5) == [0] * 5
+
+
+def test_field_candidates_rejects_empty_pool():
+    import pytest
+    with pytest.raises(ValueError):
+        _field_candidates(0, 10)
 

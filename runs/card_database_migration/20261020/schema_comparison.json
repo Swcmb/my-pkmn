@@ -1,0 +1,576 @@
+{
+  "old_file": "original_cards.csv (repo EN_Card_Data.csv)",
+  "new_file": "downloaded_cards.csv (E:/Files/Downloads/cards.csv)",
+  "old_header": [
+    "Card ID",
+    "Card Name",
+    "Expansion",
+    "Collection No.",
+    "Stage (Pokémon)/Type (Energy and Trainer)",
+    "Rule",
+    "Category",
+    "Previous stage",
+    "HP",
+    "Type",
+    "Weakness",
+    "Resistance (Type)",
+    "Retreat",
+    "Move Name",
+    "Cost",
+    "Damage",
+    "Effect Explanation"
+  ],
+  "new_header": [
+    "cardId",
+    "name",
+    "cardType",
+    "cardTypeName",
+    "pokemonType",
+    "energyType",
+    "evolutionType",
+    "hp",
+    "retreatCost",
+    "weakness",
+    "resistance",
+    "basic",
+    "stage1",
+    "stage2",
+    "ex",
+    "megaEx",
+    "tera",
+    "aceSpec",
+    "evolvesFrom",
+    "attacks",
+    "skills"
+  ],
+  "new_fields_absent_in_old": [
+    "aceSpec",
+    "attacks",
+    "basic",
+    "cardId",
+    "cardType",
+    "cardTypeName",
+    "energyType",
+    "evolutionType",
+    "evolvesFrom",
+    "ex",
+    "hp",
+    "megaEx",
+    "name",
+    "pokemonType",
+    "resistance",
+    "retreatCost",
+    "skills",
+    "stage1",
+    "stage2",
+    "tera",
+    "weakness"
+  ],
+  "old_fields_absent_in_new": [
+    "Card ID",
+    "Card Name",
+    "Category",
+    "Collection No.",
+    "Cost",
+    "Damage",
+    "Effect Explanation",
+    "Expansion",
+    "HP",
+    "Move Name",
+    "Previous stage",
+    "Resistance (Type)",
+    "Retreat",
+    "Rule",
+    "Stage (Pokémon)/Type (Energy and Trainer)",
+    "Type",
+    "Weakness"
+  ],
+  "row_layout": {
+    "old": "one row per attack, grouped by Card ID",
+    "new": "one row per card, attacks/skills packed in columns"
+  },
+  "new_quality": {
+    "row_count": 1267,
+    "unique_ids": 1267,
+    "duplicate_cardId": [],
+    "unparseable_rows": [],
+    "unparseable_count": 0
+  },
+  "counts": {
+    "old_unique_cards": 1267,
+    "new_unique_cards": 1267,
+    "shared_ids": 1267,
+    "added_ids": 0,
+    "removed_ids": 0
+  },
+  "field_change_counts": {
+    "hp": 206,
+    "energyType": 3,
+    "attack_damage": 93,
+    "attack_count": 250,
+    "evolvesFrom": 5
+  },
+  "cards_with_any_diff": 549,
+  "sample_diffs": {
+    "1": {
+      "old_name": "Basic {G} Energy",
+      "new_name": "Basic {G} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "2": {
+      "old_name": "Basic {R} Energy",
+      "new_name": "Basic {R} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "3": {
+      "old_name": "Basic {W} Energy",
+      "new_name": "Basic {W} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "4": {
+      "old_name": "Basic {L} Energy",
+      "new_name": "Basic {L} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "5": {
+      "old_name": "Basic {P} Energy",
+      "new_name": "Basic {P} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "6": {
+      "old_name": "Basic {F} Energy",
+      "new_name": "Basic {F} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "7": {
+      "old_name": "Basic {D} Energy",
+      "new_name": "Basic {D} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "8": {
+      "old_name": "Basic {M} Energy",
+      "new_name": "Basic {M} Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "9": {
+      "old_name": "Boomerang Energy",
+      "new_name": "Boomerang Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "10": {
+      "old_name": "Neo Upper Energy",
+      "new_name": "Neo Upper Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ],
+        [
+          "energyType",
+          "{A}{A}",
+          "COLORLESS"
+        ]
+      ]
+    },
+    "11": {
+      "old_name": "Mist Energy",
+      "new_name": "Mist Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "12": {
+      "old_name": "Legacy Energy",
+      "new_name": "Legacy Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ],
+        [
+          "energyType",
+          "{A}",
+          "RAINBOW"
+        ]
+      ]
+    },
+    "13": {
+      "old_name": "Enriching Energy",
+      "new_name": "Enriching Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "14": {
+      "old_name": "Spiky Energy",
+      "new_name": "Spiky Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "15": {
+      "old_name": "Team Rocket's Energy",
+      "new_name": "Team Rocket's Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "16": {
+      "old_name": "Prism Energy",
+      "new_name": "Prism Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ],
+        [
+          "energyType",
+          "{A}",
+          "COLORLESS"
+        ]
+      ]
+    },
+    "17": {
+      "old_name": "Ignition Energy",
+      "new_name": "Ignition Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "18": {
+      "old_name": "Grow Grass Energy",
+      "new_name": "Grow Grass Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "19": {
+      "old_name": "Telepath Psychic Energy",
+      "new_name": "Telepath Psychic Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "20": {
+      "old_name": "Rock Fighting Energy",
+      "new_name": "Rock Fighting Energy",
+      "diffs": [
+        [
+          "hp",
+          "n/a",
+          "0"
+        ]
+      ]
+    },
+    "24": {
+      "old_name": "Team Rocket's Kangaskhan ex",
+      "new_name": "Team Rocket's Kangaskhan ex",
+      "diffs": [
+        [
+          "attack_damage",
+          "30×",
+          "0"
+        ]
+      ]
+    },
+    "28": {
+      "old_name": "Poltchageist",
+      "new_name": "Poltchageist",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "30": {
+      "old_name": "Magcargo ex",
+      "new_name": "Magcargo ex",
+      "diffs": [
+        [
+          "attack_count",
+          "3",
+          "2"
+        ]
+      ]
+    },
+    "35": {
+      "old_name": "Walking Wake",
+      "new_name": "Walking Wake",
+      "diffs": [
+        [
+          "attack_damage",
+          "20×",
+          "0"
+        ]
+      ]
+    },
+    "36": {
+      "old_name": "Morpeko",
+      "new_name": "Morpeko",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "37": {
+      "old_name": "Iron Thorns ex",
+      "new_name": "Iron Thorns ex",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "40": {
+      "old_name": "Greninja ex",
+      "new_name": "Greninja ex",
+      "diffs": [
+        [
+          "attack_count",
+          "3",
+          "2"
+        ]
+      ]
+    },
+    "44": {
+      "old_name": "Bloodmoon Ursaluna ex",
+      "new_name": "Bloodmoon Ursaluna ex",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "49": {
+      "old_name": "Feraligatr",
+      "new_name": "Feraligatr",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "51": {
+      "old_name": "Palafin",
+      "new_name": "Palafin",
+      "diffs": [
+        [
+          "attack_damage",
+          "90×",
+          "0"
+        ]
+      ]
+    },
+    "52": {
+      "old_name": "Wugtrio ex",
+      "new_name": "Wugtrio ex",
+      "diffs": [
+        [
+          "attack_count",
+          "3",
+          "2"
+        ]
+      ]
+    },
+    "53": {
+      "old_name": "Marill",
+      "new_name": "Marill",
+      "diffs": [
+        [
+          "attack_damage",
+          "10×",
+          "0"
+        ]
+      ]
+    },
+    "56": {
+      "old_name": "Flutter Mane",
+      "new_name": "Flutter Mane",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "57": {
+      "old_name": "Relicanth",
+      "new_name": "Relicanth",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "62": {
+      "old_name": "Koraidon",
+      "new_name": "Koraidon",
+      "diffs": [
+        [
+          "attack_damage",
+          "30×",
+          "0"
+        ]
+      ]
+    },
+    "63": {
+      "old_name": "Raging Bolt ex",
+      "new_name": "Raging Bolt ex",
+      "diffs": [
+        [
+          "attack_damage",
+          "70×",
+          "0"
+        ]
+      ]
+    },
+    "66": {
+      "old_name": "Dudunsparce",
+      "new_name": "Dudunsparce",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "69": {
+      "old_name": "Nuzleaf",
+      "new_name": "Nuzleaf",
+      "diffs": [
+        [
+          "attack_damage",
+          "30×",
+          "0"
+        ]
+      ]
+    },
+    "72": {
+      "old_name": "Sawsbuck",
+      "new_name": "Sawsbuck",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    },
+    "74": {
+      "old_name": "Rabsca",
+      "new_name": "Rabsca",
+      "diffs": [
+        [
+          "attack_count",
+          "2",
+          "1"
+        ]
+      ]
+    }
+  },
+  "schema_compatible_with_python_readers": {
+    "rl/card_features.py": false,
+    "rl/decks.py": false,
+    "note": "readers expect the old column names (Card ID / Card Name / ...); the new engine-format header lacks them"
+  }
+}

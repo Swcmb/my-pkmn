@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_k44_fezandipiti_ex_hydrapple_ex_meowth_ex_te_43.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 3,
+      "losses": 5,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.375,
+      "winrate_ci95": [
+        0.13684428582359737,
+        0.6942576053973727
+      ],
+      "winrate_all_games": 0.375,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 2,
+        "wins_seat1": 1,
+        "wr_seat0": 0.5,
+        "wr_seat1": 0.25
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 108.75,
+        "median_applies": 128.5,
+        "p95_applies": 167.04999999999998,
+        "max_applies": 180,
+        "mean_turn": 44.875,
+        "median_turn": 52.0,
+        "p95_turn": 70.19999999999999,
+        "max_turn": 73
+      },
+      "elapsed_s": 2.993828535079956,
+      "games_per_s": 2.672163721556066
+    }
+  ]
+}

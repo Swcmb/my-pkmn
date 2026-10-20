@@ -1,0 +1,52 @@
+[
+ {
+  "deck": "team17_不说对不队",
+  "n_cards": 60,
+  "games": 3,
+  "resets_ok": 3,
+  "random_steps_executed": 92,
+  "illegal_action_events": 0,
+  "errors": [],
+  "accepted": true
+ },
+ {
+  "deck": "team39_对对对队",
+  "n_cards": 60,
+  "games": 3,
+  "resets_ok": 3,
+  "random_steps_executed": 120,
+  "illegal_action_events": 0,
+  "errors": [],
+  "accepted": true
+ },
+ {
+  "deck": "team3_格鲁",
+  "n_cards": 60,
+  "games": 3,
+  "resets_ok": 3,
+  "random_steps_executed": 84,
+  "illegal_action_events": 0,
+  "errors": [],
+  "accepted": true
+ },
+ {
+  "deck": "team4_咪咪汪汪队",
+  "n_cards": 60,
+  "games": 3,
+  "resets_ok": 3,
+  "random_steps_executed": 90,
+  "illegal_action_events": 0,
+  "errors": [],
+  "accepted": true
+ },
+ {
+  "deck": "team7_食堂不要插队",
+  "n_cards": 60,
+  "games": 3,
+  "resets_ok": 3,
+  "random_steps_executed": 120,
+  "illegal_action_events": 0,
+  "errors": [],
+  "accepted": true
+ }
+]

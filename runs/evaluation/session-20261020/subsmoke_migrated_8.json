@@ -1,0 +1,30 @@
+{
+  "games": 8,
+  "wins": 4,
+  "losses": 4,
+  "draws": 0,
+  "errors": 0,
+  "illegal_len": 0,
+  "illegal_index": 0,
+  "duplicate_index": 0,
+  "decisions": 227,
+  "step_ms_max": 119.77080000360729,
+  "step_ms_sum": 7517.14810001431,
+  "game_s_max": 2.6578716000003624,
+  "over_100ms": 2,
+  "over_10min": 0,
+  "step_ms_p99": 78.93019999755779,
+  "step_ms_mean": 33.11518986790445,
+  "import_s": 1.53,
+  "peak_rss_mb": 718.3,
+  "verdict": {
+    "单步100ms": false,
+    "单局10分钟": true,
+    "内存2GB": true,
+    "返回长度合法": true,
+    "返回下标合法": true,
+    "无重复下标": true,
+    "无异常": true
+  },
+  "all_pass": false
+}

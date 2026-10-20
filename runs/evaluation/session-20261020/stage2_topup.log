@@ -1,0 +1,8 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[topup] base_vs_untrained deck=dragapult_newlib seed=20261024 games=60
+     wr=0.9333333333333333 ci95=[0.8407464268680284, 0.9737713012754938] draws=0 errs=0 illegal=0
+[topup] base_selfmirror deck=dragapult_newlib seed=20261024 games=60
+     wr=0.5833333333333334 ci95=[0.45728081022640116, 0.6993572144165839] draws=0 errs=0 illegal=0
+[topup] cand_vs_baseline_mirror deck=current_agent_deck seed=20261024 games=60
+     wr=0.38333333333333336 ci95=[0.27088272374082023, 0.5098240417590009] draws=0 errs=0 illegal=0
+[saved] D:\pkmn-kaggle\runs\evaluation\session-20261020\stage2_topup.json

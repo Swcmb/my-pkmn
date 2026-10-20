@@ -1,0 +1,527 @@
+{
+ "evidence": {
+  "candidate_ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "candidate_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+  "candidate_global_step": 999424,
+  "candidate_net_config": {
+   "arch": "transformer2",
+   "d_model": 544,
+   "nhead": 8,
+   "nlayers": 5,
+   "ff": 256,
+   "static": false,
+   "would_ko": true,
+   "split_heads": false,
+   "value_categorical": false,
+   "value_atoms": 51,
+   "value_vmax": 1.0
+  },
+  "ship_deck": "D:\\pkmn-kaggle\\runs\\evaluation\\card_database_migration\\best_deck.csv",
+  "ship_deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+  "seeds": [
+   20261211
+  ],
+  "games_per_seed_per_direction": 4,
+  "quick": true,
+  "turn_cap": "200",
+  "native_encode": false,
+  "would_ko": true,
+  "device": "cuda",
+  "random_reference": {
+   "wr": 0.608,
+   "ci95": [
+    0.519,
+    0.691
+   ],
+   "note": "对随机合法策略的既有基线，并列呈现，不与本节混算"
+  },
+  "reconstruction_confidence": {
+   "team7_食堂不要插队": {
+    "team": "食堂不要插队",
+    "games_observed": 44,
+    "n_kinds": 16,
+    "conf_high": 12,
+    "conf_low": 0,
+    "energy_budget": 16
+   },
+   "team3_格鲁": {
+    "team": "格鲁",
+    "games_observed": 44,
+    "n_kinds": 22,
+    "conf_high": 18,
+    "conf_low": 0,
+    "energy_budget": 10
+   },
+   "team39_对对对队": {
+    "team": "对对对队",
+    "games_observed": 46,
+    "n_kinds": 21,
+    "conf_high": 12,
+    "conf_low": 1,
+    "energy_budget": 10
+   },
+   "team4_咪咪汪汪队": {
+    "team": "咪咪汪汪队",
+    "games_observed": 42,
+    "n_kinds": 21,
+    "conf_high": 17,
+    "conf_low": 0,
+    "energy_budget": 10
+   },
+   "team17_不说对不队": {
+    "team": "不说对不队",
+    "games_observed": 44,
+    "n_kinds": 20,
+    "conf_high": 17,
+    "conf_low": 0,
+    "energy_budget": 10
+   }
+  }
+ },
+ "results": [
+  {
+   "wins": 3,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.75,
+   "ci95": [
+    0.30064184258240184,
+    0.9544127391902995
+   ],
+   "mean_turn": 54.5,
+   "seat0": {
+    "games": 2,
+    "wins": 2
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 3,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team17_不说对不队",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team17_不说对不队_reconstructed.csv",
+   "deck_sha256": "f11eda3b37b797175e89938c2b8b135db0d4e770a8139a564621150681715d4b",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "mean_turn": 35.25,
+   "seat0": {
+    "games": 2,
+    "wins": 1
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 2,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team17_不说对不队",
+   "direction": "reverse",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team17_不说对不队_reconstructed.csv",
+   "deck_sha256": "f11eda3b37b797175e89938c2b8b135db0d4e770a8139a564621150681715d4b",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "该副牌",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 0,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.0,
+   "ci95": [
+    0.0,
+    0.4898908364545973
+   ],
+   "mean_turn": 16.5,
+   "seat0": {
+    "games": 2,
+    "wins": 0
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 0
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 0,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team39_对对对队",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team39_对对对队_reconstructed.csv",
+   "deck_sha256": "f299aba8c4b3834deb5d1a3a9670e7f65a8571951c2ce7fbe1c53a54d9395cec",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "mean_turn": 24.5,
+   "seat0": {
+    "games": 2,
+    "wins": 0
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 2
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 2,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team39_对对对队",
+   "direction": "reverse",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team39_对对对队_reconstructed.csv",
+   "deck_sha256": "f299aba8c4b3834deb5d1a3a9670e7f65a8571951c2ce7fbe1c53a54d9395cec",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "该副牌",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "mean_turn": 21.5,
+   "seat0": {
+    "games": 2,
+    "wins": 1
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 2,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team3_格鲁",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team3_格鲁_reconstructed.csv",
+   "deck_sha256": "3ad9ef5a206938bc9bbd1155b57763fdea6bc9e961c74c8075ac869f167a4267",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "mean_turn": 37.5,
+   "seat0": {
+    "games": 2,
+    "wins": 1
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 2,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team3_格鲁",
+   "direction": "reverse",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team3_格鲁_reconstructed.csv",
+   "deck_sha256": "3ad9ef5a206938bc9bbd1155b57763fdea6bc9e961c74c8075ac869f167a4267",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "该副牌",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 3,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.75,
+   "ci95": [
+    0.30064184258240184,
+    0.9544127391902995
+   ],
+   "mean_turn": 48.0,
+   "seat0": {
+    "games": 2,
+    "wins": 2
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 3,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team4_咪咪汪汪队",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team4_咪咪汪汪队_reconstructed.csv",
+   "deck_sha256": "d854ea9b54188029cf1f487a8d13384dd746b0bd5e2bb23e53e61b0ef36ae775",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 1,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.25,
+   "ci95": [
+    0.04558726080970055,
+    0.6993581574175981
+   ],
+   "mean_turn": 25.5,
+   "seat0": {
+    "games": 2,
+    "wins": 0
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 1,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team4_咪咪汪汪队",
+   "direction": "reverse",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team4_咪咪汪汪队_reconstructed.csv",
+   "deck_sha256": "d854ea9b54188029cf1f487a8d13384dd746b0bd5e2bb23e53e61b0ef36ae775",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "该副牌",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 1,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.25,
+   "ci95": [
+    0.04558726080970055,
+    0.6993581574175981
+   ],
+   "mean_turn": 22.0,
+   "seat0": {
+    "games": 2,
+    "wins": 0
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 1,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team7_食堂不要插队",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team7_食堂不要插队_reconstructed.csv",
+   "deck_sha256": "dc0b926cf4d9ce67cfb4ccf5f04af1e974638345bc85df02f9b3f8b78cca40d2",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "mean_turn": 35.5,
+   "seat0": {
+    "games": 2,
+    "wins": 1
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 2,
+     "decided": 4
+    }
+   ],
+   "deck_label": "team7_食堂不要插队",
+   "direction": "reverse",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\strong_decks\\team7_食堂不要插队_reconstructed.csv",
+   "deck_sha256": "dc0b926cf4d9ce67cfb4ccf5f04af1e974638345bc85df02f9b3f8b78cca40d2",
+   "deck_kind": "A5.5 还原（推断，非官方 deck）",
+   "candidate_pilots": "该副牌",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "mean_turn": 37.5,
+   "seat0": {
+    "games": 2,
+    "wins": 1
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 1
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 2,
+     "decided": 4
+    }
+   ],
+   "deck_label": "dragapult_旧参照",
+   "direction": "forward",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\deck_search\\dragapult_deck.csv",
+   "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+   "deck_kind": "本项目旧牌组参照，非还原",
+   "candidate_pilots": "best_deck",
+   "opponent_policy": "random_legal"
+  },
+  {
+   "wins": 4,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "wr": 1.0,
+   "ci95": [
+    0.5101091635454027,
+    1.0
+   ],
+   "mean_turn": 47.75,
+   "seat0": {
+    "games": 2,
+    "wins": 2
+   },
+   "seat1": {
+    "games": 2,
+    "wins": 2
+   },
+   "per_seed": [
+    {
+     "seed": 20261211,
+     "wins": 4,
+     "decided": 4
+    }
+   ],
+   "deck_label": "dragapult_旧参照",
+   "direction": "reverse",
+   "deck_path": "D:\\pkmn-kaggle\\runs\\evaluation\\deck_search\\dragapult_deck.csv",
+   "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+   "deck_kind": "本项目旧牌组参照，非还原",
+   "candidate_pilots": "该副牌",
+   "opponent_policy": "random_legal"
+  }
+ ]
+}

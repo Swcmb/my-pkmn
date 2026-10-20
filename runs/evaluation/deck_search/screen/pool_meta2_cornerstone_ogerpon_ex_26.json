@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_meta2_cornerstone_ogerpon_ex_26.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 6,
+      "losses": 2,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.75,
+      "winrate_ci95": [
+        0.40927543031016894,
+        0.928520787247891
+      ],
+      "winrate_all_games": 0.75,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 3,
+        "wins_seat1": 3,
+        "wr_seat0": 0.75,
+        "wr_seat1": 0.75
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 124.5,
+        "median_applies": 131.5,
+        "p95_applies": 143.6,
+        "max_applies": 145,
+        "mean_turn": 61.875,
+        "median_turn": 64.0,
+        "p95_turn": 78.19999999999999,
+        "max_turn": 81
+      },
+      "elapsed_s": 4.306006193161011,
+      "games_per_s": 1.8578700636116021
+    }
+  ]
+}

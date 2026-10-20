@@ -1,0 +1,419 @@
+{
+  "sources": [
+    "runs\\card_database_migration\\20261020\\stage5_gates.json",
+    "runs\\evaluation\\session-20261020\\stage2_supplement.json",
+    "runs\\evaluation\\session-20261020\\stage2_topup.json"
+  ],
+  "protocol_shared": {
+    "library_sha256_prefix": "05aa569e",
+    "turn_cap": 200,
+    "encoding": "python TokenEncoder + 引擎 would_ko",
+    "seat_balance": "逐局交替",
+    "seeds": [
+      20261020,
+      20261021,
+      20261022,
+      20261023,
+      20261024
+    ]
+  },
+  "total_games": 1620,
+  "arms": [
+    {
+      "arm": "候选 vs 随机合法（提交牌组）",
+      "cells": 2,
+      "wins": 73,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.6083,
+      "ci95": [
+        0.5189,
+        0.691
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.5666666666666667,
+          "wins": 34,
+          "decided": 60
+        },
+        {
+          "seed": 20261021,
+          "wr": 0.65,
+          "wins": 39,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "旧基线 vs 随机合法（提交牌组）",
+      "cells": 2,
+      "wins": 69,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.575,
+      "ci95": [
+        0.4856,
+        0.6598
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.6,
+          "wins": 36,
+          "decided": 60
+        },
+        {
+          "seed": 20261022,
+          "wr": 0.55,
+          "wins": 33,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选 vs 随机合法（旧 agent 牌组）",
+      "cells": 2,
+      "wins": 28,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.2333,
+      "ci95": [
+        0.1667,
+        0.3166
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.26666666666666666,
+          "wins": 16,
+          "decided": 60
+        },
+        {
+          "seed": 20261021,
+          "wr": 0.2,
+          "wins": 12,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "旧基线 vs 随机合法（旧 agent 牌组）",
+      "cells": 2,
+      "wins": 0,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.0,
+      "ci95": [
+        0.0,
+        0.031
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.0,
+          "wins": 0,
+          "decided": 60
+        },
+        {
+          "seed": 20261022,
+          "wr": 0.0,
+          "wins": 0,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选 vs 同配置未训练（提交牌组）",
+      "cells": 3,
+      "wins": 101,
+      "decided": 180,
+      "draws": 0,
+      "wr": 0.5611,
+      "ci95": [
+        0.4881,
+        0.6316
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.8333333333333334,
+          "wins": 50,
+          "decided": 60
+        },
+        {
+          "seed": 20261022,
+          "wr": 0.4,
+          "wins": 24,
+          "decided": 60
+        },
+        {
+          "seed": 20261023,
+          "wr": 0.45,
+          "wins": 27,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选 vs 同配置未训练（旧 agent 牌组）",
+      "cells": 2,
+      "wins": 63,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.525,
+      "ci95": [
+        0.4363,
+        0.6122
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.2833333333333333,
+          "wins": 17,
+          "decided": 60
+        },
+        {
+          "seed": 20261022,
+          "wr": 0.7666666666666667,
+          "wins": 46,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "旧基线 vs 同配置未训练（提交牌组）",
+      "cells": 2,
+      "wins": 88,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.7333,
+      "ci95": [
+        0.6479,
+        0.8043
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261022,
+          "wr": 0.5333333333333333,
+          "wins": 32,
+          "decided": 60
+        },
+        {
+          "seed": 20261024,
+          "wr": 0.9333333333333333,
+          "wins": 56,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选自镜像（提交牌组）",
+      "cells": 2,
+      "wins": 61,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.5083,
+      "ci95": [
+        0.42,
+        0.5961
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.5666666666666667,
+          "wins": 34,
+          "decided": 60
+        },
+        {
+          "seed": 20261021,
+          "wr": 0.45,
+          "wins": 27,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "旧基线自镜像（提交牌组）",
+      "cells": 2,
+      "wins": 67,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.5583,
+      "ci95": [
+        0.469,
+        0.644
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261022,
+          "wr": 0.5333333333333333,
+          "wins": 32,
+          "decided": 60
+        },
+        {
+          "seed": 20261024,
+          "wr": 0.5833333333333334,
+          "wins": 35,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选自镜像（旧 agent 牌组）",
+      "cells": 2,
+      "wins": 58,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.4833,
+      "ci95": [
+        0.3958,
+        0.5719
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.45,
+          "wins": 27,
+          "decided": 60
+        },
+        {
+          "seed": 20261021,
+          "wr": 0.5166666666666667,
+          "wins": 31,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选 vs 旧基线：提交牌组纯镜像",
+      "cells": 2,
+      "wins": 85,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.7083,
+      "ci95": [
+        0.6216,
+        0.7822
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261022,
+          "wr": 0.6833333333333333,
+          "wins": 41,
+          "decided": 60
+        },
+        {
+          "seed": 20261023,
+          "wr": 0.7333333333333333,
+          "wins": 44,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选 vs 旧基线：旧 agent 牌组纯镜像",
+      "cells": 2,
+      "wins": 40,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.3333,
+      "ci95": [
+        0.2553,
+        0.4217
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261022,
+          "wr": 0.2833333333333333,
+          "wins": 17,
+          "decided": 60
+        },
+        {
+          "seed": 20261024,
+          "wr": 0.38333333333333336,
+          "wins": 23,
+          "decided": 60
+        }
+      ]
+    },
+    {
+      "arm": "候选 vs 旧基线：74 副混合池交叉",
+      "cells": 2,
+      "wins": 61,
+      "decided": 120,
+      "draws": 0,
+      "wr": 0.5083,
+      "ci95": [
+        0.42,
+        0.5961
+      ],
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "n_ge_120": true,
+      "per_cell": [
+        {
+          "seed": 20261020,
+          "wr": 0.5166666666666667,
+          "wins": 31,
+          "decided": 60
+        },
+        {
+          "seed": 20261021,
+          "wr": 0.5,
+          "wins": 30,
+          "decided": 60
+        }
+      ]
+    }
+  ]
+}

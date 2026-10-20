@@ -1,0 +1,86 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_500736.pt",
+  "cand_step": 500736,
+  "mode": "mirror",
+  "games": 30,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs\\evaluation\\pool_top15.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "untrained",
+      "label": "untrained_same_config",
+      "games": 30,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {
+        "net_config": {
+          "arch": "transformer2",
+          "d_model": 544,
+          "nhead": 8,
+          "nlayers": 5,
+          "ff": 256,
+          "static": false,
+          "would_ko": true,
+          "split_heads": false,
+          "value_categorical": false,
+          "value_atoms": 51,
+          "value_vmax": 1.0
+        },
+        "init_seed": 20261019,
+        "shape_from": "runs\\train-20m-e16-1m\\ckpt_500736.pt",
+        "shape_step": 500736
+      },
+      "wins": 6,
+      "losses": 24,
+      "decided": 30,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.2,
+      "winrate_ci95": [
+        0.0950510717728987,
+        0.37305696413148254
+      ],
+      "winrate_all_games": 0.2,
+      "seat_balance": {
+        "games_seat0": 15,
+        "games_seat1": 15,
+        "wins_seat0": 4,
+        "wins_seat1": 2,
+        "wr_seat0": 0.26666666666666666,
+        "wr_seat1": 0.13333333333333333
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 116.56666666666666,
+        "median_applies": 113.5,
+        "p95_applies": 154.8499999999999,
+        "max_applies": 197,
+        "mean_turn": 89.7,
+        "median_turn": 95.0,
+        "p95_turn": 96.0,
+        "max_turn": 96
+      },
+      "elapsed_s": 31.947473764419556,
+      "games_per_s": 0.9390413846559446
+    }
+  ]
+}

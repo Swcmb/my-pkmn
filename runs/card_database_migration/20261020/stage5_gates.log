@@ -1,0 +1,30 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[gate] cand_vs_random deck=dragapult_newlib seed=20261020 games=60
+     wr=0.5666666666666667 ci95=[0.44103438776125564, 0.6842760319531322] draws=0 errs=0 illegal=0 len=106.7 2.60 g/s
+[gate] cand_selfmirror deck=dragapult_newlib seed=20261020 games=60
+     wr=0.5666666666666667 ci95=[0.44103438776125564, 0.6842760319531322] draws=0 errs=0 illegal=0 len=78.1 1.54 g/s
+[gate] cand_vs_random deck=dragapult_newlib seed=20261021 games=60
+     wr=0.65 ci95=[0.5236261884175487, 0.7583222559398244] draws=0 errs=0 illegal=0 len=110.2 2.78 g/s
+[gate] cand_selfmirror deck=dragapult_newlib seed=20261021 games=60
+     wr=0.45 ci95=[0.3309365440675524, 0.5750806411466566] draws=0 errs=0 illegal=0 len=88.0 0.81 g/s
+[gate] cand_vs_untrained deck=dragapult_newlib seed=20261020 games=60
+     wr=0.8333333333333334 ci95=[0.7196838683638547, 0.9068682302080855] draws=0 errs=0 illegal=0 len=118.3 0.45 g/s
+[gate] base_vs_random deck=dragapult_newlib seed=20261020 games=60
+     wr=0.6 ci95=[0.47366053492040755, 0.7143050946511744] draws=0 errs=0 illegal=0 len=114.0 1.48 g/s
+[gate] cand_vs_random deck=current_agent_deck seed=20261020 games=60
+     wr=0.26666666666666666 ci95=[0.1713264000328055, 0.39008713096683645] draws=0 errs=0 illegal=0 len=47.8 1.57 g/s
+[gate] cand_selfmirror deck=current_agent_deck seed=20261020 games=60
+     wr=0.45 ci95=[0.3309365440675524, 0.5750806411466566] draws=0 errs=0 illegal=0 len=91.8 0.65 g/s
+[gate] cand_vs_random deck=current_agent_deck seed=20261021 games=60
+     wr=0.2 ci95=[0.11828505322897492, 0.317818058056279] draws=0 errs=0 illegal=0 len=51.8 1.41 g/s
+[gate] cand_selfmirror deck=current_agent_deck seed=20261021 games=60
+     wr=0.5166666666666667 ci95=[0.39307810032592494, 0.638249504602672] draws=0 errs=0 illegal=0 len=88.6 0.61 g/s
+[gate] cand_vs_untrained deck=current_agent_deck seed=20261020 games=60
+     wr=0.2833333333333333 ci95=[0.18506828428432712, 0.4076728516439118] draws=0 errs=0 illegal=0 len=57.6 0.82 g/s
+[gate] base_vs_random deck=current_agent_deck seed=20261020 games=60
+     wr=0.0 ci95=[0.0, 0.06017185214208986] draws=0 errs=0 illegal=0 len=39.4 2.80 g/s
+[gate] cand_vs_baseline_heldout deck=pool_top50 seed=20261020 games=60
+     wr=0.5166666666666667 ci95=[0.39307810032592494, 0.638249504602672] draws=0 errs=0 illegal=0 len=109.0 0.51 g/s
+[gate] cand_vs_baseline_heldout deck=pool_top50 seed=20261021 games=60
+     wr=0.5 ci95=[0.3773502424155577, 0.6226497575844424] draws=0 errs=0 illegal=0 len=100.9 0.58 g/s
+[saved] D:\pkmn-kaggle\runs\card_database_migration\20261020\stage5_gates.json

@@ -1,0 +1,203 @@
+{
+ "evidence": {
+  "candidate_ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "candidate_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+  "candidate_global_step": 999424,
+  "candidate_net_config": {
+   "arch": "transformer2",
+   "d_model": 544,
+   "nhead": 8,
+   "nlayers": 5,
+   "ff": 256,
+   "static": false,
+   "would_ko": true,
+   "split_heads": false,
+   "value_categorical": false,
+   "value_atoms": 51,
+   "value_vmax": 1.0
+  },
+  "candidate_ckpt_top_level_keys": [
+   "args",
+   "global_step",
+   "net",
+   "net_config"
+  ],
+  "candidate_params": 20303715,
+  "teacher_ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "teacher_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+  "teacher_global_step": 999424,
+  "teacher_net_config": {
+   "arch": "transformer2",
+   "d_model": 544,
+   "nhead": 8,
+   "nlayers": 5,
+   "ff": 256,
+   "static": false,
+   "would_ko": true,
+   "split_heads": false,
+   "value_categorical": false,
+   "value_atoms": 51,
+   "value_vmax": 1.0
+  },
+  "teacher_params": 20303715,
+  "ship_deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+  "heldout_pool": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\eval_pool_heldout44.json",
+  "train_pool": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\opp_pool_train30.json",
+  "heldout_pool_sha256": "5c225480c02c12c9c59bb3736bbd4daca1c0da83a77e060411314daf1b02de49",
+  "train_pool_sha256": "8d7dd1e1cf520dac619ff877edbe780de4bd5686d00d109840939672786a8fe2",
+  "seeds": [
+   20261201
+  ],
+  "games_per_seed": 4,
+  "quick": true,
+  "turn_cap": "200",
+  "native_encode": false,
+  "would_ko": true,
+  "device": "cuda",
+  "seed_overlap_guard": "skipped (quick)"
+ },
+ "merged": {
+  "G_a_vs_random": {
+   "wins": 3,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "max_steps": 0,
+   "wr": 0.75,
+   "ci95": [
+    0.30064184258240184,
+    0.9544127391902995
+   ],
+   "seeds": [
+    20261201
+   ],
+   "per_seed": [
+    {
+     "seed": 20261201,
+     "wins": 3,
+     "decided": 4,
+     "wr": 0.75
+    }
+   ]
+  },
+  "G_b_vs_teacher_mirror": {
+   "wins": 2,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "max_steps": 0,
+   "wr": 0.5,
+   "ci95": [
+    0.15003898915214947,
+    0.8499610108478506
+   ],
+   "seeds": [
+    20261201
+   ],
+   "per_seed": [
+    {
+     "seed": 20261201,
+     "wins": 2,
+     "decided": 4,
+     "wr": 0.5
+    }
+   ]
+  },
+  "G_c_self_mirror": {
+   "wins": 1,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "max_steps": 0,
+   "wr": 0.25,
+   "ci95": [
+    0.04558726080970055,
+    0.6993581574175981
+   ],
+   "seeds": [
+    20261201
+   ],
+   "per_seed": [
+    {
+     "seed": 20261201,
+     "wins": 1,
+     "decided": 4,
+     "wr": 0.25
+    }
+   ]
+  },
+  "G_d_vs_teacher_heldout": {
+   "wins": 3,
+   "decided": 4,
+   "games": 4,
+   "draws": 0,
+   "errs": 0,
+   "illegal": 0,
+   "turn_cap": 0,
+   "max_steps": 0,
+   "wr": 0.75,
+   "ci95": [
+    0.30064184258240184,
+    0.9544127391902995
+   ],
+   "seeds": [
+    20261201
+   ],
+   "per_seed": [
+    {
+     "seed": 20261201,
+     "wins": 3,
+     "decided": 4,
+     "wr": 0.75
+    }
+   ]
+  }
+ },
+ "gates": [
+  {
+   "id": "G-a",
+   "pass": false,
+   "detail": "wr=0.75 需 ≥0.608；Wilson 下界=0.3006 需 >0.5；decided=4 需 ≥0；噪声带参照：教师同口径 0.608 CI[0.519, 0.691]"
+  },
+  {
+   "id": "G-b",
+   "pass": true,
+   "detail": "wr=0.5 需 ≥0.45；decided=4 需 ≥0"
+  },
+  {
+   "id": "G-c",
+   "pass": false,
+   "detail": "wr=0.25 需落在 0.45–0.55；errs=0 需 0；decided=4 需 ≥0"
+  },
+  {
+   "id": "G-d",
+   "pass": false,
+   "detail": "Wilson 下界=0.3006 需 >0.40；wr=0.75；decided=4 需 ≥0"
+  },
+  {
+   "id": "G-e",
+   "pass": true,
+   "detail": "非法动作=0 异常=0 turn_cap 截断=0，全部需 0"
+  },
+  {
+   "id": "G-f",
+   "ran": false,
+   "pass": null,
+   "detail": "未执行：G-f 量的是提交包，需要 A6 先导出（--pkg）"
+  }
+ ],
+ "promote": false,
+ "skipped": [
+  "G-f"
+ ],
+ "note": "quick 模式只验证脚本可跑通，任何数字都不构成结论"
+}

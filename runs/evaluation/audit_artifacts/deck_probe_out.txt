@@ -1,0 +1,15 @@
+total=60 unique=11
+   3 x33  Basic {W} Energy             type=5 
+ 721 x2   Kyogre                       type=0 hp=150 basic=True stage1=False stage2=False ex=False attacks=[1042, 1043] skills=[]
+ 722 x4   Snover                       type=0 hp=90 basic=True stage1=False stage2=False ex=False attacks=[1044, 1045] skills=[]
+ 723 x4   Mega Abomasnow ex            type=0 hp=350 basic=False stage1=True stage2=False ex=False attacks=[1046, 1047] skills=[]
+1092 x1   Secret Box                   type=1 
+1121 x2   Ultra Ball                   type=1 
+1145 x2   Mega Signal                  type=1 
+1163 x2   Powerglass                   type=2 
+1219 x4   Team Rocket's Petrel         type=3 
+1227 x4   Lillie's Determination       type=3 
+1262 x2   Surfing Beach                type=4 
+
+cardType 分布: {'5': 33, '0': 10, '1': 5, '2': 2, '3': 8, '4': 2}  (0=Pokemon 1=Item 2=Tool 3=Supporter 4=Stadium 5=BasicEnergy 6=SpecialEnergy)
+Pokemon 张数 = 10

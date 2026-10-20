@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/official_iono.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 2,
+      "losses": 6,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.25,
+      "winrate_ci95": [
+        0.07147921275210901,
+        0.5907245696898311
+      ],
+      "winrate_all_games": 0.25,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 0,
+        "wins_seat1": 2,
+        "wr_seat0": 0.0,
+        "wr_seat1": 0.5
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 117.0,
+        "median_applies": 109.0,
+        "p95_applies": 244.39999999999992,
+        "max_applies": 285,
+        "mean_turn": 26.125,
+        "median_turn": 28.0,
+        "p95_turn": 41.949999999999996,
+        "max_turn": 43
+      },
+      "elapsed_s": 4.600588083267212,
+      "games_per_s": 1.738908125484388
+    }
+  ]
+}

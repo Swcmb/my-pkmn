@@ -1,0 +1,263 @@
+{
+  "library_sha256": "05aa569e3003a838b8503a9d928795e5aea7407ab19dd9f3d9c4b1293b6bb4b4",
+  "deck": "D:\\pkmn-kaggle\\runs\\evaluation\\card_database_migration\\best_deck.csv",
+  "turn_cap": "200",
+  "games_per_cell": 60,
+  "seeds": [
+    20261050,
+    20261051
+  ],
+  "small_target_cfg": {
+    "arch": "transformer2",
+    "d_model": 64,
+    "nhead": 4,
+    "nlayers": 3,
+    "ff": 128,
+    "static": false,
+    "would_ko": true,
+    "split_heads": false,
+    "value_categorical": false,
+    "value_atoms": 51,
+    "value_vmax": 1.0
+  },
+  "big_step": 999424,
+  "note": "候选座位固定驾驶提交牌组；对手一律随机合法策略。用于判断 1 MiB 上限下容量取舍",
+  "runs": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261050,
+      "meta": {},
+      "wins": 33,
+      "losses": 27,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.55,
+      "winrate_ci95": [
+        0.4249193588533434,
+        0.6690634559324476
+      ],
+      "winrate_all_games": 0.55,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 14,
+        "wins_seat1": 19,
+        "wr_seat0": 0.4666666666666667,
+        "wr_seat1": 0.6333333333333333
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 104.41666666666667,
+        "median_applies": 127.0,
+        "p95_applies": 165.54999999999995,
+        "max_applies": 214,
+        "mean_turn": 37.25,
+        "median_turn": 40.0,
+        "p95_turn": 66.34999999999998,
+        "max_turn": 84
+      },
+      "elapsed_s": 69.8589391708374,
+      "games_per_s": 0.8588736203576218,
+      "cell": "untrained_544_vs_random",
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "candidate": "untrained transformer2 d544/h8/L5",
+      "n_params": 20303715
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261051,
+      "meta": {},
+      "wins": 36,
+      "losses": 24,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.6,
+      "winrate_ci95": [
+        0.47366053492040755,
+        0.7143050946511744
+      ],
+      "winrate_all_games": 0.6,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 20,
+        "wins_seat1": 16,
+        "wr_seat0": 0.6666666666666666,
+        "wr_seat1": 0.5333333333333333
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 159.6,
+        "median_applies": 183.5,
+        "p95_applies": 264.05,
+        "max_applies": 311,
+        "mean_turn": 43.05,
+        "median_turn": 47.0,
+        "p95_turn": 75.05,
+        "max_turn": 81
+      },
+      "elapsed_s": 170.37022399902344,
+      "games_per_s": 0.3521742156090839,
+      "cell": "untrained_544_vs_random",
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "candidate": "untrained transformer2 d544/h8/L5",
+      "n_params": 20303715
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261050,
+      "meta": {},
+      "wins": 23,
+      "losses": 37,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.38333333333333336,
+      "winrate_ci95": [
+        0.27088272374082023,
+        0.5098240417590009
+      ],
+      "winrate_all_games": 0.38333333333333336,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 11,
+        "wins_seat1": 12,
+        "wr_seat0": 0.36666666666666664,
+        "wr_seat1": 0.4
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 212.66666666666666,
+        "median_applies": 211.0,
+        "p95_applies": 257.45,
+        "max_applies": 304,
+        "mean_turn": 42.05,
+        "median_turn": 41.0,
+        "p95_turn": 62.05,
+        "max_turn": 67
+      },
+      "elapsed_s": 193.97980785369873,
+      "games_per_s": 0.30931054455550616,
+      "cell": "small_untrained_vs_random",
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "candidate": "untrained transformer2 d64/h4/L3",
+      "n_params": 384067
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261051,
+      "meta": {},
+      "wins": 51,
+      "losses": 9,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.85,
+      "winrate_ci95": [
+        0.7388541093022145,
+        0.9190255941983225
+      ],
+      "winrate_all_games": 0.85,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 26,
+        "wins_seat1": 25,
+        "wr_seat0": 0.8666666666666667,
+        "wr_seat1": 0.8333333333333334
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 176.51666666666668,
+        "median_applies": 194.0,
+        "p95_applies": 241.0,
+        "max_applies": 284,
+        "mean_turn": 44.03333333333333,
+        "median_turn": 50.0,
+        "p95_turn": 61.05,
+        "max_turn": 68
+      },
+      "elapsed_s": 130.42432236671448,
+      "games_per_s": 0.46003689274534093,
+      "cell": "small_untrained_vs_random",
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "candidate": "untrained transformer2 d64/h4/L3",
+      "n_params": 384067
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "id_range_old": [
+    1,
+    1267
+  ],
+  "id_range_new": [
+    1,
+    1267
+  ],
+  "ids_equal_as_sets": true,
+  "added_ids": [],
+  "added_count": 0,
+  "removed_ids": [],
+  "removed_count": 0,
+  "name_identical_for_shared_ids": 1267,
+  "shared_id_count": 1267,
+  "first_name_mismatches": []
+}

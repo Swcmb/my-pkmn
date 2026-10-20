@@ -1,0 +1,862 @@
+{
+  "library": {
+    "path": "D:\\pkmn-kaggle\\EN_Card_Data.csv",
+    "sha256": "05aa569e3003a838b8503a9d928795e5aea7407ab19dd9f3d9c4b1293b6bb4b4"
+  },
+  "engine": {
+    "kaggle_environments": "1.33.0",
+    "shim": "D:\\pkmn-kaggle\\.engine-shim",
+    "would_ko": true,
+    "native_encode": false,
+    "encoding_path": "python TokenEncoder + 引擎 would_ko 标注"
+  },
+  "env": {
+    "python": "3.12.14",
+    "device": "cuda",
+    "turn_cap": "200",
+    "live": 1,
+    "platform": "Windows-11-10.0.26100-SP0"
+  },
+  "protocol": {
+    "harness": "runs/evaluation/eval_h2h.py run_one（与 stage5_gates 同协议）",
+    "seat_balance": "cs = gi % 2 逐局交替",
+    "games_per_cell": 60,
+    "seeds_new_independent": [
+      20261022,
+      20261023
+    ],
+    "note": "种子与 stage5_gates.json 的 20261020/20261021 不重叠，可合并计数"
+  },
+  "runs": [
+    {
+      "opponent": "untrained",
+      "label": "untrained_same_config",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {
+        "net_config": {
+          "arch": "transformer2",
+          "d_model": 544,
+          "nhead": 8,
+          "nlayers": 5,
+          "ff": 256,
+          "static": false,
+          "would_ko": true,
+          "split_heads": false,
+          "value_categorical": false,
+          "value_atoms": 51,
+          "value_vmax": 1.0
+        },
+        "init_seed": 20261022,
+        "shape_from": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "shape_step": 999424
+      },
+      "wins": 24,
+      "losses": 36,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.4,
+      "winrate_ci95": [
+        0.2856949053488256,
+        0.5263394650795924
+      ],
+      "winrate_all_games": 0.4,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 11,
+        "wins_seat1": 13,
+        "wr_seat0": 0.36666666666666664,
+        "wr_seat1": 0.43333333333333335
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 103.13333333333334,
+        "median_applies": 112.0,
+        "p95_applies": 200.59999999999997,
+        "max_applies": 240,
+        "mean_turn": 44.016666666666666,
+        "median_turn": 29.0,
+        "p95_turn": 96.0,
+        "max_turn": 96
+      },
+      "elapsed_s": 89.65930914878845,
+      "games_per_s": 0.669199892009326,
+      "cell": "cand_vs_untrained",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+      "ckpt_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+      "ckpt_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "untrained",
+      "label": "untrained_same_config",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261023,
+      "meta": {
+        "net_config": {
+          "arch": "transformer2",
+          "d_model": 544,
+          "nhead": 8,
+          "nlayers": 5,
+          "ff": 256,
+          "static": false,
+          "would_ko": true,
+          "split_heads": false,
+          "value_categorical": false,
+          "value_atoms": 51,
+          "value_vmax": 1.0
+        },
+        "init_seed": 20261023,
+        "shape_from": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "shape_step": 999424
+      },
+      "wins": 27,
+      "losses": 33,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.45,
+      "winrate_ci95": [
+        0.3309365440675524,
+        0.5750806411466566
+      ],
+      "winrate_all_games": 0.45,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 14,
+        "wins_seat1": 13,
+        "wr_seat0": 0.4666666666666667,
+        "wr_seat1": 0.43333333333333335
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 71.86666666666666,
+        "median_applies": 97.0,
+        "p95_applies": 105.05,
+        "max_applies": 114,
+        "mean_turn": 64.33333333333333,
+        "median_turn": 87.0,
+        "p95_turn": 95.05,
+        "max_turn": 96
+      },
+      "elapsed_s": 37.190736532211304,
+      "games_per_s": 1.613304967704346,
+      "cell": "cand_vs_untrained",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+      "ckpt_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+      "ckpt_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "untrained",
+      "label": "untrained_same_config",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {
+        "net_config": {
+          "arch": "transformer2",
+          "d_model": 544,
+          "nhead": 8,
+          "nlayers": 5,
+          "ff": 256,
+          "static": false,
+          "would_ko": true,
+          "split_heads": false,
+          "value_categorical": false,
+          "value_atoms": 51,
+          "value_vmax": 1.0
+        },
+        "init_seed": 20261022,
+        "shape_from": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "shape_step": 999424
+      },
+      "wins": 46,
+      "losses": 14,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.7666666666666667,
+      "winrate_ci95": [
+        0.6456372962239804,
+        0.8556043826335717
+      ],
+      "winrate_all_games": 0.7666666666666667,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 23,
+        "wins_seat1": 23,
+        "wr_seat0": 0.7666666666666667,
+        "wr_seat1": 0.7666666666666667
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 153.95,
+        "median_applies": 142.5,
+        "p95_applies": 286.3499999999999,
+        "max_applies": 398,
+        "mean_turn": 42.61666666666667,
+        "median_turn": 44.0,
+        "p95_turn": 75.0,
+        "max_turn": 91
+      },
+      "elapsed_s": 248.18230557441711,
+      "games_per_s": 0.2417577669815348,
+      "cell": "cand_vs_untrained",
+      "deck_name": "current_agent_deck",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+      "ckpt_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+      "ckpt_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "deck_source": "current_agent_deck"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {},
+      "wins": 33,
+      "losses": 27,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.55,
+      "winrate_ci95": [
+        0.4249193588533434,
+        0.6690634559324476
+      ],
+      "winrate_all_games": 0.55,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 15,
+        "wins_seat1": 18,
+        "wr_seat0": 0.5,
+        "wr_seat1": 0.6
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 114.7,
+        "median_applies": 128.5,
+        "p95_applies": 162.39999999999998,
+        "max_applies": 178,
+        "mean_turn": 44.18333333333333,
+        "median_turn": 45.5,
+        "p95_turn": 71.1,
+        "max_turn": 95
+      },
+      "elapsed_s": 54.55717396736145,
+      "games_per_s": 1.0997637090934125,
+      "cell": "base_vs_random",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt",
+      "ckpt_sha256": "b02b0724ebbb90916e9d495cbc4ab73b30f6bb761cea993366798942b5477a3d",
+      "ckpt_step": 500736,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {},
+      "wins": 0,
+      "losses": 60,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.0,
+      "winrate_ci95": [
+        0.0,
+        0.06017185214208986
+      ],
+      "winrate_all_games": 0.0,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 0,
+        "wins_seat1": 0,
+        "wr_seat0": 0.0,
+        "wr_seat1": 0.0
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 43.31666666666667,
+        "median_applies": 35.0,
+        "p95_applies": 86.39999999999998,
+        "max_applies": 99,
+        "mean_turn": 16.066666666666666,
+        "median_turn": 14.5,
+        "p95_turn": 35.05,
+        "max_turn": 38
+      },
+      "elapsed_s": 27.84675145149231,
+      "games_per_s": 2.1546498917303545,
+      "cell": "base_vs_random",
+      "deck_name": "current_agent_deck",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt",
+      "ckpt_sha256": "b02b0724ebbb90916e9d495cbc4ab73b30f6bb761cea993366798942b5477a3d",
+      "ckpt_step": 500736,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "deck_source": "current_agent_deck"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt",
+        "step": 500736
+      },
+      "wins": 32,
+      "losses": 28,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.5333333333333333,
+      "winrate_ci95": [
+        0.40893427027157897,
+        0.6537209395856151
+      ],
+      "winrate_all_games": 0.5333333333333333,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 24,
+        "wins_seat1": 8,
+        "wr_seat0": 0.8,
+        "wr_seat1": 0.26666666666666666
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 97.68333333333334,
+        "median_applies": 98.0,
+        "p95_applies": 99.0,
+        "max_applies": 99,
+        "mean_turn": 94.3,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 200.82538199424744,
+      "games_per_s": 0.2987670154249659,
+      "cell": "base_selfmirror",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt",
+      "ckpt_sha256": "b02b0724ebbb90916e9d495cbc4ab73b30f6bb761cea993366798942b5477a3d",
+      "ckpt_step": 500736,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "untrained",
+      "label": "untrained_same_config",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {
+        "net_config": {
+          "arch": "transformer2",
+          "d_model": 544,
+          "nhead": 8,
+          "nlayers": 5,
+          "ff": 256,
+          "static": false,
+          "would_ko": true,
+          "split_heads": false,
+          "value_categorical": false,
+          "value_atoms": 51,
+          "value_vmax": 1.0
+        },
+        "init_seed": 20261022,
+        "shape_from": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt",
+        "shape_step": 500736
+      },
+      "wins": 32,
+      "losses": 28,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.5333333333333333,
+      "winrate_ci95": [
+        0.40893427027157897,
+        0.6537209395856151
+      ],
+      "winrate_all_games": 0.5333333333333333,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 15,
+        "wins_seat1": 17,
+        "wr_seat0": 0.5,
+        "wr_seat1": 0.5666666666666667
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 110.71666666666667,
+        "median_applies": 126.0,
+        "p95_applies": 160.1,
+        "max_applies": 226,
+        "mean_turn": 66.21666666666667,
+        "median_turn": 76.0,
+        "p95_turn": 96.0,
+        "max_turn": 96
+      },
+      "elapsed_s": 264.20648169517517,
+      "games_per_s": 0.22709510991189166,
+      "cell": "base_vs_untrained",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt",
+      "ckpt_sha256": "b02b0724ebbb90916e9d495cbc4ab73b30f6bb761cea993366798942b5477a3d",
+      "ckpt_step": 500736,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "baseline",
+      "label": "baseline_ckpt_500736",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {
+        "ckpt": "runs\\train-20m-e16-1m\\ckpt_500736.pt",
+        "step": 500736
+      },
+      "wins": 41,
+      "losses": 19,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.6833333333333333,
+      "winrate_ci95": [
+        0.5576623297382323,
+        0.7869413244763348
+      ],
+      "winrate_all_games": 0.6833333333333333,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 28,
+        "wins_seat1": 13,
+        "wr_seat0": 0.9333333333333333,
+        "wr_seat1": 0.43333333333333335
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 90.53333333333333,
+        "median_applies": 97.5,
+        "p95_applies": 99.0,
+        "max_applies": 130,
+        "mean_turn": 80.43333333333334,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 211.37985515594482,
+      "games_per_s": 0.2838491868382405,
+      "cell": "cand_vs_baseline_mirror",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+      "ckpt_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+      "ckpt_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "baseline",
+      "label": "baseline_ckpt_500736",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261023,
+      "meta": {
+        "ckpt": "runs\\train-20m-e16-1m\\ckpt_500736.pt",
+        "step": 500736
+      },
+      "wins": 44,
+      "losses": 16,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.7333333333333333,
+      "winrate_ci95": [
+        0.6099128690331636,
+        0.8286735999671944
+      ],
+      "winrate_all_games": 0.7333333333333333,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 26,
+        "wins_seat1": 18,
+        "wr_seat0": 0.8666666666666667,
+        "wr_seat1": 0.6
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 91.88333333333334,
+        "median_applies": 97.0,
+        "p95_applies": 99.84999999999995,
+        "max_applies": 142,
+        "mean_turn": 77.38333333333334,
+        "median_turn": 94.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 196.5502073764801,
+      "games_per_s": 0.305265513584901,
+      "cell": "cand_vs_baseline_mirror",
+      "deck_name": "dragapult_newlib",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+      "ckpt_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+      "ckpt_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "deck_source": "dragapult_newlib"
+    },
+    {
+      "opponent": "baseline",
+      "label": "baseline_ckpt_500736",
+      "games": 60,
+      "mode": "mirror",
+      "seed": 20261022,
+      "meta": {
+        "ckpt": "runs\\train-20m-e16-1m\\ckpt_500736.pt",
+        "step": 500736
+      },
+      "wins": 17,
+      "losses": 43,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.2833333333333333,
+      "winrate_ci95": [
+        0.18506828428432712,
+        0.4076728516439118
+      ],
+      "winrate_all_games": 0.2833333333333333,
+      "seat_balance": {
+        "games_seat0": 30,
+        "games_seat1": 30,
+        "wins_seat0": 17,
+        "wins_seat1": 0,
+        "wr_seat0": 0.5666666666666667,
+        "wr_seat1": 0.0
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 97.73333333333333,
+        "median_applies": 98.0,
+        "p95_applies": 99.0,
+        "max_applies": 100,
+        "mean_turn": 94.41666666666667,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 198.93381762504578,
+      "games_per_s": 0.30160784484159014,
+      "cell": "cand_vs_baseline_mirror",
+      "deck_name": "current_agent_deck",
+      "ckpt_path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+      "ckpt_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+      "ckpt_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "deck_sha256": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "deck_source": "current_agent_deck"
+    }
+  ]
+}

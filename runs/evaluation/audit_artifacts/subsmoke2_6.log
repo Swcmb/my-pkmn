@@ -1,0 +1,42 @@
+[setup] pkg=C:\Users\Swcmb\AppData\Local\Temp\opencode\subsmoke2\pkg  cg.dll=1659392 B (官方 wheel 内 CABT 引擎)
+[engine] sim.lib 来自: C:\Users\Swcmb\AppData\Local\Temp\opencode\subsmoke2\pkg\sdk_cg\cg.dll
+[engine] would_ko 所需符号检查: {'AgentStart': True, 'SearchBegin': True, 'SearchStep': True, 'SearchEnd': True, 'SearchRelease': True, 'WouldKO': False, 'GetSerialObs': False, 'GetBinaryObs': False}
+[main] import ok in 1.8s; _WK_ON=True; search_agent loaded=True; DECK len=60
+[deck] 牌组请求分支 -> 60 张 list[int] 正常
+{
+ "games": 0,
+ "wins": 2,
+ "losses": 4,
+ "draws": 0,
+ "errors": 0,
+ "illegal_returns": 0,
+ "wk_calls": 116,
+ "wk_nonzero_cells": 54,
+ "applies": [
+  21,
+  186,
+  24,
+  17,
+  20,
+  14
+ ],
+ "turns": [
+  6,
+  34,
+  7,
+  6,
+  5,
+  3
+ ],
+ "sub_seat": {
+  "0": 3,
+  "1": 3
+ },
+ "win_by_seat": {
+  "0": 1,
+  "1": 1
+ },
+ "elapsed_s": 4.904857635498047,
+ "games_per_s": 1.2232770950528824
+}
+[out] C:\Users\Swcmb\AppData\Local\Temp\opencode\subsmoke2\subsmoke2_result.json

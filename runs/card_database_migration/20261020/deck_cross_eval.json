@@ -1,0 +1,1162 @@
+{
+  "library": {
+    "path": "D:\\pkmn-kaggle\\EN_Card_Data.csv",
+    "sha256": "05aa569e3003a838b8503a9d928795e5aea7407ab19dd9f3d9c4b1293b6bb4b4",
+    "vocab_size": 1268,
+    "feat_dim": 59
+  },
+  "candidate_ckpt": {
+    "path": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+    "sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+    "global_step": 999424,
+    "net_config": {
+      "arch": "transformer2",
+      "d_model": 544,
+      "nhead": 8,
+      "nlayers": 5,
+      "ff": 256,
+      "static": false,
+      "would_ko": true,
+      "split_heads": false,
+      "value_categorical": false,
+      "value_atoms": 51,
+      "value_vmax": 1.0
+    }
+  },
+  "engine": {
+    "kaggle_environments_pkg": "1.33.0",
+    "shim": "D:\\pkmn-kaggle\\.engine-shim"
+  },
+  "env": {
+    "python": "3.12.14",
+    "torch": "2.14.0+cu130",
+    "device": "cuda",
+    "turn_cap": "200",
+    "would_ko": true,
+    "native_encode": false,
+    "live": 1,
+    "platform": "Windows-11-10.0.26100-SP0"
+  },
+  "protocol": {
+    "games_per_cell": 40,
+    "seeds": [
+      20261020,
+      20261021
+    ],
+    "bidirectional": true,
+    "seat_balance": "cs = gi % 2 逐局严格交替",
+    "model_fixed": "两侧同 ckpt_999424，仅牌组变量"
+  },
+  "runs": [
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261020,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 18,
+      "losses": 22,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.45,
+      "winrate_ci95": [
+        0.3070530781090492,
+        0.6017090820106795
+      ],
+      "winrate_all_games": 0.45,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 13,
+        "wins_seat1": 5,
+        "wr_seat0": 0.65,
+        "wr_seat1": 0.25
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 84.85,
+        "median_applies": 97.0,
+        "p95_applies": 100.39999999999992,
+        "max_applies": 128,
+        "mean_turn": 71.425,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 43.11342811584473,
+      "games_per_s": 0.9277851877730757,
+      "cell": "dragapult_newlib vs current_agent_deck",
+      "cand_deck": "dragapult_newlib",
+      "opp_deck": "current_agent_deck",
+      "cand_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "opp_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261020,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 20,
+      "losses": 20,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.5,
+      "winrate_ci95": [
+        0.35199526933465386,
+        0.6480047306653461
+      ],
+      "winrate_all_games": 0.5,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 11,
+        "wins_seat1": 9,
+        "wr_seat0": 0.55,
+        "wr_seat1": 0.45
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 96.15,
+        "median_applies": 98.0,
+        "p95_applies": 140.25,
+        "max_applies": 157,
+        "mean_turn": 57.85,
+        "median_turn": 93.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 29.501142263412476,
+      "games_per_s": 1.3558797026516591,
+      "cell": "dragapult_newlib vs fixture_iono",
+      "cand_deck": "dragapult_newlib",
+      "opp_deck": "fixture_iono",
+      "cand_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "opp_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261020,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 20,
+      "losses": 20,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.5,
+      "winrate_ci95": [
+        0.35199526933465386,
+        0.6480047306653461
+      ],
+      "winrate_all_games": 0.5,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 14,
+        "wins_seat1": 6,
+        "wr_seat0": 0.7,
+        "wr_seat1": 0.3
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 86.425,
+        "median_applies": 97.0,
+        "p95_applies": 99.0,
+        "max_applies": 132,
+        "mean_turn": 70.375,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 27.349040508270264,
+      "games_per_s": 1.4625741618944228,
+      "cell": "current_agent_deck vs dragapult_newlib",
+      "cand_deck": "current_agent_deck",
+      "opp_deck": "dragapult_newlib",
+      "cand_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "opp_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261020,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 24,
+      "losses": 16,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.6,
+      "winrate_ci95": [
+        0.44595893660346186,
+        0.7365167431570807
+      ],
+      "winrate_all_games": 0.6,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 14,
+        "wins_seat1": 10,
+        "wr_seat0": 0.7,
+        "wr_seat1": 0.5
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 102.95,
+        "median_applies": 97.0,
+        "p95_applies": 209.04999999999995,
+        "max_applies": 234,
+        "mean_turn": 75.9,
+        "median_turn": 94.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 31.858886241912842,
+      "games_per_s": 1.2555366718180152,
+      "cell": "current_agent_deck vs fixture_iono",
+      "cand_deck": "current_agent_deck",
+      "opp_deck": "fixture_iono",
+      "cand_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "opp_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261020,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 20,
+      "losses": 20,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.5,
+      "winrate_ci95": [
+        0.35199526933465386,
+        0.6480047306653461
+      ],
+      "winrate_all_games": 0.5,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 12,
+        "wins_seat1": 8,
+        "wr_seat0": 0.6,
+        "wr_seat1": 0.4
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 97.85,
+        "median_applies": 98.0,
+        "p95_applies": 138.29999999999998,
+        "max_applies": 184,
+        "mean_turn": 63.375,
+        "median_turn": 94.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 30.98825716972351,
+      "games_per_s": 1.2908115413176977,
+      "cell": "fixture_iono vs dragapult_newlib",
+      "cand_deck": "fixture_iono",
+      "opp_deck": "dragapult_newlib",
+      "cand_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']",
+      "opp_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261020,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 14,
+      "losses": 26,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.35,
+      "winrate_ci95": [
+        0.2213452887317629,
+        0.5049411916274231
+      ],
+      "winrate_all_games": 0.35,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 9,
+        "wins_seat1": 5,
+        "wr_seat0": 0.45,
+        "wr_seat1": 0.25
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 94.2,
+        "median_applies": 97.0,
+        "p95_applies": 143.29999999999993,
+        "max_applies": 238,
+        "mean_turn": 70.425,
+        "median_turn": 93.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 30.243923664093018,
+      "games_per_s": 1.32257971697931,
+      "cell": "fixture_iono vs current_agent_deck",
+      "cand_deck": "fixture_iono",
+      "opp_deck": "current_agent_deck",
+      "cand_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']",
+      "opp_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 40,
+      "mode": "mirror",
+      "seed": 20261020,
+      "meta": {},
+      "wins": 19,
+      "losses": 21,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.475,
+      "winrate_ci95": [
+        0.32935470112678905,
+        0.6250263789330752
+      ],
+      "winrate_all_games": 0.475,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 6,
+        "wins_seat1": 13,
+        "wr_seat0": 0.3,
+        "wr_seat1": 0.65
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 104.8,
+        "median_applies": 127.5,
+        "p95_applies": 195.1,
+        "max_applies": 205,
+        "mean_turn": 35.425,
+        "median_turn": 36.0,
+        "p95_turn": 71.19999999999999,
+        "max_turn": 81
+      },
+      "elapsed_s": 14.349452018737793,
+      "games_per_s": 2.787562894232283,
+      "cell": "dragapult_newlib vs random",
+      "cand_deck": "dragapult_newlib",
+      "opp_deck": "random_legal",
+      "cand_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 40,
+      "mode": "mirror",
+      "seed": 20261020,
+      "meta": {},
+      "wins": 7,
+      "losses": 33,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.175,
+      "winrate_ci95": [
+        0.0874541374603592,
+        0.31949990331787714
+      ],
+      "winrate_all_games": 0.175,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 3,
+        "wins_seat1": 4,
+        "wr_seat0": 0.15,
+        "wr_seat1": 0.2
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 60.875,
+        "median_applies": 41.5,
+        "p95_applies": 160.14999999999998,
+        "max_applies": 164,
+        "mean_turn": 17.825,
+        "median_turn": 13.5,
+        "p95_turn": 38.14999999999999,
+        "max_turn": 45
+      },
+      "elapsed_s": 15.806391954421997,
+      "games_per_s": 2.530621796254369,
+      "cell": "current_agent_deck vs random",
+      "cand_deck": "current_agent_deck",
+      "opp_deck": "random_legal",
+      "cand_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 40,
+      "mode": "mirror",
+      "seed": 20261020,
+      "meta": {},
+      "wins": 11,
+      "losses": 29,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.275,
+      "winrate_ci95": [
+        0.16108016247667334,
+        0.4283495580621057
+      ],
+      "winrate_all_games": 0.275,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 4,
+        "wins_seat1": 7,
+        "wr_seat0": 0.2,
+        "wr_seat1": 0.35
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 124.025,
+        "median_applies": 111.5,
+        "p95_applies": 318.65,
+        "max_applies": 461,
+        "mean_turn": 27.125,
+        "median_turn": 28.5,
+        "p95_turn": 55.29999999999998,
+        "max_turn": 61
+      },
+      "elapsed_s": 18.7377986907959,
+      "games_per_s": 2.134722475145824,
+      "cell": "fixture_iono vs random",
+      "cand_deck": "fixture_iono",
+      "opp_deck": "random_legal",
+      "cand_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 20,
+      "losses": 20,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.5,
+      "winrate_ci95": [
+        0.35199526933465386,
+        0.6480047306653461
+      ],
+      "winrate_all_games": 0.5,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 12,
+        "wins_seat1": 8,
+        "wr_seat0": 0.6,
+        "wr_seat1": 0.4
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 84.325,
+        "median_applies": 97.0,
+        "p95_applies": 101.34999999999992,
+        "max_applies": 136,
+        "mean_turn": 60.825,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 30.805598258972168,
+      "games_per_s": 1.2984652875017595,
+      "cell": "dragapult_newlib vs current_agent_deck",
+      "cand_deck": "dragapult_newlib",
+      "opp_deck": "current_agent_deck",
+      "cand_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "opp_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 21,
+      "losses": 19,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.525,
+      "winrate_ci95": [
+        0.3749736210669247,
+        0.670645298873211
+      ],
+      "winrate_all_games": 0.525,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 12,
+        "wins_seat1": 9,
+        "wr_seat0": 0.6,
+        "wr_seat1": 0.45
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 91.975,
+        "median_applies": 97.0,
+        "p95_applies": 138.44999999999993,
+        "max_applies": 183,
+        "mean_turn": 60.2,
+        "median_turn": 93.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 31.709890127182007,
+      "games_per_s": 1.2614360957911877,
+      "cell": "dragapult_newlib vs fixture_iono",
+      "cand_deck": "dragapult_newlib",
+      "opp_deck": "fixture_iono",
+      "cand_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+      "opp_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 19,
+      "losses": 21,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.475,
+      "winrate_ci95": [
+        0.32935470112678905,
+        0.6250263789330752
+      ],
+      "winrate_all_games": 0.475,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 12,
+        "wins_seat1": 7,
+        "wr_seat0": 0.6,
+        "wr_seat1": 0.35
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 84.725,
+        "median_applies": 97.0,
+        "p95_applies": 132.74999999999994,
+        "max_applies": 165,
+        "mean_turn": 65.0,
+        "median_turn": 95.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 28.710418462753296,
+      "games_per_s": 1.3932224656318732,
+      "cell": "current_agent_deck vs dragapult_newlib",
+      "cand_deck": "current_agent_deck",
+      "opp_deck": "dragapult_newlib",
+      "cand_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "opp_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 19,
+      "losses": 21,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.475,
+      "winrate_ci95": [
+        0.32935470112678905,
+        0.6250263789330752
+      ],
+      "winrate_all_games": 0.475,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 10,
+        "wins_seat1": 9,
+        "wr_seat0": 0.5,
+        "wr_seat1": 0.45
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 104.8,
+        "median_applies": 97.0,
+        "p95_applies": 206.59999999999997,
+        "max_applies": 272,
+        "mean_turn": 70.175,
+        "median_turn": 93.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 70.02415084838867,
+      "games_per_s": 0.5712314896414119,
+      "cell": "current_agent_deck vs fixture_iono",
+      "cand_deck": "current_agent_deck",
+      "opp_deck": "fixture_iono",
+      "cand_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78",
+      "opp_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 22,
+      "losses": 18,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.55,
+      "winrate_ci95": [
+        0.3982909179893206,
+        0.6929469218909509
+      ],
+      "winrate_all_games": 0.55,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 10,
+        "wins_seat1": 12,
+        "wr_seat0": 0.5,
+        "wr_seat1": 0.6
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 96.825,
+        "median_applies": 97.0,
+        "p95_applies": 153.1,
+        "max_applies": 201,
+        "mean_turn": 55.675,
+        "median_turn": 68.5,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 63.7241895198822,
+      "games_per_s": 0.6277051195373751,
+      "cell": "fixture_iono vs dragapult_newlib",
+      "cand_deck": "fixture_iono",
+      "opp_deck": "dragapult_newlib",
+      "cand_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']",
+      "opp_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 40,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 23,
+      "losses": 17,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.575,
+      "winrate_ci95": [
+        0.4219506854199107,
+        0.7149060744004961
+      ],
+      "winrate_all_games": 0.575,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 11,
+        "wins_seat1": 12,
+        "wr_seat0": 0.55,
+        "wr_seat1": 0.6
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 94.85,
+        "median_applies": 97.0,
+        "p95_applies": 150.99999999999994,
+        "max_applies": 189,
+        "mean_turn": 61.55,
+        "median_turn": 93.0,
+        "p95_turn": 95.0,
+        "max_turn": 95
+      },
+      "elapsed_s": 67.65259337425232,
+      "games_per_s": 0.591255974160829,
+      "cell": "fixture_iono vs current_agent_deck",
+      "cand_deck": "fixture_iono",
+      "opp_deck": "current_agent_deck",
+      "cand_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']",
+      "opp_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 40,
+      "mode": "mirror",
+      "seed": 20261021,
+      "meta": {},
+      "wins": 21,
+      "losses": 19,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.525,
+      "winrate_ci95": [
+        0.3749736210669247,
+        0.670645298873211
+      ],
+      "winrate_all_games": 0.525,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 12,
+        "wins_seat1": 9,
+        "wr_seat0": 0.6,
+        "wr_seat1": 0.45
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 100.975,
+        "median_applies": 118.5,
+        "p95_applies": 143.49999999999997,
+        "max_applies": 160,
+        "mean_turn": 38.3,
+        "median_turn": 39.0,
+        "p95_turn": 67.19999999999999,
+        "max_turn": 73
+      },
+      "elapsed_s": 22.730544805526733,
+      "games_per_s": 1.7597466467356448,
+      "cell": "dragapult_newlib vs random",
+      "cand_deck": "dragapult_newlib",
+      "opp_deck": "random_legal",
+      "cand_deck_sha": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 40,
+      "mode": "mirror",
+      "seed": 20261021,
+      "meta": {},
+      "wins": 6,
+      "losses": 34,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.15,
+      "winrate_ci95": [
+        0.0706118771732036,
+        0.2907232436648971
+      ],
+      "winrate_all_games": 0.15,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 0,
+        "wins_seat1": 6,
+        "wr_seat0": 0.0,
+        "wr_seat1": 0.3
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 53.45,
+        "median_applies": 45.0,
+        "p95_applies": 118.99999999999994,
+        "max_applies": 201,
+        "mean_turn": 16.2,
+        "median_turn": 15.0,
+        "p95_turn": 29.399999999999977,
+        "max_turn": 49
+      },
+      "elapsed_s": 26.456743955612183,
+      "games_per_s": 1.5119018450308936,
+      "cell": "current_agent_deck vs random",
+      "cand_deck": "current_agent_deck",
+      "opp_deck": "random_legal",
+      "cand_deck_sha": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 40,
+      "mode": "mirror",
+      "seed": 20261021,
+      "meta": {},
+      "wins": 9,
+      "losses": 31,
+      "decided": 40,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.225,
+      "winrate_ci95": [
+        0.12316091323540744,
+        0.37503096742310027
+      ],
+      "winrate_all_games": 0.225,
+      "seat_balance": {
+        "games_seat0": 20,
+        "games_seat1": 20,
+        "wins_seat0": 3,
+        "wins_seat1": 6,
+        "wr_seat0": 0.15,
+        "wr_seat1": 0.3
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 118.6,
+        "median_applies": 130.5,
+        "p95_applies": 176.79999999999995,
+        "max_applies": 311,
+        "mean_turn": 31.775,
+        "median_turn": 33.0,
+        "p95_turn": 60.05,
+        "max_turn": 61
+      },
+      "elapsed_s": 28.22533106803894,
+      "games_per_s": 1.4171667252928752,
+      "cell": "fixture_iono vs random",
+      "cand_deck": "fixture_iono",
+      "opp_deck": "random_legal",
+      "cand_deck_sha": "rl/decks.py:_DECKS_SPEC['iono']"
+    }
+  ]
+}

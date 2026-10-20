@@ -1,0 +1,17 @@
+{
+ "decisions": 241,
+ "mismatch": 0,
+ "wk_nonzero": 4,
+ "opt_len_hist": {
+  "32": 241
+ },
+ "examples": [],
+ "game_result_seat0_subagent": {
+  "win": 0,
+  "loss": 12,
+  "draw": 0,
+  "err": 0
+ },
+ "mismatch_rate": 0.0,
+ "wk_nonzero_rate": 0.016597510373443983
+}

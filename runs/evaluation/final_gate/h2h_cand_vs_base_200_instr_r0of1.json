@@ -1,0 +1,1 @@
+{"tag": "h2h_cand_vs_base_200_instr", "a": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt", "b": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_500736.pt", "step_a": 999424, "step_b": 500736, "games": 200, "sample": 2, "seed": 777, "rank": 0, "world": 1, "turn_cap": 200, "wins": 118, "decided": 200, "draws": 0}

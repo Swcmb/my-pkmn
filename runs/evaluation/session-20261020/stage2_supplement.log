@@ -1,0 +1,22 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[supp] cand_vs_untrained deck=dragapult_newlib seed=20261022 games=60
+     wr=0.4 ci95=[0.2856949053488256, 0.5263394650795924] draws=0 errs=0 illegal=0 len=103.1 0.67 g/s
+[supp] cand_vs_untrained deck=dragapult_newlib seed=20261023 games=60
+     wr=0.45 ci95=[0.3309365440675524, 0.5750806411466566] draws=0 errs=0 illegal=0 len=71.9 1.61 g/s
+[supp] cand_vs_untrained deck=current_agent_deck seed=20261022 games=60
+     wr=0.7666666666666667 ci95=[0.6456372962239804, 0.8556043826335717] draws=0 errs=0 illegal=0 len=153.9 0.24 g/s
+[supp] base_vs_random deck=dragapult_newlib seed=20261022 games=60
+     wr=0.55 ci95=[0.4249193588533434, 0.6690634559324476] draws=0 errs=0 illegal=0 len=114.7 1.10 g/s
+[supp] base_vs_random deck=current_agent_deck seed=20261022 games=60
+     wr=0.0 ci95=[0.0, 0.06017185214208986] draws=0 errs=0 illegal=0 len=43.3 2.15 g/s
+[supp] base_selfmirror deck=dragapult_newlib seed=20261022 games=60
+     wr=0.5333333333333333 ci95=[0.40893427027157897, 0.6537209395856151] draws=0 errs=0 illegal=0 len=97.7 0.30 g/s
+[supp] base_vs_untrained deck=dragapult_newlib seed=20261022 games=60
+     wr=0.5333333333333333 ci95=[0.40893427027157897, 0.6537209395856151] draws=0 errs=0 illegal=0 len=110.7 0.23 g/s
+[supp] cand_vs_baseline_mirror deck=dragapult_newlib seed=20261022 games=60
+     wr=0.6833333333333333 ci95=[0.5576623297382323, 0.7869413244763348] draws=0 errs=0 illegal=0 len=90.5 0.28 g/s
+[supp] cand_vs_baseline_mirror deck=dragapult_newlib seed=20261023 games=60
+     wr=0.7333333333333333 ci95=[0.6099128690331636, 0.8286735999671944] draws=0 errs=0 illegal=0 len=91.9 0.31 g/s
+[supp] cand_vs_baseline_mirror deck=current_agent_deck seed=20261022 games=60
+     wr=0.2833333333333333 ci95=[0.18506828428432712, 0.4076728516439118] draws=0 errs=0 illegal=0 len=97.7 0.30 g/s
+[saved] D:\pkmn-kaggle\runs\evaluation\session-20261020\stage2_supplement.json

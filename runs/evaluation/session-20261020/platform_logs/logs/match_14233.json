@@ -1,0 +1,1 @@
+{"match": {"id": 14233, "round_no": 34, "player_a": 39, "player_b": 16, "winner": "draw", "seed": 3401639, "duration_ms": 2496, "created_at": "2026-10-20T12:32:07.525152"}, "teams": {"39": "A", "16": "B"}, "log_chars": 81, "log": "真实引擎对战完成（reward a=None, b=None）\n平台裁定：draw（invalid：双方均异常（A 方：INVALID；B 方：INVALID））"}

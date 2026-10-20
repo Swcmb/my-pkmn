@@ -1,0 +1,70 @@
+===G1 base_vs_random_100=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_500736.pt step=500736
+
+=== opponent=random games=100 seed=20261019 mode=mirror ===
+[done] random_legal wr=0.42 ci95=[0.3279838267435473, 0.5179351329695703] draws=0 errs=0 illegal=0 len_mean=98.9 3.46 g/s
+
+[out] runs\evaluation\ctl2_base_vs_random_100.json
+===G2 base_vs_untrained_100=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_500736.pt step=500736
+
+=== opponent=untrained games=100 seed=20261019 mode=mirror ===
+[done] untrained_same_config wr=0.1 ci95=[0.055229137060675094, 0.17436566150491348] draws=0 errs=0 illegal=0 len_mean=120.3 1.02 g/s
+
+[out] runs\evaluation\ctl2_base_vs_untrained_100.json
+===G3 cand_selfmirror_100=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_999424.pt step=999424
+
+=== opponent=selfmirror games=100 seed=20261019 mode=mirror ===
+[done] selfmirror_ckpt_999424 wr=0.56 ci95=[0.46228104651676977, 0.653279733698392] draws=0 errs=0 illegal=0 len_mean=93.2 1.37 g/s
+
+[out] runs\evaluation\ctl2_cand_selfmirror_100.json
+===G4 base_selfmirror_100=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_500736.pt step=500736
+
+=== opponent=selfmirror games=100 seed=20261019 mode=mirror ===
+[done] selfmirror_ckpt_999424 wr=0.5 ci95=[0.4038315303659957, 0.5961684696340044] draws=0 errs=0 illegal=0 len_mean=98.0 1.34 g/s
+
+[out] runs\evaluation\ctl2_base_selfmirror_100.json
+===G5 cand_vs_untrained_100_seedB=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_999424.pt step=999424
+
+=== opponent=untrained games=100 seed=20261020 mode=mirror ===
+[done] untrained_same_config wr=0.7040816326530612 ci95=[0.6073991576853616, 0.785368193285381] draws=2 errs=0 illegal=0 len_mean=220.8 0.49 g/s
+
+[out] runs\evaluation\ctl2_cand_vs_untrained_100_seedB.json
+===G6 cand_vs_baseline_100_seedB=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_999424.pt step=999424
+
+=== opponent=baseline games=100 seed=20261020 mode=mirror ===
+[done] baseline_ckpt_500736 wr=0.58 ci95=[0.4820648670304296, 0.6720161732564526] draws=0 errs=0 illegal=0 len_mean=99.0 1.26 g/s
+
+[out] runs\evaluation\ctl2_cand_vs_baseline_100_seedB.json
+===G7 cand_vs_random_100_seedB=== 
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[env] device=cuda turn_cap=200  torch=2.14.0+cu130
+[pool] cand_pool=30 decks (runs\evaluation\pool_top15.json); net_pool=30 decks
+[cand] runs\train-20m-e16-1m\ckpt_999424.pt step=999424
+
+=== opponent=random games=100 seed=20261020 mode=mirror ===
+[done] random_legal wr=0.45 ci95=[0.3561453797951198, 0.5475539700255787] draws=0 errs=0 illegal=0 len_mean=94.8 3.03 g/s
+
+[out] runs\evaluation\ctl2_cand_vs_random_100_seedB.json

@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_meta_aichi_ns_zoroark_2nd_16.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 7,
+      "losses": 1,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.875,
+      "winrate_ci95": [
+        0.5291118177871466,
+        0.9775825085499433
+      ],
+      "winrate_all_games": 0.875,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 3,
+        "wins_seat1": 4,
+        "wr_seat0": 0.75,
+        "wr_seat1": 1.0
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 109.75,
+        "median_applies": 112.5,
+        "p95_applies": 131.85,
+        "max_applies": 135,
+        "mean_turn": 28.75,
+        "median_turn": 31.0,
+        "p95_turn": 33.0,
+        "max_turn": 33
+      },
+      "elapsed_s": 2.2167563438415527,
+      "games_per_s": 3.6088765561560594
+    }
+  ]
+}

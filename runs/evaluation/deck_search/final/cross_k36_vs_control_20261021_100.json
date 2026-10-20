@@ -1,0 +1,72 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "cross",
+  "games": 100,
+  "seed": 20261021,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_k36_marnie_s_grimmsnarl_ex_35.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "selfmirror",
+      "label": "selfmirror_ckpt_999424",
+      "games": 100,
+      "mode": "cross",
+      "seed": 20261021,
+      "meta": {
+        "ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "step": 999424
+      },
+      "wins": 28,
+      "losses": 72,
+      "decided": 100,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.28,
+      "winrate_ci95": [
+        0.2013968521118621,
+        0.37488028709921156
+      ],
+      "winrate_all_games": 0.28,
+      "seat_balance": {
+        "games_seat0": 50,
+        "games_seat1": 50,
+        "wins_seat0": 15,
+        "wins_seat1": 13,
+        "wr_seat0": 0.3,
+        "wr_seat1": 0.26
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 132.33,
+        "median_applies": 98.0,
+        "p95_applies": 349.05,
+        "max_applies": 394,
+        "mean_turn": 73.25,
+        "median_turn": 94.0,
+        "p95_turn": 96.0,
+        "max_turn": 96
+      },
+      "elapsed_s": 113.56641340255737,
+      "games_per_s": 0.8805420282626283
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "tar": "D:\\pkmn-kaggle\\submission_rl_transformer2_dragapult_nodist.tar.gz",
+  "members": 19,
+  "binaries": [],
+  "extract_dir": "C:\\Users\\Swcmb\\AppData\\Local\\Temp\\pkmn_pkgcheck__8skj72a\\agent",
+  "games": [
+    {
+      "main_seat": 0,
+      "decisions_main": 10,
+      "decisions_opp": 53,
+      "wk_decisions": 0,
+      "wk_cells": 0,
+      "bad_actions": 0,
+      "attack_opts": 0,
+      "select_types": {
+        "9": 1,
+        "1": 1,
+        "0": 8
+      },
+      "first_decision_ok": true,
+      "terminal": 1,
+      "won": false,
+      "error": null
+    },
+    {
+      "main_seat": 1,
+      "decisions_main": 24,
+      "decisions_opp": 85,
+      "wk_decisions": 0,
+      "wk_cells": 0,
+      "bad_actions": 0,
+      "attack_opts": 0,
+      "select_types": {
+        "1": 1,
+        "8": 1,
+        "0": 22
+      },
+      "first_decision_ok": true,
+      "terminal": 1,
+      "won": true,
+      "error": null
+    }
+  ],
+  "errors": [],
+  "import_main": true,
+  "wk_on": true,
+  "deck_request": {
+    "n": 60,
+    "all_int": true
+  },
+  "ok": true
+}

@@ -1,0 +1,489 @@
+# 任务：替换本地卡牌库、验证模型兼容性、修复 Agent 运行问题并准备最终提交
+
+## 一、任务目标
+
+项目目录：
+
+`D:\pkmn-kaggle`
+
+新卡牌库来源：
+
+`E:\Files\Downloads\cards.csv`
+
+当前模型候选：
+
+`runs\train-20m-e16-1m\ckpt_999424.pt`
+
+旧基线模型：
+
+`runs\train-20m-e16-1m\ckpt_500736.pt`
+
+当前牌组：
+
+`agent\deck.csv`
+
+候选牌组输出：
+
+`runs\evaluation\card_database_migration\best_deck.csv`
+
+最终提交包目标：
+
+`submission_rl_transformer2_db_migrated.tar.gz`
+
+请直接检查和修改现有项目，按顺序完成卡牌库迁移、模型兼容性审计、牌组重建、评估门禁和运行时验证。
+
+本次任务首先解决卡牌库替换及其影响，再决定当前模型是否能够继续使用。
+
+**最终提交包的导出命令必须由用户本人运行。AI 只能在所有前置检查通过后，提供完整 PowerShell 命令并明确要求用户执行。AI 不得调用 Python、PowerShell、子进程或其他间接方式执行该导出命令。**
+
+本任务不启动长时间训练，也不自动启动 0.5M 步微调。
+
+## 二、运行环境
+
+### Windows 原生环境
+
+- 项目：`D:\pkmn-kaggle`
+- Python：`D:\ProgramFiles\deeplearning\python.exe`
+- Conda 环境：`deeplearning`
+- GPU：NVIDIA GeForce RTX 5060 Laptop GPU，8 GB 显存
+- CPU：Intel Core i7-14650HX
+- RAM：约 32 GB
+- 引擎 shim：`C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim`
+
+执行 Windows 命令时，沿用已验证可运行的 Conda 环境。
+
+### WSL2 环境
+
+允许使用已安装的 `Ubuntu-24.04` WSL2。
+
+WSL2 用于 Linux 提交包运行时验证。项目目录对应：
+
+`/mnt/d/pkmn-kaggle`
+
+本地卡牌库来源在 WSL2 中对应：
+
+`/mnt/e/Files/Downloads/cards.csv`
+
+不得为了本次任务重新安装操作系统、重建发行版或破坏现有环境。
+
+## 三、项目保护规则
+
+开始前执行：
+
+```powershell
+Set-Location D:\pkmn-kaggle
+
+git status --short
+git rev-parse HEAD
+git branch --show-current
+```
+
+先记录所有现有修改和未跟踪文件。
+
+必须遵守：
+
+1. 不执行 `git reset --hard`、`git clean -fd` 或无差别回滚。
+2. 不覆盖旧 checkpoint、旧提交包、旧牌组、旧评估结果。
+3. 不删除已有实验产物。
+4. 不因卡牌库发生变化而直接认定旧模型失效，也不因 `load_state_dict()` 成功而认定模型兼容。
+5. 所有新报告及生成文件放在独立目录中。
+6. 所有修改必须有明确原因和验证结果。
+7. 若某一阶段发现关键前置条件不满足，应停止其依赖阶段，保留证据并记录阻塞。
+
+## 四、第一阶段：备份并替换原卡牌库
+
+### 4.1 定位原卡牌库
+
+搜索项目中所有卡牌数据库及其读取位置。
+
+检查：
+
+- `cards.csv`、`*cards*.csv` 等可能的数据文件。
+- `rl/encoding.py`。
+- `rl/policy.py`。
+- `rl/decks.py`。
+- `scripts/` 下的牌组生成、卡牌检查和提交导出代码。
+- `sdk_cg/` 与提交包中所有读取卡牌元数据的代码。
+- 项目内可能由原始 CSV 生成的 JSON、索引、缓存和映射文件。
+
+确定唯一的权威卡牌库路径，并明确区分原始卡牌数据、派生数据与引擎内部卡牌库。
+
+不能把 `agent/deck.csv` 当作卡牌数据库；它是提交牌组。
+
+### 4.2 备份原数据库
+
+在新的迁移目录中保存原数据库的完整副本。例如：
+
+`runs\card_database_migration\20261020\original_cards.csv`
+
+如果目录已存在，使用新的唯一目录。
+
+覆盖之前计算原文件 SHA-256，并确保备份文件与原文件哈希一致。
+
+### 4.3 校验新卡牌库
+
+从本地读取：
+
+`E:\Files\Downloads\cards.csv`
+
+首先确认文件存在、可读取、非空。将其复制到新的迁移临时文件：
+
+`runs\card_database_migration\20261020\downloaded_cards.csv`
+
+使用 Python 标准库 `csv` 或项目既有解析逻辑读取。
+
+检查：
+
+- 编码和 CSV 格式。
+- 列名、列顺序及必要字段。
+- 数据行数。
+- 卡牌 ID 是否存在空值或重复值。
+- 必要字段是否有异常类型或无法解析的内容。
+- 卡牌名称、类型、进化关系、招式、特性和能量需求的格式。
+- 是否存在误将表头、错误页面或其他非卡牌记录当作卡牌行的情况。
+
+不要假定新文件仍然只有 1267 张卡牌。以新 CSV 中通过验证的真实记录为准。
+
+### 4.4 比较旧、新卡牌库
+
+生成旧、新卡牌的比较结果，至少包含：
+
+- 新增和删除的卡牌 ID。
+- 新旧均存在的卡牌 ID。
+- 相同 ID 的名称是否变化。
+- `cardType`、`pokemonType`、`basic`、进化关系等字段的变化。
+- HP、招式 ID、招式伤害、能量需求和 `skills` 的变化。
+- 新增字段、缺失字段及字段语义变化。
+- 新旧卡牌 ID 映射是否保持一致。
+
+将结果保存到：
+
+`runs\card_database_migration\20261020\schema_comparison.json`
+
+同时生成：
+
+`runs\card_database_migration\20261020\id_mapping_comparison.json`
+
+如有需要，补充便于阅读的 Markdown 报告。
+
+### 4.5 覆盖原数据库
+
+只有完成备份、格式校验及 schema 检查后，才执行覆盖。
+
+将 `downloaded_cards.csv` 复制并覆盖项目中定位到的原始权威卡牌库文件。优先使用同卷临时文件和原子替换，防止覆盖过程中留下损坏文件。
+
+覆盖后重新计算 SHA-256，必须与新源文件一致。
+
+如果校验失败，保留原数据库，不得使用错误数据覆盖。
+
+完成后明确记录：
+
+- 原数据库绝对路径。
+- 原数据库 SHA-256。
+- 备份路径和哈希。
+- 新数据库路径。
+- 新数据库 SHA-256。
+- 实际记录数。
+- 新旧 ID 与语义差异。
+
+不要为了迁移而直接覆盖所有派生 JSON、模型权重或牌组文件。它们必须在分析其依赖关系后分别处理。
+
+## 五、第二阶段：验证数据库解析与模型兼容性
+
+### 5.1 验证卡牌解析
+
+重新运行项目原有的卡牌数据读取入口，例如 `all_card_data()` 和相关索引构造函数。
+
+检查：
+
+- CSV 可以完整解析。
+- 卡牌 ID 查询正确。
+- 名称与属性映射正确。
+- 招式与技能能够解析。
+- 不存在索引越界、重复映射或关键字段缺失。
+- 牌组工具、训练入口与 Agent 编码器能够读取新数据。
+
+优先复用已有测试，只添加解决本次迁移所需的最少测试。
+
+### 5.2 验证现有 checkpoint
+
+首先检查：
+
+`runs\train-20m-e16-1m\ckpt_999424.pt`
+
+以及：
+
+`runs\train-20m-e16-1m\ckpt_500736.pt`
+
+重点检查：
+
+- `net_config`。
+- 模型输入维度。
+- 卡牌 token / embedding 的映射。
+- 卡牌属性编码。
+- `would_ko` 特征。
+- `model.pt` 的导出方式。
+- 训练时使用的数据文件与当前数据文件的语义差异。
+
+判定原则：
+
+- 若模型输入表示的是卡牌稳定语义，且相关字段与 ID 映射一致，可以继续测试旧 checkpoint。
+- 若 ID 被重新分配，但模型将 ID 直接当作类别或索引，则必须检查权重与映射能否兼容。
+- 若卡牌顺序、embedding 或输入语义发生变化，必须明确风险。
+- 即使模型成功加载，也需要通过输入、推理和对战回归测试才能确认兼容。
+- 如果无法证明 checkpoint 与新数据库兼容，保留旧模型，不得继续微调或将其导出为有效候选提交包。
+
+**数据库更新不等于模型自动适配。**
+
+## 六、第三阶段：重新生成与验证牌组
+
+优先根据新卡牌库重新构建牌组候选。
+
+原有以下文件全部保留为历史资料：
+
+- `agent\deck.csv`
+- `runs\evaluation\deck_search\dragapult_deck.csv`
+- 历史 pool JSON、权重文件与评估结果。
+
+新候选牌组路径为：
+
+`runs\evaluation\card_database_migration\best_deck.csv`
+
+如该目录中存在旧文件，先归档或使用独立文件名，不得覆盖旧评估产物。
+
+### 6.1 重建 Dragapult 候选
+
+使用新卡牌库核对旧 Dragapult 牌组：
+
+- 不依据旧卡牌 ID 直接认定新 ID 仍对应相同卡牌。
+- 同名多印刷版本必须根据实际语义、招式与进化关系确认。
+- 所有牌组中的 ID 均须能从新卡牌库找到。
+- 若旧牌组无法完整映射，重新构建候选并说明原因。
+
+### 6.2 牌组合法性验证
+
+每副候选牌组必须满足：
+
+- 恰好 60 张卡牌。
+- 所有 ID 存在于新卡牌库。
+- 满足同名卡数量限制。
+- 满足 ACE SPEC 数量限制。
+- 至少包含 1 张引擎真正认可的基础宝可梦。
+- 进化关系正确。
+- 所有卡牌均被当前 CABT 引擎支持。
+
+不能仅依赖 Python 对 CSV 的检查。必须使用实际 CABT 引擎执行开局校验，确保引擎接受牌组。
+
+### 6.3 重新评估候选牌组
+
+保持模型 checkpoint、推理策略、编码路径和环境参数一致，仅改变牌组。
+
+评估至少包含：
+
+1. 新 Dragapult 候选。
+2. 当前 `agent/deck.csv`，前提是它能在新库中验证。
+3. 至少一副合法的补充候选牌组（如可构建）。
+
+使用两个独立种子开展双向交叉评估，严格平衡座位。
+
+记录：
+
+- 胜率与 Wilson 95% 置信区间。
+- 分座位胜率。
+- 平局、异常与非法动作。
+- 平均对局长度及耗时。
+- 每副牌组的 SHA-256。
+- 新旧卡牌库版本与映射差异。
+
+不得直接沿用旧牌组评估结果作为新数据库上的最终结论。
+
+输出：
+
+`runs\evaluation\card_database_migration\deck_validation_report.md`
+
+## 七、第四阶段：修复 WSL2 引擎初始化与运行验证
+
+允许使用已安装的 WSL2 Ubuntu 24.04。
+
+当前历史报告发现：
+
+- 在部分启动顺序下，提交包可以正常完成对局。
+- 干净解释器先导入 `main` 时，可能因为二次 `GameInitialize()` 触发 `SIGABRT`。
+
+检查：
+
+- `sdk_cg/sim.py`
+- `sdk_cg/api.py`
+- `sdk_cg/game.py`
+- 新提交包中对应的 SDK 文件。
+
+优先修复最小范围内的引擎句柄复用问题。
+
+要求：
+
+1. 官方 CABT 模块已加载时，复用官方引擎句柄。
+2. 避免间接导入官方模块后又独立加载同一引擎并再次初始化。
+3. 每个进程只执行一次引擎初始化。
+4. 保留 Search API 的真实调用与生命周期，不伪造符号。
+5. 不通过静默关闭 `would_ko` 来规避问题。
+6. 失败时保留原始错误与日志。
+
+在 WSL2 中使用真实官方运行时完成：
+
+- 干净目录解包。
+- 直接 `import main`。
+- 官方环境先加载再导入 Agent。
+- 按文件路径加载 Agent。
+- 60 张牌组请求和引擎开局验证。
+- 两个座位各至少 3 局真实对局。
+- `would_ko=True` 的真实 Search API 路径。
+- 动作返回合法性、异常及退出码检查。
+
+如果候选 Agent 本身未触发可以验证 `would_ko` 正例的攻击选项，可以用真实引擎的攻击 observation 单独测试，并注明其来源。
+
+不能使用 Windows 测试代替 WSL2 测试。也不能将静态 ELF 检查或一次 `import` 成功当作完整通过。
+
+输出：
+
+`runs\evaluation\card_database_migration\linux_runtime_report.md`
+
+## 八、第五阶段：重新验证评估门禁
+
+如果旧 checkpoint 经核验仍兼容新数据库，使用统一的数据与运行时设置重新评估：
+
+- 候选 checkpoint `ckpt_999424.pt`。
+- 旧基线 checkpoint `ckpt_500736.pt`。
+- 新 Dragapult 候选牌组。
+- 当前牌组（若兼容）。
+- 随机合法策略。
+- 自镜像和 held-out 牌组。
+
+重新检查现有评估工具：
+
+- `runs\evaluation\eval_h2h.py`
+- `scripts\h2h_ckpt.py`
+- `rl\gates.py`
+
+复用现有评估协议，不重写无关代码。
+
+所有对局记录必须标注：
+
+- 实际 checkpoint 路径。
+- checkpoint SHA-256 和 global step。
+- 实际牌组文件及哈希。
+- 使用的新数据库 SHA-256。
+- 随机种子。
+- Python / PyTorch / 引擎版本。
+- Python 编码或原生编码路径。
+- 座位分配。
+- 平局、异常和非法动作计数。
+
+新旧卡牌库产生的胜率必须分开报告。
+
+如果模型与新数据库不兼容，应停止旧 checkpoint 的新环境评估，不得将新旧结果混合计算。
+
+输出：
+
+`runs\evaluation\card_database_migration\final_gate_report.md`
+
+## 九、第六阶段：准备最终导出
+
+只有满足以下条件后，才允许准备最终导出：
+
+1. 新卡牌库替换成功，哈希和记录数已验证。
+2. 所有必要字段都能正常解析。
+3. checkpoint 与新数据库的输入语义兼容。
+4. `best_deck.csv` 已生成，恰好 60 张卡牌。
+5. `best_deck.csv` 已通过真实引擎验证。
+6. Windows 和 WSL2 运行时测试均达到本阶段要求。
+7. 新的独立评估没有出现异常或非法动作。
+8. `export_rl_submission.py` 的参数已通过源码及 `--help` 核实。
+9. 不需要将未经确认可分发的专有引擎二进制直接嵌入提交包。
+
+在此之前，不执行最终导出命令。
+
+### 用户手动执行门禁（强制）
+
+当全部前置检查通过后：
+
+1. 先告诉用户所有前置门禁已经通过，并提供证据路径。
+2. 提供以下 PowerShell 命令，供用户亲自复制执行。
+3. **绝对不要由 AI 运行此命令，也不要通过任何脚本间接运行它。**
+4. 将该命令作为一个明确的人工操作门禁。停止本轮自动执行，等待用户运行并返回结果。
+5. 如果导出脚本实际参数与以下命令存在差异，先说明差异，生成经源码核实的修正版，并仍然要求用户亲自执行。
+
+准备提供给用户的命令：
+
+```powershell
+cd D:\pkmn-kaggle
+
+$env:PYTHONPATH = "C:\Users\Swcmb\AppData\Local\Temp\opencode\bench-shim"
+$env:PYTHONUNBUFFERED = "1"
+
+D:\ProgramFiles\deeplearning\python.exe scripts\export_rl_submission.py `
+  --ckpt runs\train-20m-e16-1m\ckpt_999424.pt `
+  --backend transformer2 `
+  --deck runs\evaluation\card_database_migration\best_deck.csv `
+  --out submission_rl_transformer2_db_migrated.tar.gz `
+  --builddir submission_rl_transformer2_db_migrated
+```
+
+执行前必须确认：
+
+- `best_deck.csv` 真实存在。
+- 检查点已通过新数据库兼容性验证。
+- 导出脚本支持这些参数。
+- 导出脚本正确包含或加载必要的新版卡牌数据。
+- 命令中的输出路径不会覆盖任何已有产物。
+
+**在人工导出门禁处必须停止。不得自动执行导出命令。**
+
+用户手动完成导出后，再根据实际返回结果继续进行最终包检查。
+
+## 十、第七阶段：用户完成手动导出后的验证
+
+只有在用户运行导出命令并提供结果后，才进入这一阶段。
+
+检查：
+
+- tar 包是否存在且可正常读取。
+- 压缩包内部结构及文件清单。
+- `model.pt` 是否对应指定 checkpoint。
+- `deck.csv` 是否与指定 `best_deck.csv` 一致。
+- 卡牌数据文件及必要元数据是否与新数据库一致。
+- 不应打包不允许分发的专有二进制。
+- 新包中 `import main`、首个决策及连续决策是否通过。
+- WSL2 下是否能够运行真实 CABT 对局。
+- 最终 SHA-256、大小和所有测试结果。
+
+输出最终综合报告：
+
+`runs\evaluation\card_database_migration\final_report.md`
+
+## 十一、微调决策
+
+本任务不启动长时间训练。
+
+只有在数据库、模型兼容性、牌组合法性、部署运行和独立评估全部通过后，才提出 0.5M 环境步的初步微调配置。
+
+不能因为新数据库已经替换，就假定旧模型必然适合微调。
+
+任何需要重新训练的情况都必须先说明原因、预计耗时和验证标准；等待用户明确决定后再执行训练。
+
+## 十二、最终交付标准
+
+请实际执行所有可安全自动完成的步骤，并生成清晰报告，至少包含：
+
+- 原数据库的备份位置和哈希。
+- 新数据库的路径、记录数和哈希。
+- 新旧 schema 与卡牌 ID 语义差异。
+- 旧 checkpoint 的兼容性结论。
+- 牌组验证和独立评估结果。
+- Windows 与 WSL2 的真实运行验证。
+- 提交包导出的准备状态。
+- 需要用户亲自运行的完整 PowerShell 命令。
+- 尚未解决的阻塞与下一步。
+
+不得只提供计划，不得编造测试结果，不得覆盖旧模型和旧提交包。
+
+**现在开始：先检查项目和本地 CSV，完成备份、校验与覆盖，然后逐阶段执行。到达最终导出门禁时，展示命令并要求用户运行，绝不代替用户执行。**

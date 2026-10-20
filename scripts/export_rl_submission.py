@@ -45,6 +45,10 @@ sys.path.insert(0, _HERE)
 
 TRANSFORMER2_HEAD = '''\
 import torch
+# 平台单步限时 100ms、只给 2 核，但容器常把宿主机全部逻辑核暴露给 torch，推理线程超订会让
+# 单步延迟越界。空闲态 A/B 实测：不钉线程 38/964 次决策 >100ms（max 350.3ms），
+# 钉到 2 线程后 1/571（max 112.7ms）。
+torch.set_num_threads(2)
 from card_features import get_card_table
 from encoding import SUBMIT_ACTION
 from encoding import TokenEncoder, GameTracker, AbilityTracker
@@ -161,6 +165,9 @@ def main():
     p.add_argument("--deck", default=os.path.join(ROOT, "agent", "deck.csv"))
     p.add_argument("--csv", default=os.path.join(ROOT, "EN_Card_Data.csv"))
     p.add_argument("--out", default=None)
+    p.add_argument("--max-bytes", type=int, default=1_047_000,
+                   help="提交包体上限（平台 nginx client_max_body_size 实测 1 MiB；留 multipart 边界余量）。"
+                        "0 = 跳过体积门禁")
     p.add_argument("--builddir", default=None)
     p.add_argument("--n-sims", type=int, default=40, help="MCTS sims/move (mcts2 head)")
     p.add_argument("--n-det", type=int, default=2, help="MCTS determinizations/move")
@@ -229,6 +236,16 @@ def main():
     print(f"backend={args.backend}  trained to step {ck.get('global_step')}")
     print(f"wrote {out} ({size:.1f} MB)")
     print("top-level contents:", files)
+
+    # 平台 nginx 的 client_max_body_size 实测为 1 MiB（1024 KiB 放行、1100 KiB 起 HTTP 413，
+    # 2026-10-20 提交 submission_rl_transformer2_t2.tar.gz 时确证），且算的是整个 multipart body。
+    # 超限的包在 nginx 层就被丢弃、不产生任何提交记录，所以必须在导出侧先拦住。
+    if args.max_bytes and os.path.getsize(out) > args.max_bytes:
+        raise SystemExit(
+            f"ERROR: 包体 {os.path.getsize(out):,} B 超过提交上限 {args.max_bytes:,} B"
+            f"（平台 nginx 1 MiB）。model.pt 占 {os.path.getsize(os.path.join(b,'model.pt')):,} B；"
+            f"1 MiB 预算内约可容纳 {max(0, args.max_bytes - 123000) // 2:,} 个 fp16 参数"
+            f"（非权重部分实测 gzip 后 ~120 KB）。--max-bytes 0 可跳过本检查。")
 
 if __name__ == "__main__":
     main()

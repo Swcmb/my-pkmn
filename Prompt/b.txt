@@ -1,0 +1,112 @@
+# 任务：完成 Pokémon TCG Agent 最终门禁，制定小规模微调方案
+
+项目目录：`D:\pkmn-kaggle`
+
+当前模型：`runs/train-20m-e16-1m/ckpt_999424.pt`
+
+旧基线：`runs/train-20m-e16-1m/ckpt_500736.pt`
+
+当前牌组：`agent/deck.csv`
+
+候选牌组：`runs/evaluation/deck_search/dragapult_deck.csv`
+
+候选包：`submission_rl_transformer2_dragapult_nodist.tar.gz`
+
+现有综合报告：本轮提供的《Pokémon TCG 提交修复与牌组优化 — 最终报告》。
+
+## 全局约束
+
+- 本阶段不启动长时间训练。
+- 不覆盖已有 checkpoint、原始提交包或现有评估结果。
+- 复用现有评估脚本；所有结果写入新的文件。
+- 区分实测、推断和未验证项。
+- 不以训练内 reward 代替独立对战。
+- 不允许把 Linux 静态兼容性描述为 Linux 运行通过。
+
+## 第一阶段：第三种子牌组交叉验证
+
+使用现有 `eval_h2h.py` 和 cross 模式，比较：
+
+1. `official_dragapult` 对当前 `agent/deck.csv`。
+2. 当前 `agent/deck.csv` 对 `official_dragapult`。
+
+要求：
+
+- 使用新的第三种子，例如 `20261023`。
+- 每个方向先进行 10 局冒烟，再进行 100 局正式评估。
+- 两个方向都严格均衡座位，记录每组的座位分项。
+- 统计胜率、Wilson 95% 置信区间、平局、异常、非法动作、平均对局长度和耗时。
+- 把新结果与之前两种子的结果并列比较，不要只看第三种子的点估计。
+- 保留当前牌组作为对照，不要直接修改 `agent/deck.csv`。
+
+输出：
+`runs/evaluation/deck_search/third_seed_report.md`
+
+## 第二阶段：Linux 候选提交包真实运行验证
+
+当前候选包采用运行时解析引擎依赖的方案，不内嵌引擎二进制。
+
+在 WSL2 Ubuntu 24.04 中建立独立测试目录，不能修改 Windows 原始提交包。
+
+验证：
+
+1. 检查 Python 版本、`kaggle_environments` 安装情况及官方 `libcg.so` 的实际加载路径。
+2. 在干净目录解包 `submission_rl_transformer2_dragapult_nodist.tar.gz`。
+3. 执行 `import main` 和牌组请求，确认返回 60 张合法牌组。
+4. 用真实引擎运行多局对战，分别测试两个座位。
+5. 确认首个决策、连续决策、`would_ko=True` 的 Search API 调用、特征写回和合法动作返回均正常。
+6. 检查动态库依赖和加载错误，记录实际运行环境。
+7. 如果 WSL 缺少依赖，可以配置独立环境；不得因此修改 Windows 原始模型、原始提交包或现有 checkpoint。
+8. 不要下载或自行编译替代引擎来掩盖实际依赖问题。
+
+若 WSL 实际运行无法完成，明确报告错误信息和剩余阻塞，不得将测试标记为通过。
+
+输出：
+`runs/evaluation/linux_runtime_report.md`
+
+## 第三阶段：复核评估门禁
+
+使用仓库现有 `scripts/h2h_ckpt.py`，对当前候选 checkpoint 与旧基线运行 200 局评估。
+
+要求：
+
+- 使用明确指定的牌组池，至少覆盖当前牌组与 `official_dragapult`。
+- 核实两边模型路径、global step、牌组池、座位分配和实际运行参数。
+- 如 runner 不支持预期的双牌组池，先检查现有接口，不要假设参数已支持。
+- 记录 0 异常、0 非法动作是否仍成立。
+- 区分 Python 编码回退和原生编码路径；不得混用不同编码口径的结果作直接结论。
+
+输出：
+`runs/evaluation/final_gate_report.md`
+
+## 第四阶段：给出短程微调方案，但暂不训练
+
+检查 `rl/train_selfplay.py` 的计步方式、checkpoint 恢复方式、梯度更新频率和日志定义。
+
+报告中曾提出 10–20M 步的“短程微调”。先核实该预算的实际含义及耗时，不要直接启动。
+
+根据已验证结果，提出一个分阶段、可中止的微调方案：
+
+- 初始化：`ckpt_999424.pt`。
+- 牌组分布：`TRAIN_TOP15`、当前提交牌组和 `official_dragapult`。
+- 牌组采样权重给出明确方案，并说明如何避免单牌组过拟合。
+- 第一阶段只建议小规模试跑；具体步数根据实际吞吐和 checkpoint 恢复开销确定。
+- 继续沿用随机合法策略、旧基线、自镜像和牌组交叉对局组成的评估矩阵。
+- 设立明确门禁：如果新模型没有稳定改善，停止扩大预算并保留原 checkpoint。
+- 当前训练接口没有随机策略对手分支，未经实现与测试不得宣称随机策略已加入 PPO 训练。
+
+输出：
+`runs/evaluation/next_training_plan.md`
+
+## 完成标准
+
+最终汇总必须给出：
+
+1. 第三种子牌组交叉对战真实结果。
+2. Linux 推理是否实际通过。
+3. 200 局模型对比的真实结果。
+4. 下一轮微调建议预算及其依据。
+5. 尚未验证的事项。
+6. 新增、修改的文件及执行过的测试命令。
+
+本任务仅完成最终门禁和训练方案，不启动长时间训练。

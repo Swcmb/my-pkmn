@@ -1,0 +1,88 @@
+{
+  "tar": "D:\\pkmn-kaggle\\submission_rl_transformer2_linux_nodist.tar.gz",
+  "members": 19,
+  "binaries": [],
+  "extract_dir": "C:\\Users\\Swcmb\\AppData\\Local\\Temp\\pkmn_pkgcheck_zcv1jc4x\\agent",
+  "games": [
+    {
+      "main_seat": 0,
+      "decisions_main": 18,
+      "decisions_opp": 35,
+      "wk_decisions": 10,
+      "wk_cells": 11,
+      "bad_actions": 0,
+      "first_decision_ok": true,
+      "terminal": 1,
+      "won": false,
+      "error": null
+    },
+    {
+      "main_seat": 1,
+      "decisions_main": 6,
+      "decisions_opp": 19,
+      "wk_decisions": 0,
+      "wk_cells": 0,
+      "bad_actions": 0,
+      "first_decision_ok": true,
+      "terminal": 0,
+      "won": false,
+      "error": null
+    },
+    {
+      "main_seat": 0,
+      "decisions_main": 15,
+      "decisions_opp": 23,
+      "wk_decisions": 5,
+      "wk_cells": 6,
+      "bad_actions": 0,
+      "first_decision_ok": true,
+      "terminal": 0,
+      "won": true,
+      "error": null
+    },
+    {
+      "main_seat": 1,
+      "decisions_main": 38,
+      "decisions_opp": 55,
+      "wk_decisions": 18,
+      "wk_cells": 25,
+      "bad_actions": 0,
+      "first_decision_ok": true,
+      "terminal": 0,
+      "won": false,
+      "error": null
+    },
+    {
+      "main_seat": 0,
+      "decisions_main": 15,
+      "decisions_opp": 29,
+      "wk_decisions": 2,
+      "wk_cells": 2,
+      "bad_actions": 0,
+      "first_decision_ok": true,
+      "terminal": 1,
+      "won": false,
+      "error": null
+    },
+    {
+      "main_seat": 1,
+      "decisions_main": 6,
+      "decisions_opp": 16,
+      "wk_decisions": 0,
+      "wk_cells": 0,
+      "bad_actions": 0,
+      "first_decision_ok": true,
+      "terminal": 0,
+      "won": false,
+      "error": null
+    }
+  ],
+  "errors": [],
+  "import_main": true,
+  "wk_on": true,
+  "deck_request": {
+    "n": 60,
+    "all_int": true
+  },
+  "ok": true
+}

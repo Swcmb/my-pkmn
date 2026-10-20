@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_k18_lillie_s_clefairy_ex_17.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 1,
+      "losses": 7,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.125,
+      "winrate_ci95": [
+        0.022417491450056667,
+        0.47088818221285345
+      ],
+      "winrate_all_games": 0.125,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 1,
+        "wins_seat1": 0,
+        "wr_seat0": 0.25,
+        "wr_seat1": 0.0
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 50.125,
+        "median_applies": 34.0,
+        "p95_applies": 108.89999999999998,
+        "max_applies": 125,
+        "mean_turn": 21.5,
+        "median_turn": 13.0,
+        "p95_turn": 56.39999999999998,
+        "max_turn": 69
+      },
+      "elapsed_s": 1.6631383895874023,
+      "games_per_s": 4.810182995045091
+    }
+  ]
+}

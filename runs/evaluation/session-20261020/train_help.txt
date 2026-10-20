@@ -1,0 +1,460 @@
+usage: train_selfplay.py [-h] [--total-timesteps TOTAL_TIMESTEPS]
+                         [--num-envs NUM_ENVS] [--num-steps NUM_STEPS]
+                         [--lr LR] [--anneal-lr]
+                         [--lr-schedule {linear,cosine}]
+                         [--warmup-steps WARMUP_STEPS]
+                         [--warmup-frac WARMUP_FRAC]
+                         [--lr-min-ratio LR_MIN_RATIO]
+                         [--decay-steps DECAY_STEPS] [--init-from INIT_FROM]
+                         [--lr-restart] [--gamma GAMMA]
+                         [--gae-lambda GAE_LAMBDA]
+                         [--num-minibatches NUM_MINIBATCHES]
+                         [--grad-accum GRAD_ACCUM]
+                         [--update-epochs UPDATE_EPOCHS]
+                         [--target-kl TARGET_KL]
+                         [--critic-warmup-until CRITIC_WARMUP_UNTIL]
+                         [--clip-coef CLIP_COEF] [--ent-coef ENT_COEF]
+                         [--vf-coef VF_COEF] [--vf-clip VF_CLIP]
+                         [--max-grad-norm MAX_GRAD_NORM]
+                         [--weight-decay WEIGHT_DECAY] [--norm-adv]
+                         [--arch ARCH] [--static] [--split-heads]
+                         [--would-ko | --no-would-ko] [--native-encode]
+                         [--value-categorical] [--value-atoms VALUE_ATOMS]
+                         [--value-vmax VALUE_VMAX] [--bf16] [--bf16-collect]
+                         [--state-trunc] [--compile-collect] [--async-collect]
+                         [--collect-graphs] [--obs-shm]
+                         [--envs-per-worker ENVS_PER_WORKER] [--compile]
+                         [--d-model D_MODEL] [--nhead NHEAD]
+                         [--nlayers NLAYERS] [--ff FF]
+                         [--terminal-margin TERMINAL_MARGIN] [--decks DECKS]
+                         [--teacher-kl-coef TEACHER_KL_COEF]
+                         [--teacher-value-coef TEACHER_VALUE_COEF]
+                         [--promote-strict] [--reset-ft-anchor]
+                         [--ft-wr-stop FT_WR_STOP]
+                         [--ft-wr-stop-hold FT_WR_STOP_HOLD]
+                         [--ft-wr-stop-min-n FT_WR_STOP_MIN_N]
+                         [--teacher-refresh TEACHER_REFRESH]
+                         [--promote-winrate PROMOTE_WINRATE]
+                         [--promote-games PROMOTE_GAMES]
+                         [--gate-decks-file GATE_DECKS_FILE]
+                         [--gate-pairs {mirror,cross}]
+                         [--finetune-deck FINETUNE_DECK]
+                         [--opponent-ckpt OPPONENT_CKPT]
+                         [--cross-gate-delta CROSS_GATE_DELTA]
+                         [--ft-balance-mode {off,hard,soft,turns}]
+                         [--ft-balance-band FT_BALANCE_BAND]
+                         [--ft-phase-timebox FT_PHASE_TIMEBOX]
+                         [--two-net-finetune]
+                         [--ft-teachers-from FT_TEACHERS_FROM]
+                         [--frozen-wide-envs FROZEN_WIDE_ENVS]
+                         [--frozen-wide-decks FROZEN_WIDE_DECKS]
+                         [--frozen-wide-ckpt FROZEN_WIDE_CKPT]
+                         [--frozen-wide-sample]
+                         [--frozen-ks-envs FROZEN_KS_ENVS]
+                         [--frozen-ks-decks FROZEN_KS_DECKS]
+                         [--frozen-ks-ckpt FROZEN_KS_CKPT]
+                         [--ft-start-turn {A,B}]
+                         [--opponent-decks OPPONENT_DECKS]
+                         [--ladder-decks-file LADDER_DECKS_FILE]
+                         [--compile-mode {default,max-autotune,reduce-overhead}]
+                         [--varlen-attn]
+                         [--sched-anchor-step SCHED_ANCHOR_STEP]
+                         [--async-serial-iters ASYNC_SERIAL_ITERS]
+                         [--teacher-prepass-collect]
+                         [--deck-weights-file DECK_WEIGHTS_FILE]
+                         [--opponent-uniform-mix OPPONENT_UNIFORM_MIX]
+                         [--value-diag | --no-value-diag]
+                         [--diag-every DIAG_EVERY] [--device DEVICE] [--ddp]
+                         [--seed SEED] [--resume RESUME] [--out OUT]
+                         [--save-every SAVE_EVERY] [--log-every LOG_EVERY]
+
+options:
+  -h, --help            show this help message and exit
+  --total-timesteps TOTAL_TIMESTEPS
+  --num-envs NUM_ENVS
+  --num-steps NUM_STEPS
+  --lr LR
+  --anneal-lr
+  --lr-schedule {linear,cosine}
+  --warmup-steps WARMUP_STEPS
+                        linear LR warmup over this many GLOBAL env steps
+                        (FLAT, budget-invariant: warmup exists to settle Adam
+                        moments + survive garbage early values, a fixed cost
+                        -- %-of-budget over-warms long runs and under-warms
+                        short ones). Clamped to 20% of the run
+  --warmup-frac WARMUP_FRAC
+                        DEPRECATED %-of-decay-window warmup; if >0 it
+                        OVERRIDES --warmup-steps (keeps old launch lines byte-
+                        identical)
+  --lr-min-ratio LR_MIN_RATIO
+                        final LR = lr * this (schedule floor). Default 0.1:
+                        the old 0.02 floor froze the last ~15-20% of a 100M
+                        run (kl->0.0000) at full collection cost
+  --decay-steps DECAY_STEPS
+                        LR decays over this many GLOBAL steps then holds FLAT
+                        at lr*min_ratio (Orbit-style, decoupled from the
+                        budget); None = 70% of --total-timesteps (decaying
+                        over the full budget wastes the tail -- see lr-min-
+                        ratio)
+  --init-from INIT_FROM
+                        checkpoint .pt to WARM-START net weights from (STRICT
+                        load, fresh optimizer/LR schedule/step; the teacher
+                        starts as a copy) -- e.g. a BC net
+  --lr-restart          on --resume, RESTART the LR schedule from the resume
+                        point (fresh warmup+cosine) instead of continuing it
+                        -> a warm restart to escape a plateau (use with
+                        --resume best.pt)
+  --gamma GAMMA         0.997 = settled default (100M 4-arm A/B 2026-07-03:
+                        fixes gamma=0.99's early-game target starvation,
+                        ~10-15% better mid-game value mse; 1.0 equivalent)
+  --gae-lambda GAE_LAMBDA
+  --num-minibatches NUM_MINIBATCHES
+  --grad-accum GRAD_ACCUM
+                        accumulate this many consecutive minibatches per
+                        optimizer step (samples/step = minibatch x world x N;
+                        each minibatch's loss is scaled 1/N so the step's
+                        gradient is the EXACT mean over the group, Orbit-
+                        style). The noise-reduction lever that neither lowers
+                        lr below the ~1.5e-5 mobility floor nor costs VRAM
+                        (bonus: N x fewer allreduces). Adv-norm stays per-
+                        minibatch. num-minibatches must be divisible by N.
+                        Default 1 = byte-identical legacy path
+  --update-epochs UPDATE_EPOCHS
+                        1 = production default (speed stack; ep4 ~= ep1 at
+                        maturity per the epochs/target_kl study, and the
+                        update dominates wall clock at ep4)
+  --target-kl TARGET_KL
+  --critic-warmup-until CRITIC_WARMUP_UNTIL
+                        CRITIC-FIRST RESTART (2026-07-13, restart-shock fix):
+                        while global_step < this ABSOLUTE step, the update
+                        trains the VALUE function only (pg + entropy losses
+                        zeroed; the teacher-kl/value terms stay and pin the
+                        policy while the shared trunk moves). Use after a pool
+                        injection: the value head mispredicts unseen decks ->
+                        large WRONG advantages shove the policy (the mechanism
+                        behind the 5e-5/3e-5/2e-5 restart shocks at 3B). Set
+                        to injection_base + ~30-50M. 0 = off
+  --clip-coef CLIP_COEF
+  --ent-coef ENT_COEF
+  --vf-coef VF_COEF
+  --vf-clip VF_CLIP
+  --max-grad-norm MAX_GRAD_NORM
+  --weight-decay WEIGHT_DECAY
+                        AdamW weight decay. Default 0.0 == plain Adam (the
+                        long-standing exact setting). Nonzero is a FRESH-RUN
+                        knob (sweep arm sweep_wd001; the Orbit Wars winner ran
+                        0.01 on its 200M net) -- never flip mid-lineage
+  --norm-adv
+  --arch ARCH
+  --static
+  --split-heads
+  --would-ko, --no-would-ko
+  --native-encode       JSON-free collection: sdk_cg engine + GetBinaryObs +
+                        Cython native encode for BOTH seats (byte-identical).
+                        Requires --no-would-ko + the built encode_native +
+                        sdk_cg/libcg_custom.so. Training wall-clock only;
+                        inference unchanged.
+  --value-categorical
+  --value-atoms VALUE_ATOMS
+  --value-vmax VALUE_VMAX
+  --bf16                run the PPO update forward under bf16 autocast; loss
+                        upcast to fp32 (memory-bound update -> ~1.8x)
+  --bf16-collect        ALSO run the collection action-selection forward under
+                        bf16 autocast (logp/value cast back to fp32 in the
+                        buffer). Measured NO-OP on d128 (the collect fwd is
+                        launch-bound, not compute-bound) -- kept for bigger
+                        nets
+  --state-trunc         batch-max STATE-token truncation (gather-then-slice;
+                        policy.state_keep_np): drop state tokens padded in
+                        EVERY row of the batch before the encoder. EXACT (same
+                        argument as option truncation; no positional
+                        encoding). Cuts the O(seq^2) attention + per-token FFN
+                        over the ~337-token state region to the board's actual
+                        size (typ. ~40-60% fewer state tokens mid-game)
+  --compile-collect     torch.compile(mode=reduce-overhead) the COLLECTION
+                        forward (logits_value; sampling stays eager ->
+                        identical math). The b=96 d128 fwd is kernel-launch-
+                        bound (~100 tiny kernels/step); cudagraph replay
+                        collapses it. Requires the sync-free collect loop
+                        (bucketed_opt_len_np) -- graphs cannot contain syncs
+  --async-collect       overlap collection of the NEXT rollout (own thread +
+                        CUDA stream, a frozen one-update-stale COPY of the net
+                        as the behavior policy) with THIS iteration's update.
+                        Stored logp/val are the behavior net's, so the PPO
+                        ratio absorbs the lag as ordinary importance sampling.
+                        Pays off when update-time >= collect-time (20M+ nets):
+                        hides collection entirely
+  --collect-graphs      build DENSE cudagraphed collect twin(s) (varlen NJT is
+                        dynamo-untraceable): torch.compile(mode=reduce-
+                        overhead) -> one cudagraph replay per barrier. The
+                        collect forward is LAUNCH-bound (51ms/barrier vs ~2ms
+                        compute, 2026-07-13); graphs collapse it. ASYNC: two
+                        double-buffered twins refreshed post-update (stale=2).
+                        SYNC (2026-07-15): one twin refreshed from the live
+                        net every iteration (stale=0). Collect numerics
+                        already diverge from the update path under
+                        --bf16-collect (ratio noise); dense-vs-NJT is the same
+                        class. All graphs are captured serially at startup,
+                        before any second thread exists
+  --obs-shm             workers write encoded obs into a shared-memory batch
+                        buffer instead of pickling over the Pipe (main reads
+                        zero-copy) -> cuts collection IPC + np.stack.
+  --envs-per-worker ENVS_PER_WORKER
+                        pack K envs per worker PROCESS (engine is multi-battle
+                        per process, proven 2026-07-13; the old
+                        1-battle/process rule was a Python singleton). K=8
+                        turns 768 procs/124 cores (~6x oversub, step barrier =
+                        slowest proc's scheduling tail) into ~96 procs
+                        (~0.8x): the tail WAS the engine wall. Same envs, same
+                        batch, same seeds -> no training-math change. Requires
+                        --native-encode
+  --compile             torch.compile the UPDATE forward (b>1, static shapes)
+                        -> ~1.5x update; async collection has its own per-twin
+                        compile (--collect-graphs).
+  --d-model D_MODEL
+  --nhead NHEAD
+  --nlayers NLAYERS
+  --ff FF
+  --terminal-margin TERMINAL_MARGIN
+  --decks DECKS
+  --teacher-kl-coef TEACHER_KL_COEF
+  --teacher-value-coef TEACHER_VALUE_COEF
+  --promote-strict      finetune guarded promotion WITHOUT downward slack:
+                        teacher promotes only at/above the best rolling ft_wr
+                        seen (user 2026-08-09). For curriculum legs (per-leg
+                        --reset-ft-anchor bounds the stale-bar cost); leave
+                        off for long stationary fts
+  --reset-ft-anchor     on resume, DISCARD the checkpointed ft_best guarded-
+                        promotion peak. Guarded promotion assumes a STATIONARY
+                        opponent: it holds the teacher back unless rolling
+                        ft_wr is within ~2sigma of the best ever seen. A
+                        curriculum leg deliberately raises opponent strength,
+                        so ft_wr drops by design and an inherited anchor would
+                        pin the teacher for the rest of the run (the
+                        2026-08-08 ftks1 failure: ft_best=0.485 from the
+                        buggy-ft_wr era vs a real 0.37, promotion
+                        mathematically unreachable). Set at every rung change;
+                        leave OFF for ordinary same-opponent resumes
+  --ft-wr-stop FT_WR_STOP
+                        CURRICULUM early exit: end the leg once the rolling
+                        ft_wr reaches this. Valid only when the ft opponent IS
+                        the thing being measured (one --ladder-decks-file deck
+                        + a fixed --opponent-ckpt), where inline ft_wr == wr-
+                        vs-current-rung, already computed free from the
+                        collection stream. The leg still stops at --total-
+                        timesteps if never reached
+  --ft-wr-stop-hold FT_WR_STOP_HOLD
+                        --ft-wr-stop must hold for this many CONSECUTIVE
+                        logged iterations before the leg ends (the n=2000
+                        rolling window is noisy enough to mis-rank
+                        checkpoints, so a single crossing is not evidence)
+  --ft-wr-stop-min-n FT_WR_STOP_MIN_N
+                        --ft-wr-stop is ignored until the rolling window holds
+                        this many games
+  --teacher-refresh TEACHER_REFRESH
+                        steps between teacher refresh / promotion attempts. 5M
+                        = settled default: at 1M the 200-game gate ate 64% of
+                        wall clock (172s gate per ~100s of training at ~10k
+                        sps); 5M + the rank-split gate = ~3% overhead
+  --promote-winrate PROMOTE_WINRATE
+                        C11: replace the teacher only when the current net
+                        wins >= this in an in-process h2h vs the teacher (None
+                        = unconditional time-based refresh)
+  --promote-games PROMOTE_GAMES
+                        C11: games for the promotion h2h; None = max(200,
+                        5*len(pool)) -- generalist-aware (the old fixed 80-100
+                        is too noisy once the pool has 20-50 decks)
+  --gate-decks-file GATE_DECKS_FILE
+                        json list of POOL INDICES: frozen promotion-gate slate
+                        (mirror schedule drawn from this subset; training
+                        sampling untouched; ignored in ft mode)
+  --gate-pairs {mirror,cross}
+                        promotion-gate deck schedule: mirror = same deck both
+                        sides (pure piloting probe); cross = round-robin
+                        cross-matchups in pilot-swap blocks (deck strength
+                        cancels per block). Threshold guidance: --promote-
+                        winrate 0.6 at N>=200 is a ~3-sigma bar; 0.7 was the
+                        specialist/N=100 setting and stalls a generalist
+                        teacher
+  --finetune-deck FINETUNE_DECK
+                        deck name (TRAIN_TOP50/META2) the live net pilots
+                        EVERY episode; also becomes the gate pool
+  --opponent-ckpt OPPONENT_CKPT
+                        frozen ckpt piloting the opponent seat during finetune
+                        collection
+  --cross-gate-delta CROSS_GATE_DELTA
+                        two-net cross-gate promotion margin: promote a net
+                        when its live-vs-other-teacher wr beats the frozen-vs-
+                        frozen baseline by this much (the baseline replaces an
+                        absolute bar because the asymmetric deck matchup EV !=
+                        0.5)
+  --ft-balance-mode {off,hard,soft,turns}
+                        TWO-NET train-the-loser balancing (user design
+                        2026-08-02, the fix for the winner-snowball
+                        instability: the advantaged side farms wins, the
+                        loser's stream becomes loss-dominated, V->-1,
+                        advantages vanish, policy decays). Per iteration the
+                        rolling live A-vs-B wr (all-reduced across ranks)
+                        gates updates: wr above the band -> A is gated, below
+                        -> B is gated. hard = the gated net's ENTIRE loss
+                        zeroed; soft = only its pg/entropy zeroed (value +
+                        teacher terms keep training). turns = promotion-driven
+                        strict alternation (2026-08-03 v2: one net trains per
+                        phase; phase ends when the trainee earns its cross-
+                        gate promotion, --ft-phase-timebox backstop; band
+                        ignored). off = numerically identical to the
+                        historical path
+  --ft-balance-band FT_BALANCE_BAND
+                        lo,hi rolling-wr band for --ft-balance-mode hard/soft
+                        (inside = both train). RETIRED in turns mode
+                        (2026-08-03 ceiling audit: the inline wr floor is
+                        mixture-structural, absolute bands are uncalibratable)
+  --ft-phase-timebox FT_PHASE_TIMEBOX
+                        turns mode backstop: a phase that cannot EARN its
+                        promotion within this many steps flips anyway (the
+                        opponent keeps facing the last PROMOTED snapshot, so
+                        unverified drift never becomes the target)
+  --two-net-finetune    finetune with a LIVE opponent net (user design
+                        2026-07-29): --opponent-ckpt seeds net B, which TRAINS
+                        on the opponent rows (~amask) with its own AdamW -- A
+                        specializes 'ft-deck vs all', B specializes 'all vs
+                        ft-deck'. B samples (not greedy); each net's
+                        pg/ent/value train on its OWN rows; BOTH nets carry
+                        teacher anchors (B's = t_b, same kl/value coefs;
+                        2026-08-03 leak-audit order). ft_wr becomes the A-vs-B
+                        curriculum diagnostic (NON-stationary -- judge ships
+                        by offline audits only). Sync collect only; eager opp
+                        forward.
+  --ft-teachers-from FT_TEACHERS_FROM
+                        ckpt path: after init/resume, load BOTH teachers (T_A
+                        and t_b) from this ckpt's net -- 'teachers start as
+                        the generalist' (user 2026-08-03). Use on two-net
+                        (re)starts; standard promotions still refresh them
+                        afterwards
+  --frozen-wide-envs FROZEN_WIDE_ENVS
+                        two-net ft recipe v2 (user 2026-08-06): this fraction
+                        of envs samples opponents from --frozen-wide-decks
+                        piloted by the FROZEN base (greedy, single-net
+                        semantics); live B pilots only the remaining envs'
+                        concentrated mixture -- B's whole capacity goes to the
+                        adversarial job. Those rows are off-policy for both
+                        nets (fmask); A still trains policy+value on its own
+                        rows everywhere. Emits fw_wr (wide-vs-base) telemetry.
+                        0 = off
+  --frozen-wide-decks FROZEN_WIDE_DECKS
+                        ladder-decks json for the frozen-wide env stream (e.g.
+                        the v2 builder's _wide.json); --ladder-decks-file
+                        should then be the concentrated mixture
+  --frozen-wide-ckpt FROZEN_WIDE_CKPT
+                        OVERRIDE the frozen-wide stream's pilot net (default:
+                        the --opponent-ckpt base). SHIP-FT KS STREAM (user
+                        2026-08-09): point the stream at a SPECIALIST pilot --
+                        e.g. --frozen-wide-decks ks_agent_113.json + this at
+                        ftks1@380M gives a 10% KS stream piloted by a
+                        competent KS net instead of the crown (whose KS play
+                        is the 626-vs-1365-LB artifact). Built from the ckpt's
+                        own net_config; v2.2/v2.3 compat via load_net_compat
+  --frozen-wide-sample  frozen-wide stream SAMPLES its picks instead of greedy
+                        argmax. Use for specialist-pilot streams: a
+                        deterministic opponent is both weaker and an easier
+                        overfit target
+  --frozen-ks-envs FROZEN_KS_ENVS
+                        fraction of envs sampling --frozen-ks-decks piloted by
+                        --frozen-ks-ckpt (sampled picks). Stacks with
+                        --frozen-wide-envs; both rows are off-policy for A and
+                        (two-net) excluded from B via fmask. 0 = off
+  --frozen-ks-decks FROZEN_KS_DECKS
+                        ladder-decks json for the KS stream (e.g.
+                        ks_opp_113_ladder.json)
+  --frozen-ks-ckpt FROZEN_KS_CKPT
+                        pilot net for the KS stream (the matched KS
+                        specialist: kscurr's net for the alakazam ft,
+                        kscurrdk's for dusknoir)
+  --ft-start-turn {A,B}
+                        turns mode: which side trains FIRST on a fresh start
+                        (user 2026-08-06: A-first = phase 1 is the proven
+                        single-net recipe vs the frozen base and the ship
+                        artifact improves from step 0; B-first = the
+                        historical default, sharpen the adversary before A
+                        specializes). Resumes keep the checkpointed turn
+                        state; this only seeds fresh runs
+  --opponent-decks OPPONENT_DECKS
+                        name=weight list for the frozen opponent's decks
+  --ladder-decks-file LADDER_DECKS_FILE
+                        ladder_decks.json. With --decks ladder_all the
+                        GENERALIST pool = UNIFORM over all mined lists
+                        (breadth, no meta snapshot). In finetune mode (if
+                        --opponent-decks not given): a DESIGNED mixture file
+                        (F_now/F_counter/F_wide counts = sampling mass;
+                        build_ft_*.py), sampled at mixed_weights(counts,
+                        --opponent-uniform-mix); run mix 0.0 so the file IS
+                        the distribution
+  --compile-mode {default,max-autotune,reduce-overhead}
+                        torch.compile mode for the UPDATE forward (sps probe
+                        2026-07-10)
+  --varlen-attn         jagged (NJT) flash attention over per-row PACKED
+                        tokens instead of padded+key-padding-mask (which
+                        forces the slow mem-efficient kernel AND the int32 row
+                        cap). EXACT (no positional encoding; the b=1 path's
+                        argument, batched; tests/test_varlen_attn.py). Applied
+                        to net+collect+teacher together; --collect-
+                        graphs/--bf16-collect give the collect twins their own
+                        numerics (behavior-policy data; ratios absorb it).
+                        ~2.2x attn (A100 probe)
+  --sched-anchor-step SCHED_ANCHOR_STEP
+                        with --lr-restart: anchor the restarted LR schedule at
+                        this ABSOLUTE global step instead of the current
+                        resume point. Fixes the restart-chain bug
+                        (2026-07-10): every chain leg / self-heal restart re-
+                        anchored at ITS OWN resume step, pinning LR at peak
+                        forever and pumping entropy (0.65->0.84). -1 = use the
+                        anchor persisted in the resume ckpt (sched_anchor),
+                        falling back to the resume point (and persisting it)
+                        if absent
+  --async-serial-iters ASYNC_SERIAL_ITERS
+                        ASYNC: run this many iterations fully SYNCHRONOUS
+                        before pipelining. Dynamo is not thread-safe: the
+                        iter-1 update compile + the first automatic-dynamic
+                        re-specializations FX-trace on the main thread, and a
+                        collector thread calling its compiled forward in that
+                        window crashes (S3 stud-3 2026-07-10; hopper only
+                        survived on warm inductor cache). 3 covers auto-
+                        dynamic settling
+  --teacher-prepass-collect
+                        ASYNC only: run the frozen teacher's no-grad pre-pass
+                        over the freshly collected buffer INSIDE the collector
+                        thread (hides its ~2-3s under the update). EXACT: same
+                        fp32 forward on the same rows, just scheduled earlier;
+                        teacher promotion takes a lock so weights can't swap
+                        mid-forward. No-op without --async-collect / without
+                        teacher terms
+  --deck-weights-file DECK_WEIGHTS_FILE
+                        .npy of per-pool-deck sampling weights (tf-idf density
+                        design 2026-07-10: 75% ladder / 25% curated tier
+                        split, inverse idf-cosine-density within tier, 0.2x-8x
+                        floor/cap). None = uniform sampling (byte-identical
+                        rng)
+  --opponent-uniform-mix OPPONENT_UNIFORM_MIX
+                        finetune opponent distribution = (1-x)*band-blend-meta
+                        + x*UNIFORM over all mined decks. The uniform mass is
+                        late-competition insurance against a meta shift there
+                        is no time to adapt to; raise toward 1.0 near the
+                        deadline
+  --value-diag, --no-value-diag
+                        log per-bucket value quality (sign-acc vs outcome by
+                        steps-to-terminal)
+  --diag-every DIAG_EVERY
+                        iterations per [vdiag] summary window (accumulated in
+                        between)
+  --device DEVICE
+  --ddp                 data-parallel across GPUs (torchrun): each rank runs
+                        its own two-sided envs; grads all-reduced; teacher
+                        promotion decided on rank0 and broadcast. world=1 when
+                        off.
+  --seed SEED
+  --resume RESUME       latest.pt to FULLY resume:
+                        net+optimizer+teacher+global_step (continues the LR
+                        schedule)
+  --out OUT
+  --save-every SAVE_EVERY
+  --log-every LOG_EVERY

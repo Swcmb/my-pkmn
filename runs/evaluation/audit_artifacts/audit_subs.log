@@ -1,0 +1,196 @@
+==== encoding.py : 28 diff lines ====
+--- rl/encoding.py
++++ sub/encoding.py
+@@ -51,6 +51,6 @@
+ 
+-from .card_features import CardTable, N_ENERGY, get_card_table
++from card_features import CardTable, N_ENERGY, get_card_table
+ 
+ try:    # per-attack properties (base_damage / is_variable / energy_cost / has_effect); bundle-safe
+-    from .attack_data import ATTACKS as _ATTACKS
++    from attack_data import ATTACKS as _ATTACKS
+ except Exception:
+@@ -59,3 +59,3 @@
+ try:    # transient turn-buff tables for the v2 token encoder (bundle-safe; empty -> feature stays 0)
+-    from .buff_data import DEFENSE_BUFF_ATTACKS, OFFENSE_BUFF_CARDS
++    from buff_data import DEFENSE_BUFF_ATTACKS, OFFENSE_BUFF_CARDS
+ except Exception:
+@@ -76,4 +76,4 @@
+ # ---- shape/layout constants live in enc_constants.py (single source of truth) ----
+-# re-exported here so existing `from .encoding import <CONST>` callers keep working.
+-from .enc_constants import (        # noqa: F401,E402
++# re-exported here so existing `from encoding import <CONST>` callers keep working.
++from enc_constants import (        # noqa: F401,E402
+     N_BENCH, MAX_HAND, MAX_DISCARD_MLP, MAX_OPTIONS, N_OPT_TYPES, N_SELECT_TYPES, N_SELECT_CTX,
+@@ -85,3 +85,3 @@
+ )
+-from . import effect_data           # frozen attack/ability/trainer effect-category multi-hots (part of the encoding)
++import effect_data           # frozen attack/ability/trainer effect-category multi-hots (part of the encoding)
+ 
+
+==== search_agent.py : 20 diff lines ====
+--- rl/search_agent.py
++++ sub/search_agent.py
+@@ -15,4 +15,4 @@
+ 
+-from .decks import DECKS
+-from .encoding import MAX_OPTIONS
++from decks import DECKS
++from encoding import MAX_OPTIONS
+ 
+@@ -173,7 +173,7 @@
+ 
+-from .encoding import SUBMIT_ACTION
+-from .encoding import N_ACTIONS
++from encoding import SUBMIT_ACTION
++from encoding import N_ACTIONS
+ 
+ try:    # per-attack is_variable flag for variable-aware would_KO sampling (bundle-safe)
+-    from .attack_data import ATTACKS as _WK_ATTACKS
++    from attack_data import ATTACKS as _WK_ATTACKS
+ except Exception:
+
+
+==== search_agent: sdk 调用与 WouldKO 类符号使用 ====
+  st = api.search_step(sid, _net_greedy_select(obs, net, enc, deck, tracker, ability))
+  from sdk_cg import api
+  st = api.search_step(node.sid, [a])
+  root_ss = api.search_begin(api.to_observation_class(obs), **_determinize(obs, deck, rng, enc))
+  try: api.search_end()
+  try: api.search_release(root_ss.searchId)
+  try: api.search_end()
+  st = api.search_step(sid, pick)
+  from sdk_cg import api
+  ss = api.search_begin(api.to_observation_class(obs), **_determinize(obs, deck, rng, enc))
+  st = api.search_step(ss.searchId, [a])
+  try: api.search_release(ss.searchId)
+  try: api.search_end()
+  from sdk_cg import api
+  ss = api.search_begin(api.to_observation_class(obs), **_determinize(obs, deck, rng, enc))
+  try: api.search_release(ss.searchId)
+  try: api.search_end()
+  st = api.search_step(node.sid, [a])
+  try: api.search_release(sid)
+  try: api.search_end()
+
+==== 全仓库 WouldKO/GetSerialObs/GetBinaryObs/AdvanceLog 引用 ====
+  native_encode\BinaryObs.h                               ['GetBinaryObs', 'AdvanceLog']
+  native_encode\encode_native.pyx                         ['GetBinaryObs']
+  native_encode\README.md                                 ['GetBinaryObs']
+  Prompt\a - 副本.md                                        ['GetBinaryObs']
+  Prompt\pkmn-kaggle 实际 steps-s 基准测试报告.md                 ['WouldKO', 'GetBinaryObs', 'AdvanceLog']
+  rl\encoding.py                                          ['GetBinaryObs']
+  rl\env.py                                               ['GetBinaryObs', 'AdvanceLog']
+  rl\env_selfplay.py                                      ['GetBinaryObs']
+  rl\native_enc.py                                        ['GetBinaryObs']
+  rl\train_selfplay.py                                    ['GetBinaryObs']
+  rl\wk_native.py                                         ['WouldKO', 'GetSerialObs', 'GetBinaryObs']
+  runs\evaluation\eval_h2h.py                             ['GetBinaryObs']
+  runs\evaluation\report.md                               ['WouldKO', 'GetSerialObs', 'GetBinaryObs']
+  scripts\enc_parity_check2.py                            ['GetBinaryObs', 'AdvanceLog']
+  submission_rl_transformer2\encoding.py                  ['GetBinaryObs']
+
+==== bench-shim 引擎溯源 ====
+  kaggle_environments\__init__.py                                                 0 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\__init__.py                                            0 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\__init__.py                                       0 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\cg.dll                                   1659392 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\game.py                                     2355 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\libcg-arm64.so                           1413168 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\libcg.dylib                              1345208 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\libcg.so                                 1458504 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\sim.py                                      1649 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\__init__.py                                    0 B  mtime=2026-10-17T20:08:19
+  kaggle_environments\envs\cabt\cg\__pycache__\game.cpython-312.pyc            4221 B  mtime=2026-10-17T20:26:57
+  kaggle_environments\envs\cabt\cg\__pycache__\game.cpython-313.pyc            4223 B  mtime=2026-10-17T20:08:31
+  kaggle_environments\envs\cabt\cg\__pycache__\sim.cpython-312.pyc             3717 B  mtime=2026-10-17T20:26:57
+  kaggle_environments\envs\cabt\cg\__pycache__\sim.cpython-313.pyc             3827 B  mtime=2026-10-17T20:08:31
+  kaggle_environments\envs\cabt\cg\__pycache__\__init__.cpython-312.pyc         195 B  mtime=2026-10-17T20:26:57
+  kaggle_environments\envs\cabt\cg\__pycache__\__init__.cpython-313.pyc         195 B  mtime=2026-10-17T20:08:31
+  kaggle_environments\envs\cabt\__pycache__\__init__.cpython-312.pyc            192 B  mtime=2026-10-17T20:26:57
+  kaggle_environments\envs\cabt\__pycache__\__init__.cpython-313.pyc            192 B  mtime=2026-10-17T20:08:31
+  kaggle_environments\envs\__pycache__\__init__.cpython-312.pyc                 187 B  mtime=2026-10-17T20:26:57
+  kaggle_environments\envs\__pycache__\__init__.cpython-313.pyc                 187 B  mtime=2026-10-17T20:08:31
+  kaggle_environments\__pycache__\__init__.cpython-312.pyc                      182 B  mtime=2026-10-17T20:26:57
+  kaggle_environments\__pycache__\__init__.cpython-313.pyc                      182 B  mtime=2026-10-17T20:08:31
+---- shim sim.py (全文) ----
+import ctypes
+import os
+import platform
+
+
+class StartData(ctypes.Structure):
+    _fields_ = [
+        ("battlePtr", ctypes.c_void_p),
+        ("errorPlayer", ctypes.c_int),
+        ("errorType", ctypes.c_int),
+    ]
+
+
+class SerialData(ctypes.Structure):
+    _fields_ = [
+        ("json", ctypes.c_char_p),
+        ("data", ctypes.POINTER(ctypes.c_ubyte)),
+        ("count", ctypes.c_int),
+        ("selectPlayer", ctypes.c_int),
+    ]
+
+
+os_name = platform.system()
+if os_name == 'Windows':
+    lib_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cg.dll")
+elif os_name == "Darwin":
+    lib_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "libcg.dylib")
+elif platform.machine() in ('arm64', 'aarch64'):
+    lib_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "libcg-arm64.so")
+else:
+    lib_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "libcg.so")
+lib = ctypes.cdll.LoadLibrary(lib_path)
+
+lib.GameInitialize()
+
+lib.BattleStart.restype = StartData
+lib.BattleStart.argtypes = [ctypes.POINTER(ctypes.c_int)]
+
+lib.BattleStartReverse.restype = StartData
+lib.BattleStartReverse.argtypes = [ctypes.POINTER(ctypes.c_int)]
+
+lib.BattleFinish.argtypes = [ctypes.c_void_p]
+
+lib.GetBattleData.restype = SerialData
+lib.GetBattleData.argtypes = [ctypes.c_void_p]
+
+lib.Select.restype = ctypes.c_int
+lib.Select.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_int), ctypes.c_int]
+
+lib.VisualizeData.restype = ctypes.c_char_p
+lib.VisualizeData.argtypes = [ctypes.c_void_p]
+
+
+class Battle:
+    battle_ptr = None
+    obs = None
+    decks = None
+    result = [0, 0, 0]
+    vis = []
+    last_step = 0
+
+
+==== shim cg.dll 导出 ====
+  EXPORT GameInitialize
+  EXPORT BattleStart
+  EXPORT BattleFinish
+  EXPORT GetBattleData
+  EXPORT Select
+  EXPORT VisualizeData
+  EXPORT AgentStart
+  EXPORT SearchBegin
+  EXPORT SearchStep
+  EXPORT SearchEnd
+  EXPORT SearchRelease
+  EXPORT AllCard
+  EXPORT AllAttack
+  missing WouldKO
+  missing GetSerialObs
+  missing GetBinaryObs
+  missing AdvanceLog

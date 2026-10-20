@@ -1,0 +1,34 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[gate] vs_random seed=20261024 games=60
+     wr=0.7833333333333333 ci95=[0.6637997242680521, 0.868769559518097] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_untrained seed=20261024 games=60
+     wr=1.0 ci95=[0.93982814785791, 0.9999999999999998] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_old_ckpt seed=20261024 games=60
+     wr=1.0 ci95=[0.93982814785791, 0.9999999999999998] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_random seed=20261025 games=60
+     wr=0.6666666666666666 ci95=[0.5405686645211968, 0.7727073847647732] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_untrained seed=20261025 games=60
+     wr=0.95 ci95=[0.8629948352365148, 0.9828504978356043] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_old_ckpt seed=20261025 games=60
+     wr=1.0 ci95=[0.93982814785791, 0.9999999999999998] draws=0 errs=0 illegal=0 turncap=0
+[gate] self_mirror seed=20261024 games=60
+     wr=0.5666666666666667 ci95=[0.44103438776125564, 0.6842760319531322] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_old_heldout seed=20261024 games=60
+     wr=1.0 ci95=[0.93982814785791, 0.9999999999999998] draws=0 errs=0 illegal=0 turncap=0
+[gate] vs_old_heldout seed=20261025 games=60
+     wr=1.0 ci95=[0.93982814785791, 0.9999999999999998] draws=0 errs=0 illegal=0 turncap=0
+
+### 阶段 4 晋级门禁逐项
+  [PASS] G1_牌组合法
+  [PASS] G2_agent接口
+  [PASS] G3_测试
+  [PASS] G4_门禁干净
+  [PASS] G5_对随机不退步
+  [PASS] G6_对未训练优势
+  [PASS] G7_对旧ckpt提升
+  [PASS] G7b_heldout非劣
+  [PASS] G8_样本量
+  [PASS] sanity_自镜像接近0.5
+
+PROMOTE = True   (candidate step=499712)
+[saved] runs/evaluation/session-20261020/phase4_gate_499712.json

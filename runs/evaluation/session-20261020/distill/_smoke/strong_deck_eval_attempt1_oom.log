@@ -1,0 +1,38 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[strong-eval] team17_不说对不队 forward seed=20261211 games=60
+Traceback (most recent call last):
+  File "D:\pkmn-kaggle\runs\evaluation\session-20261020\distill\strong_deck_eval.py", line 238, in <module>
+    main()
+  File "D:\pkmn-kaggle\runs\evaluation\session-20261020\distill\strong_deck_eval.py", line 152, in main
+    runs.append(h.run_one("random", games, sd, pool, npool, dev, ct, enc,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\runs\evaluation\eval_h2h.py", line 190, in run_one
+    acts = gnet.logits_value(
+           ^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\rl\policy.py", line 620, in logits_value
+    cls_out, opt_out, pooled, extra = self._encode(o, opt_len=opt_len, state_keep=state_keep)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\pkmn-kaggle\rl\policy.py", line 531, in _encode
+    enc_t = self.encoder(seq[:, keep])                    # no pad mask: all present
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\transformer.py", line 542, in forward
+    output = mod(
+             ^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\ProgramFiles\deeplearning\Lib\site-packages\torch\nn\modules\transformer.py", line 921, in forward
+    return torch._transformer_encoder_layer_fwd(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: out of memory
+Search for `cudaErrorMemoryAllocation' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+

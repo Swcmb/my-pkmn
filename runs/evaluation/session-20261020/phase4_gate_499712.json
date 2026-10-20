@@ -1,0 +1,318 @@
+{
+  "candidate": {
+    "path": "runs/finetune-500k-e8-20261020/ckpt_499712.pt",
+    "sha256": "d1c26b2b8467ef781082e70f2ceaaf5fd1c703e79c91278939f8d8c5a17720e2",
+    "step": 499712,
+    "net_config": {
+      "arch": "transformer2",
+      "d_model": 544,
+      "nhead": 8,
+      "nlayers": 5,
+      "ff": 256,
+      "static": false,
+      "would_ko": true,
+      "split_heads": false,
+      "value_categorical": false,
+      "value_atoms": 51,
+      "value_vmax": 1.0
+    },
+    "deck": "D:\\pkmn-kaggle\\runs\\evaluation\\card_database_migration\\best_deck.csv",
+    "deck_sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+    "ckpt_keys": [
+      "args",
+      "global_step",
+      "net",
+      "net_config"
+    ]
+  },
+  "reference": {
+    "base_ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+    "base_sha256": "b8a3be1d247eac45af0bbc38a207336d6f702c82fd0b19e5f787cc7addf08a1e",
+    "base_step": 999424,
+    "random_ref_wr": 0.6083333333333333,
+    "random_ref_n": 120
+  },
+  "protocol": {
+    "harness": "runs/evaluation/eval_h2h.py run_one（与基线同协议）",
+    "games_per_cell": 60,
+    "seeds": [
+      20261024,
+      20261025
+    ],
+    "turn_cap": "200",
+    "ship_deck": "best_deck.csv（提交牌组）",
+    "quick": false
+  },
+  "aggregates": {
+    "vs_random": {
+      "wins": 87,
+      "decided": 120,
+      "draws": 0,
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "wr": 0.725,
+      "ci95": [
+        0.6390686764395932,
+        0.7969722015852385
+      ],
+      "cells": 2
+    },
+    "vs_untrained": {
+      "wins": 117,
+      "decided": 120,
+      "draws": 0,
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "wr": 0.975,
+      "ci95": [
+        0.9290687625956524,
+        0.9914619799012145
+      ],
+      "cells": 2
+    },
+    "vs_old_ckpt": {
+      "wins": 120,
+      "decided": 120,
+      "draws": 0,
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "wr": 1.0,
+      "ci95": [
+        0.9689797289440706,
+        1.0
+      ],
+      "cells": 2
+    },
+    "vs_old_heldout": {
+      "wins": 120,
+      "decided": 120,
+      "draws": 0,
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "wr": 1.0,
+      "ci95": [
+        0.9689797289440706,
+        1.0
+      ],
+      "cells": 2
+    },
+    "self_mirror": {
+      "wins": 34,
+      "decided": 60,
+      "draws": 0,
+      "errs": 0,
+      "illegal": 0,
+      "turn_cap": 0,
+      "wr": 0.5666666666666667,
+      "ci95": [
+        0.44103214654694856,
+        0.6842779960559936
+      ],
+      "cells": 1
+    }
+  },
+  "gates": {
+    "G1_牌组合法": {
+      "pass": true,
+      "detail": [
+        {
+          "rule": "恰好60张",
+          "pass": true,
+          "detail": "60 行"
+        },
+        {
+          "rule": "ID全部存在于卡池",
+          "pass": true,
+          "detail": "全部 22 个唯一ID 命中"
+        },
+        {
+          "rule": "至少1张真正基础宝可梦",
+          "pass": true,
+          "detail": "基础宝可梦 9 张 / 5 种"
+        },
+        {
+          "rule": "同名≤4（基础能量豁免）",
+          "pass": true,
+          "detail": "最大同名数=4"
+        },
+        {
+          "rule": "ACE SPEC≤1",
+          "pass": true,
+          "detail": "1 张"
+        }
+      ]
+    },
+    "G2_agent接口": {
+      "pass": true,
+      "skipped": false,
+      "detail": {
+        "games": 6,
+        "wins": 5,
+        "losses": 1,
+        "draws": 0,
+        "errors": 0,
+        "illegal_len": 0,
+        "illegal_index": 0,
+        "duplicate_index": 0,
+        "decisions": 209,
+        "step_ms_max": 103.3642000038526,
+        "step_ms_sum": 9236.719699998503,
+        "game_s_max": 4.866623199995956,
+        "over_100ms": 1,
+        "over_10min": 0,
+        "step_ms_p50": 40.29,
+        "step_ms_p99": 81.38409999810392,
+        "step_ms_top5": [
+          80.89,
+          81.38,
+          85.91,
+          93.41,
+          103.36
+        ],
+        "warmup_first10_ms": [
+          77.49,
+          31.88,
+          36.0,
+          36.48,
+          36.45,
+          41.28,
+          39.11,
+          49.01,
+          39.11,
+          65.93
+        ],
+        "over_100ms_after_warmup": 1,
+        "step_ms_mean": 44.194831100471305,
+        "threads": 2,
+        "import_s": 0.15,
+        "peak_rss_mb": 709.8,
+        "verdict": {
+          "单步100ms(全量)": false,
+          "单步100ms(预热后)": false,
+          "单局10分钟": true,
+          "内存2GB": true,
+          "返回长度合法": true,
+          "返回下标合法": true,
+          "无重复下标": true,
+          "无异常": true
+        },
+        "all_pass": false
+      }
+    },
+    "G3_测试": {
+      "pass": true,
+      "skipped": false,
+      "detail": {
+        "returncode": 0,
+        "tail": [
+          "60 passed in 30.47s"
+        ]
+      }
+    },
+    "G4_门禁干净": {
+      "pass": true,
+      "detail": {
+        "vs_random": {
+          "illegal": 0,
+          "errs": 0,
+          "turn_cap": 0
+        },
+        "vs_untrained": {
+          "illegal": 0,
+          "errs": 0,
+          "turn_cap": 0
+        },
+        "vs_old_ckpt": {
+          "illegal": 0,
+          "errs": 0,
+          "turn_cap": 0
+        },
+        "vs_old_heldout": {
+          "illegal": 0,
+          "errs": 0,
+          "turn_cap": 0
+        },
+        "self_mirror": {
+          "illegal": 0,
+          "errs": 0,
+          "turn_cap": 0
+        }
+      }
+    },
+    "G5_对随机不退步": {
+      "pass": true,
+      "detail": {
+        "new": 0.725,
+        "ref_base": 0.6083333333333333,
+        "ref_n": 120
+      }
+    },
+    "G6_对未训练优势": {
+      "pass": true,
+      "detail": {
+        "wr": 0.975,
+        "ci95": [
+          0.9290687625956524,
+          0.9914619799012145
+        ],
+        "per_init_wr": [
+          1.0,
+          0.95
+        ],
+        "note": "untrained 对手由 --seeds 逐个随机初始化；实测同一候选对不同初始化的胜率在 0.40-0.83 间摆动，故必须跨 >=2 个初始化合并判定，单格结果只作 sanity"
+      }
+    },
+    "G7_对旧ckpt提升": {
+      "pass": true,
+      "detail": {
+        "wr": 1.0,
+        "ci95": [
+          0.9689797289440706,
+          1.0
+        ],
+        "threshold": 0.55,
+        "base_ckpt": "D:\\pkmn-kaggle\\runs\\train-20m-e16-1m\\ckpt_999424.pt",
+        "base_step": 999424
+      }
+    },
+    "G7b_heldout非劣": {
+      "pass": true,
+      "detail": {
+        "wr": 1.0,
+        "ci95": [
+          0.9689797289440706,
+          1.0
+        ],
+        "margin": "Wilson 下界 > 0.40（判断值）：主提升门是 G7 的同牌组镜像，本臂用于排除仅在自家牌组上变强",
+        "ref_note": "同型对照参照：既有 74 副池上 cand vs old 交叉 = 0.508（120 局，池与本臂不同，仅作量级参考）",
+        "pool": "D:\\pkmn-kaggle\\runs\\evaluation\\session-20261020\\eval_pool_heldout44.json",
+        "n_decks": 44
+      }
+    },
+    "G8_样本量": {
+      "pass": true,
+      "detail": {
+        "vs_random": 120,
+        "vs_untrained": 120,
+        "vs_old_ckpt": 120,
+        "vs_old_heldout": 120,
+        "self_mirror": 60
+      }
+    },
+    "sanity_自镜像接近0.5": {
+      "pass": true,
+      "detail": {
+        "wr": 0.5666666666666667,
+        "ci95": [
+          0.44103214654694856,
+          0.6842779960559936
+        ]
+      }
+    }
+  },
+  "promote": true
+}

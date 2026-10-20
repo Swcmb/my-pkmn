@@ -1,0 +1,10 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[cap] untrained_544_vs_random seed=20261050 games=60
+     wr=0.55 ci95=[0.4249193588533434, 0.6690634559324476] errs=0 illegal=0
+[cap] untrained_544_vs_random seed=20261051 games=60
+     wr=0.6 ci95=[0.47366053492040755, 0.7143050946511744] errs=0 illegal=0
+[cap] small_untrained_vs_random seed=20261050 games=60
+     wr=0.38333333333333336 ci95=[0.27088272374082023, 0.5098240417590009] errs=0 illegal=0
+[cap] small_untrained_vs_random seed=20261051 games=60
+     wr=0.85 ci95=[0.7388541093022145, 0.9190255941983225] errs=0 illegal=0
+[saved] D:\pkmn-kaggle\runs\evaluation\session-20261020\capacity_probe.json

@@ -1,0 +1,38 @@
+
+D:\pkmn-kaggle>(echo ===CAND_vs_UNTRAINED_seed20261019===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_999424.pt --opponent untrained --games 30 --seed 20261019 --out runs\evaluation\wk_untrained_cand_s20261019.json   2>&1  | findstr /C:"[done]" )  & (for %S in (20261019 20261021 20261022) do (echo ===BASE_vs_UNTRAINED_seed20261019===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261019 --out runs\evaluation\wk_untrained_base_s20261019.json   2>&1  | findstr /C:"[done]" ) ) 
+===CAND_vs_UNTRAINED_seed20261019=== 
+[done] untrained_same_config wr=0.3 ci95=[0.16664748268243795, 0.4787578745871494] draws=0 errs=0 illegal=0 len_mean=108.0 1.24 g/s
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261019===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261019 --out runs\evaluation\wk_untrained_base_s20261019.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261019=== 
+[done] untrained_same_config wr=0.1 ci95=[0.03459988874733419, 0.2562108257918408] draws=0 errs=0 illegal=0 len_mean=121.8 1.04 g/s
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261021===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261021 --out runs\evaluation\wk_untrained_base_s20261021.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261021=== 
+[done] untrained_same_config wr=0.43333333333333335 ci95=[0.2737748557646652, 0.6080269299918639] draws=0 errs=0 illegal=0 len_mean=85.3 1.45 g/s
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261022===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261022 --out runs\evaluation\wk_untrained_base_s20261022.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261022=== 
+[done] untrained_same_config wr=0.5333333333333333 ci95=[0.3614229961987329, 0.6976761109230025] draws=0 errs=0 illegal=0 len_mean=112.0 1.10 g/s
+
+D:\pkmn-kaggle>(echo ===CAND_vs_UNTRAINED_seed20261021===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_999424.pt --opponent untrained --games 30 --seed 20261021 --out runs\evaluation\wk_untrained_cand_s20261021.json   2>&1  | findstr /C:"[done]" )  & (for %S in (20261019 20261021 20261022) do (echo ===BASE_vs_UNTRAINED_seed20261021===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261021 --out runs\evaluation\wk_untrained_base_s20261021.json   2>&1  | findstr /C:"[done]" ) ) 
+===CAND_vs_UNTRAINED_seed20261021=== 
+[done] untrained_same_config wr=0.4827586206896552 ci95=[0.3138609015268349, 0.6556897811800529] draws=1 errs=0 illegal=0 len_mean=221.7 0.59 g/s
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261019===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261019 --out runs\evaluation\wk_untrained_base_s20261019.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261019=== 
+[done] untrained_same_config wr=0.2 ci95=[0.0950510717728987, 0.37305696413148254] draws=0 errs=0 illegal=0 len_mean=116.6 0.94 g/s
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261021===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261021 --out runs\evaluation\wk_untrained_base_s20261021.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261021=== 
+[done] untrained_same_config wr=0.43333333333333335 ci95=[0.2737748557646652, 0.6080269299918639] draws=0 errs=0 illegal=0 len_mean=86.1 1.26 g/s
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261022===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261022 --out runs\evaluation\wk_untrained_base_s20261022.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261022=== 
+[done] untrained_same_config wr=0.43333333333333335 ci95=[0.2737748557646652, 0.6080269299918639] draws=0 errs=0 illegal=0 len_mean=83.8 1.42 g/s
+
+D:\pkmn-kaggle>(echo ===CAND_vs_UNTRAINED_seed20261022===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_999424.pt --opponent untrained --games 30 --seed 20261022 --out runs\evaluation\wk_untrained_cand_s20261022.json   2>&1  | findstr /C:"[done]" )  & (for %S in (20261019 20261021 20261022) do (echo ===BASE_vs_UNTRAINED_seed20261022===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261022 --out runs\evaluation\wk_untrained_base_s20261022.json   2>&1  | findstr /C:"[done]" ) ) 
+===CAND_vs_UNTRAINED_seed20261022=== 
+
+D:\pkmn-kaggle>(echo ===BASE_vs_UNTRAINED_seed20261019===   & D:\ProgramFiles\deeplearning\python.exe runs\evaluation\eval_h2h.py --ckpt runs\train-20m-e16-1m\ckpt_500736.pt --opponent untrained --games 30 --seed 20261019 --out runs\evaluation\wk_untrained_base_s20261019.json   2>&1  | findstr /C:"[done]" ) 
+===BASE_vs_UNTRAINED_seed20261019=== 

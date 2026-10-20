@@ -1,0 +1,122 @@
+{
+  "games": [
+    {
+      "game": 0,
+      "steps": 142,
+      "result": 0
+    },
+    {
+      "game": 1,
+      "steps": 221,
+      "result": 0
+    },
+    {
+      "game": 0,
+      "steps": 132,
+      "result": 0
+    },
+    {
+      "game": 1,
+      "steps": 250,
+      "result": -1
+    }
+  ],
+  "n_observations": 745,
+  "ckpt_compat": {
+    "cand_e16_1m": {
+      "ckpt": "runs/train-20m-e16-1m/ckpt_999424.pt",
+      "global_step": 999424,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "old_vs_new_logits_max_absdiff": 0.0,
+      "old_vs_new_value_max_absdiff": 0.0,
+      "bit_identical_logits": true,
+      "old": {
+        "load_strict_ok": true,
+        "missing": [],
+        "unexpected": [],
+        "illegal_sampled": 0,
+        "n": 745,
+        "vocab": 1268,
+        "feat_dim": 59
+      },
+      "new": {
+        "load_strict_ok": true,
+        "missing": [],
+        "unexpected": [],
+        "illegal_sampled": 0,
+        "n": 745,
+        "vocab": 1268,
+        "feat_dim": 59
+      }
+    },
+    "base_500k": {
+      "ckpt": "runs/train-20m-e16-1m/ckpt_500736.pt",
+      "global_step": 500736,
+      "net_config": {
+        "arch": "transformer2",
+        "d_model": 544,
+        "nhead": 8,
+        "nlayers": 5,
+        "ff": 256,
+        "static": false,
+        "would_ko": true,
+        "split_heads": false,
+        "value_categorical": false,
+        "value_atoms": 51,
+        "value_vmax": 1.0
+      },
+      "old_vs_new_logits_max_absdiff": 0.0,
+      "old_vs_new_value_max_absdiff": 0.0,
+      "bit_identical_logits": true,
+      "old": {
+        "load_strict_ok": true,
+        "missing": [],
+        "unexpected": [],
+        "illegal_sampled": 0,
+        "n": 745,
+        "vocab": 1268,
+        "feat_dim": 59
+      },
+      "new": {
+        "load_strict_ok": true,
+        "missing": [],
+        "unexpected": [],
+        "illegal_sampled": 0,
+        "n": 745,
+        "vocab": 1268,
+        "feat_dim": 59
+      }
+    }
+  },
+  "unk_exposure": {
+    "card_slots_scanned": 3828,
+    "ids_ge_1268": 0,
+    "distinct_in_play_ids": 39,
+    "distinct_ids_ge_1268": []
+  },
+  "would_ko": {
+    "main_selects": 483,
+    "with_attack_opts": 136,
+    "annotated_nonzero": 136,
+    "errors": [],
+    "sample": {
+      "5": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  }
+}

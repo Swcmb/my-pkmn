@@ -1,0 +1,50 @@
+{
+  "tar": "/mnt/d/pkmn-kaggle/submission_rl_transformer2_db_migrated.tar.gz",
+  "tar_sha256": "8d4ec3ccdebd563c259efa12bfe1061493dcaff7c1f0154fcfff6f128d58ae71",
+  "staged": {
+    "EN_Card_Data.csv": "05aa569e3003a838b8503a9d928795e5aea7407ab19dd9f3d9c4b1293b6bb4b4",
+    "deck.csv": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724",
+    "model.pt": "5af25c54a194b71416bcb60b963278036a88860846c589164c34539a6a8f4dfa",
+    "main.py": "4ceb231377992c5da40f41c9efa0ba7f14c7ad9c29a7014d253fac5e126e309b",
+    "sdk_cg/sim.py": "00989ad7883c96b8c2fdf7d8d568e206038a89697c62ab797373ef93e8390b1b"
+  },
+  "no_binaries": [],
+  "cases": [
+    {
+      "case": "import_clean",
+      "exit": 0,
+      "json": "{\"case\": \"import_clean\", \"pkg\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg\", \"main_file\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg/main.py\", \"deck_len\": 60, \"engine_lib\": \"/home/ubuntu/pkmn-venv/lib/python3.12/site-packages/kaggle_environments/envs/cabt/cg/libcg.so\", \"sdk_sim_module\": \"sdk_cg.sim\", \"ok\": true}",
+      "stderr": []
+    },
+    {
+      "case": "env_first",
+      "exit": 0,
+      "json": "{\"case\": \"env_first\", \"pkg\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg\", \"env_type\": \"Environment\", \"main_file\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg/main.py\", \"deck_len\": 60, \"engine_lib\": \"/home/ubuntu/pkmn-venv/lib/python3.12/site-packages/kaggle_environments/envs/cabt/cg/libcg.so\", \"sdk_sim_module\": \"sdk_cg.sim\", \"ok\": true}",
+      "stderr": []
+    },
+    {
+      "case": "by_path",
+      "exit": 0,
+      "json": "{\"case\": \"by_path\", \"pkg\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg\", \"has_agent\": true, \"deck_len\": 60, \"engine_lib\": \"/home/ubuntu/pkmn-venv/lib/python3.12/site-packages/kaggle_environments/envs/cabt/cg/libcg.so\", \"ok\": true}",
+      "stderr": []
+    },
+    {
+      "case": "deck_request",
+      "exit": 0,
+      "json": "{\"case\": \"deck_request\", \"pkg\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg\", \"main_file\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg/main.py\", \"deck_len\": 60, \"engine_lib\": \"/home/ubuntu/pkmn-venv/lib/python3.12/site-packages/kaggle_environments/envs/cabt/cg/libcg.so\", \"sdk_sim_module\": \"sdk_cg.sim\", \"unknown_ids\": [], \"engine_accepted\": true, \"errorPlayer\": -1, \"errorType\": 0, \"basic_pokemon_in_deck\": 9, \"first_names\": [\"Dreepy\", \"Dreepy\", \"Dreepy\", \"Dreepy\", \"Drakloak\", \"Drakloak\"]}",
+      "stderr": []
+    },
+    {
+      "case": "games",
+      "exit": 0,
+      "json": "{\"case\": \"games\", \"pkg\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg\", \"main_file\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg/main.py\", \"deck_len\": 60, \"engine_lib\": \"/home/ubuntu/pkmn-venv/lib/python3.12/site-packages/kaggle_environments/envs/cabt/cg/libcg.so\", \"sdk_sim_module\": \"sdk_cg.sim\", \"opponent_deck_source\": \"decks.py:mega_abomasnow\", \"games\": [{\"accepted\": true, \"agent_seat\": 0, \"steps\": 151, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 0, \"steps\": 28, \"result\": 1, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 0, \"steps\": 204, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 1, \"steps\": 165, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 1, \"steps\": 19, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 1, \"steps\": 14, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}], \"n_games\": 6, \"all_accepted\": true, \"total_steps\": 581, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \", \"IndexError: \", \"IndexError: \", \"IndexError: \", \"IndexError: \", \"IndexError: \"], \"results\": [0, 1, 0, 0, 0, 0]}",
+      "stderr": []
+    },
+    {
+      "case": "would_ko",
+      "exit": 0,
+      "json": "{\"case\": \"would_ko\", \"pkg\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg\", \"main_file\": \"/home/ubuntu/pkmn-finalpkg-verify-20261020/pkg/main.py\", \"deck_len\": 60, \"engine_lib\": \"/home/ubuntu/pkmn-venv/lib/python3.12/site-packages/kaggle_environments/envs/cabt/cg/libcg.so\", \"sdk_sim_module\": \"sdk_cg.sim\", \"opponent_deck_source\": \"decks.py:mega_abomasnow\", \"games\": [{\"accepted\": true, \"agent_seat\": 0, \"steps\": 34, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 0, \"steps\": 36, \"result\": 1, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 0, \"steps\": 152, \"result\": 1, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 1, \"steps\": 21, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 1, \"steps\": 28, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}, {\"accepted\": true, \"agent_seat\": 1, \"steps\": 22, \"result\": 0, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \"]}], \"n_games\": 6, \"all_accepted\": true, \"total_steps\": 293, \"illegal_picks\": 0, \"exceptions\": [\"IndexError: \", \"IndexError: \", \"IndexError: \", \"IndexError: \", \"IndexError: \", \"IndexError: \"], \"results\": [0, 1, 1, 0, 0, 0], \"would_ko\": {\"calls\": 172, \"nonempty\": 5, \"positive_ko\": 1, \"positive_win\": 1, \"sample\": {\"ko\": 1.0, \"prizes\": 1.0, \"win\": 1.0}}, \"annotate_would_ko_present\": true, \"search_symbols\": [\"SearchBegin\", \"SearchStep\", \"SearchEnd\", \"SearchRelease\"]}",
+      "stderr": []
+    }
+  ]
+}

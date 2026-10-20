@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_meta2_kyurem_slowking_29.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 0,
+      "losses": 8,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.0,
+      "winrate_ci95": [
+        0.0,
+        0.32440756488388023
+      ],
+      "winrate_all_games": 0.0,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 0,
+        "wins_seat1": 0,
+        "wr_seat0": 0.0,
+        "wr_seat1": 0.0
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 174.375,
+        "median_applies": 195.0,
+        "p95_applies": 212.2,
+        "max_applies": 215,
+        "mean_turn": 77.875,
+        "median_turn": 96.0,
+        "p95_turn": 96.0,
+        "max_turn": 96
+      },
+      "elapsed_s": 4.038433790206909,
+      "games_per_s": 1.9809659921625506
+    }
+  ]
+}

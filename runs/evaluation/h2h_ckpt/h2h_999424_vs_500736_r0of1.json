@@ -1,0 +1,1 @@
+{"tag": "h2h_999424_vs_500736", "a": "runs/train-20m-e16-1m/ckpt_999424.pt", "b": "runs/train-20m-e16-1m/ckpt_500736.pt", "step_a": 999424, "step_b": 500736, "games": 30, "sample": 30, "seed": 777, "rank": 0, "world": 1, "turn_cap": 200, "wins": 20, "decided": 30, "draws": 0}

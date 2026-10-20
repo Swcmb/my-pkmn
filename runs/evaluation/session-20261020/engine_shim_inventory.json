@@ -1,0 +1,35 @@
+{
+  "dir": ".engine-shim/kaggle_environments/envs/cabt/cg",
+  "files": {
+    "cg.dll": {
+      "bytes": 1659392,
+      "sha256": "e084185a17fa1487ee5ffec5cff828d120278f03547838031e2d70bb2a8811fe"
+    },
+    "libcg.so": {
+      "bytes": 1458504,
+      "sha256": "c699020e086eede189c445c7abf9d891a60005ceec6eb91dccd5bbdcd3c0de22"
+    },
+    "libcg-arm64.so": {
+      "bytes": 1413168,
+      "sha256": "95628f0bd20ac5e6f1e142c88cd52c9dc7361f9c371b5599f63b27c110892545"
+    },
+    "libcg.dylib": {
+      "bytes": 1345208,
+      "sha256": "da53cb331277cc8aa0a6181da28afeea28ae2f205372c234eca4a5c9cf3f4672"
+    },
+    "game.py": {
+      "bytes": 2355,
+      "sha256": "eeb7f9c18a21710087a875bdc4e6ae1fbffe83e46d8b8fe571876ed8f45ccd41"
+    },
+    "sim.py": {
+      "bytes": 1649,
+      "sha256": "d39837f069cc7fee54d5f5bd8d10e80bf977155aea32dbf6be5e1430f44fb1e3"
+    },
+    "__init__.py": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "engine_version_claim": "1.33.0 (\u62a5\u544a\u53e3\u5f84)",
+  "total_shim_entries": 1390
+}

@@ -51,6 +51,9 @@ kaggle.json
 # Proprietary engine dump (downloadable from the Kaggle competition; do not publish)
 _engine/
 
+# 本地引擎 shim：官方 kaggle-environments 1.33.0 包副本（含专有 cg.dll/libcg.so，143MB，不入库）
+.engine-shim/
+
 # Local play/serve assets (checkpoints + deck csvs)
 _play/
 

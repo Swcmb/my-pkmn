@@ -44,6 +44,13 @@ from .encoding import TokenEncoder
 from .policy import (build_token_net, bucketed_opt_len, state_keep_np, bucket_for,
                      int32_safe_rows, _DEFAULT_OPT_BUCKETS,
                      MAX_OPTIONS as _P_MAXOPT, OPT_PICKED as _P_OPTPICK)
+from .decks import DECKS
+from .env import load_deck
+
+try:
+    from .decks_generated import GENERATED            # optional 50-archetype expansion
+except Exception:                                     # missing/empty -> {} so `gen` errors loudly
+    GENERATED = {}
 
 # --- deck-pool resolver + LR schedule (absorbed from the retired rl/train.py) ---
 def resolve_deck_pool(name: str) -> list[list[int]]:

@@ -1,0 +1,5 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[strong-eval] team17_不说对不队 forward seed=20261211 games=60
+[strong-eval] team17_不说对不队 forward seed=20261212 games=60
+    -> wr=0.6917 CI[0.6042,0.7673] decided=120 errs=0 illegal=0 turn_cap=0
+[strong-eval] team17_不说对不队 reverse seed=20261211 games=60

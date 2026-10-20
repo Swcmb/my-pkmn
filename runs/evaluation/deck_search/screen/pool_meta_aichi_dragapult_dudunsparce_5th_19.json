@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_meta_aichi_dragapult_dudunsparce_5th_19.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 7,
+      "losses": 1,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.875,
+      "winrate_ci95": [
+        0.5291118177871466,
+        0.9775825085499433
+      ],
+      "winrate_all_games": 0.875,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 4,
+        "wins_seat1": 3,
+        "wr_seat0": 1.0,
+        "wr_seat1": 0.75
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 135.125,
+        "median_applies": 123.5,
+        "p95_applies": 189.69999999999996,
+        "max_applies": 217,
+        "mean_turn": 50.75,
+        "median_turn": 51.0,
+        "p95_turn": 68.65,
+        "max_turn": 69
+      },
+      "elapsed_s": 3.8964951038360596,
+      "games_per_s": 2.053127178864945
+    }
+  ]
+}

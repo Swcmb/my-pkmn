@@ -1,0 +1,158 @@
+{
+  "library": {
+    "path": "D:\\pkmn-kaggle\\EN_Card_Data.csv",
+    "sha256": "05aa569e3003a838b8503a9d928795e5aea7407ab19dd9f3d9c4b1293b6bb4b4",
+    "vocab_size": 1268,
+    "unique_cards": 1267
+  },
+  "engine": {
+    "cards": 1431,
+    "attacks": 1755
+  },
+  "deck_sources": {
+    "dragapult_newlib": {
+      "path": "D:\\pkmn-kaggle\\runs\\evaluation\\deck_search\\dragapult_deck.csv",
+      "sha256": "30c8c7365c75f38fd6e7e1d8543c42ce7055ed6fd1c6e9eb244e44484b78e724"
+    },
+    "current_agent_deck": {
+      "path": "D:\\pkmn-kaggle\\agent\\deck.csv",
+      "sha256": "1156379af39e71bc83eecb50d1e04c5cc480501d293621fcc89c2d355d99be78"
+    },
+    "fixture_iono": {
+      "path": "rl/decks.py:_DECKS_SPEC",
+      "fixture": "iono"
+    },
+    "fixture_mega_lucario": {
+      "path": "rl/decks.py:_DECKS_SPEC",
+      "fixture": "mega_lucario"
+    },
+    "fixture_mega_abomasnow": {
+      "path": "rl/decks.py:_DECKS_SPEC",
+      "fixture": "mega_abomasnow"
+    }
+  },
+  "python_checks": {
+    "dragapult_newlib": {
+      "label": "dragapult_newlib",
+      "cards": 60,
+      "errors": [],
+      "evolution_notes": [],
+      "distinct_names": 22,
+      "ace_spec_total": 1,
+      "basics": 9
+    },
+    "current_agent_deck": {
+      "label": "current_agent_deck",
+      "cards": 60,
+      "errors": [],
+      "evolution_notes": [],
+      "distinct_names": 11,
+      "ace_spec_total": 1,
+      "basics": 6
+    },
+    "fixture_iono": {
+      "label": "fixture_iono",
+      "cards": 60,
+      "errors": [],
+      "evolution_notes": [],
+      "distinct_names": 15,
+      "ace_spec_total": 1,
+      "basics": 9
+    },
+    "fixture_mega_lucario": {
+      "label": "fixture_mega_lucario",
+      "cards": 60,
+      "errors": [],
+      "evolution_notes": [],
+      "distinct_names": 17,
+      "ace_spec_total": 1,
+      "basics": 10
+    },
+    "fixture_mega_abomasnow": {
+      "label": "fixture_mega_abomasnow",
+      "cards": 60,
+      "errors": [],
+      "evolution_notes": [],
+      "distinct_names": 9,
+      "ace_spec_total": 1,
+      "basics": 6
+    }
+  },
+  "engine_checks": {
+    "dragapult_newlib x dragapult_newlib": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "dragapult_newlib x current_agent_deck": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "dragapult_newlib x fixture_iono": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "dragapult_newlib x fixture_mega_lucario": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "dragapult_newlib x fixture_mega_abomasnow": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "current_agent_deck x current_agent_deck": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "current_agent_deck x fixture_iono": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "current_agent_deck x fixture_mega_lucario": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "current_agent_deck x fixture_mega_abomasnow": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "fixture_iono x fixture_iono": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "fixture_iono x fixture_mega_lucario": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "fixture_iono x fixture_mega_abomasnow": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "fixture_mega_lucario x fixture_mega_lucario": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "fixture_mega_lucario x fixture_mega_abomasnow": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    },
+    "fixture_mega_abomasnow x fixture_mega_abomasnow": {
+      "accepted": true,
+      "errorPlayer": -1,
+      "errorType": 0
+    }
+  }
+}

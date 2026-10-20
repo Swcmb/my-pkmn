@@ -1,0 +1,53 @@
+{
+  "games": 12,
+  "wins": 5,
+  "losses": 7,
+  "draws": 0,
+  "errors": 0,
+  "illegal_len": 0,
+  "illegal_index": 0,
+  "duplicate_index": 0,
+  "decisions": 289,
+  "step_ms_max": 78.77329999610083,
+  "step_ms_sum": 10729.615399926843,
+  "game_s_max": 3.9559917000005953,
+  "over_100ms": 0,
+  "over_10min": 0,
+  "step_ms_p50": 36.17,
+  "step_ms_p99": 70.8714000065811,
+  "step_ms_top5": [
+    65.51,
+    70.87,
+    71.5,
+    73.36,
+    78.77
+  ],
+  "warmup_first10_ms": [
+    30.12,
+    28.45,
+    32.06,
+    42.91,
+    34.43,
+    39.37,
+    33.72,
+    35.78,
+    36.61,
+    39.0
+  ],
+  "over_100ms_after_warmup": 0,
+  "step_ms_mean": 37.12669688556001,
+  "threads": 2,
+  "import_s": 0.1,
+  "peak_rss_mb": 721.0,
+  "verdict": {
+    "单步100ms(全量)": true,
+    "单步100ms(预热后)": true,
+    "单局10分钟": true,
+    "内存2GB": true,
+    "返回长度合法": true,
+    "返回下标合法": true,
+    "无重复下标": true,
+    "无异常": true
+  },
+  "all_pass": true
+}

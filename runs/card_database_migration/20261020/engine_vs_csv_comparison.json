@@ -1,0 +1,220 @@
+{
+  "engine_card_count": 1431,
+  "old_count": 1267,
+  "new_count": 1267,
+  "new_vs_engine": {
+    "shared_ids": 1267,
+    "only_in_engine": [
+      1268,
+      1269,
+      1270,
+      1271,
+      1272,
+      1273,
+      1274,
+      1275,
+      1276,
+      1277,
+      1278,
+      1279,
+      1280,
+      1281,
+      1282,
+      1283,
+      1284,
+      1285,
+      1286,
+      1287
+    ],
+    "only_in_engine_count": 164,
+    "only_in_new": [],
+    "only_in_new_count": 0,
+    "diff_counts": {
+      "energy": 1,
+      "attacks": 1
+    },
+    "name_examples": []
+  },
+  "old_vs_engine": {
+    "shared_ids": 1267,
+    "only_in_engine_count": 164,
+    "only_in_old_count": 0,
+    "diff_counts": {
+      "cardTypeName": 1267,
+      "energy": 230,
+      "attacks": 345,
+      "prev": 5
+    },
+    "name_examples": []
+  },
+  "old_vs_new": {
+    "shared_ids": 1267,
+    "added": 0,
+    "removed": 0,
+    "diff_counts": {
+      "cardTypeName": 1267,
+      "energy": 230,
+      "attacks": 345,
+      "prev": 5
+    },
+    "name_examples": []
+  },
+  "engine_extra_cards_sample": [
+    {
+      "id": 1268,
+      "name": "Nitro {R} Energy",
+      "type": "SPECIAL_ENERGY"
+    },
+    {
+      "id": 1269,
+      "name": "Bubbly {W} Energy",
+      "type": "SPECIAL_ENERGY"
+    },
+    {
+      "id": 1270,
+      "name": "Magnetic {M} Energy",
+      "type": "SPECIAL_ENERGY"
+    },
+    {
+      "id": 1271,
+      "name": "Voltaic {L} Energy",
+      "type": "SPECIAL_ENERGY"
+    },
+    {
+      "id": 1272,
+      "name": "Shadowy {D} Energy",
+      "type": "SPECIAL_ENERGY"
+    },
+    {
+      "id": 1273,
+      "name": "Weedle",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1274,
+      "name": "Kakuna",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1275,
+      "name": "Beedrill ex",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1276,
+      "name": "Carnivine",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1277,
+      "name": "Chespin",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1278,
+      "name": "Quilladin",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1279,
+      "name": "Chesnaught",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1280,
+      "name": "Vulpix",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1281,
+      "name": "Ninetales",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1282,
+      "name": "Ho-Oh",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1283,
+      "name": "Fennekin",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1284,
+      "name": "Braixen",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1285,
+      "name": "Delphox",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1286,
+      "name": "Litleo",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1287,
+      "name": "Mega Pyroar ex",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1288,
+      "name": "Remoraid",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1289,
+      "name": "Octillery",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1290,
+      "name": "Delibird",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1291,
+      "name": "Keldeo",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1292,
+      "name": "Froakie",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1293,
+      "name": "Frogadier",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1294,
+      "name": "Mega Greninja ex",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1295,
+      "name": "Bergmite",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1296,
+      "name": "Avalugg",
+      "type": "POKEMON"
+    },
+    {
+      "id": 1297,
+      "name": "Wimpod",
+      "type": "POKEMON"
+    }
+  ],
+  "engine_id_gap_check": {
+    "engine_ids_contiguous_1_to_max": true,
+    "engine_max_id": 1431,
+    "new_max_id": 1267,
+    "old_max_id": 1267
+  }
+}

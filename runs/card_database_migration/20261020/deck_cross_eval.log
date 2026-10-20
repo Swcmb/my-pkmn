@@ -1,0 +1,38 @@
+[shim] sdk_cg.sim -> 平台引擎别名已注入（补 7 声明）
+[run] seed=20261020 dragapult_newlib(cand) vs current_agent_deck(opp) games=40
+      wr=0.45 ci95=[0.3070530781090492, 0.6017090820106795] draws=0 errs=0 illegal=0 len=84.8 0.93 g/s
+[run] seed=20261020 dragapult_newlib(cand) vs fixture_iono(opp) games=40
+      wr=0.5 ci95=[0.35199526933465386, 0.6480047306653461] draws=0 errs=0 illegal=0 len=96.2 1.36 g/s
+[run] seed=20261020 current_agent_deck(cand) vs dragapult_newlib(opp) games=40
+      wr=0.5 ci95=[0.35199526933465386, 0.6480047306653461] draws=0 errs=0 illegal=0 len=86.4 1.46 g/s
+[run] seed=20261020 current_agent_deck(cand) vs fixture_iono(opp) games=40
+      wr=0.6 ci95=[0.44595893660346186, 0.7365167431570807] draws=0 errs=0 illegal=0 len=103.0 1.26 g/s
+[run] seed=20261020 fixture_iono(cand) vs dragapult_newlib(opp) games=40
+      wr=0.5 ci95=[0.35199526933465386, 0.6480047306653461] draws=0 errs=0 illegal=0 len=97.8 1.29 g/s
+[run] seed=20261020 fixture_iono(cand) vs current_agent_deck(opp) games=40
+      wr=0.35 ci95=[0.2213452887317629, 0.5049411916274231] draws=0 errs=0 illegal=0 len=94.2 1.32 g/s
+[run] seed=20261020 dragapult_newlib vs random_legal (mirror)
+      wr=0.475 ci95=[0.32935470112678905, 0.6250263789330752] draws=0 errs=0 illegal=0
+[run] seed=20261020 current_agent_deck vs random_legal (mirror)
+      wr=0.175 ci95=[0.0874541374603592, 0.31949990331787714] draws=0 errs=0 illegal=0
+[run] seed=20261020 fixture_iono vs random_legal (mirror)
+      wr=0.275 ci95=[0.16108016247667334, 0.4283495580621057] draws=0 errs=0 illegal=0
+[run] seed=20261021 dragapult_newlib(cand) vs current_agent_deck(opp) games=40
+      wr=0.5 ci95=[0.35199526933465386, 0.6480047306653461] draws=0 errs=0 illegal=0 len=84.3 1.30 g/s
+[run] seed=20261021 dragapult_newlib(cand) vs fixture_iono(opp) games=40
+      wr=0.525 ci95=[0.3749736210669247, 0.670645298873211] draws=0 errs=0 illegal=0 len=92.0 1.26 g/s
+[run] seed=20261021 current_agent_deck(cand) vs dragapult_newlib(opp) games=40
+      wr=0.475 ci95=[0.32935470112678905, 0.6250263789330752] draws=0 errs=0 illegal=0 len=84.7 1.39 g/s
+[run] seed=20261021 current_agent_deck(cand) vs fixture_iono(opp) games=40
+      wr=0.475 ci95=[0.32935470112678905, 0.6250263789330752] draws=0 errs=0 illegal=0 len=104.8 0.57 g/s
+[run] seed=20261021 fixture_iono(cand) vs dragapult_newlib(opp) games=40
+      wr=0.55 ci95=[0.3982909179893206, 0.6929469218909509] draws=0 errs=0 illegal=0 len=96.8 0.63 g/s
+[run] seed=20261021 fixture_iono(cand) vs current_agent_deck(opp) games=40
+      wr=0.575 ci95=[0.4219506854199107, 0.7149060744004961] draws=0 errs=0 illegal=0 len=94.8 0.59 g/s
+[run] seed=20261021 dragapult_newlib vs random_legal (mirror)
+      wr=0.525 ci95=[0.3749736210669247, 0.670645298873211] draws=0 errs=0 illegal=0
+[run] seed=20261021 current_agent_deck vs random_legal (mirror)
+      wr=0.15 ci95=[0.0706118771732036, 0.2907232436648971] draws=0 errs=0 illegal=0
+[run] seed=20261021 fixture_iono vs random_legal (mirror)
+      wr=0.225 ci95=[0.12316091323540744, 0.37503096742310027] draws=0 errs=0 illegal=0
+[saved] D:\pkmn-kaggle\runs\card_database_migration\20261020\deck_cross_eval.json

@@ -1,0 +1,30 @@
+C:\Users\Swcmb\AppData\Local\Temp\opencode\tarcheck.py:21: DeprecationWarning: Python 3.14 will, by default, filter extracted tar archives and reject files or modify their metadata. Use the filter argument to control this behavior.
+  t.extractall(CLEAN)
+== tar 成员 ==
+  EN_Card_Data.csv                 359232 B
+  attack_data.py                    39651 B
+  buff_data.py                       1379 B
+  card_features.py                   6914 B
+  deck.csv                            191 B
+  decks.py                           5008 B
+  effect_data.py                    54952 B
+  enc_constants.py                   5812 B
+  encoding.py                       83913 B
+  main.py                            2883 B
+  model.pt                       81239775 B
+  policy.py                         44889 B
+  sdk_cg                                0 B
+  sdk_cg/__init__.py                    0 B
+  sdk_cg/api.py                     26933 B
+  sdk_cg/game.py                     2225 B
+  sdk_cg/sim.py                      2273 B
+  sdk_cg/utils.py                    1970 B
+  search_agent.py                   24258 B
+  member_count = 19
+  含二进制(.dll/.so/.dylib) = []
+
+== 按原样解包 → 干净环境 import/推理 ==
+import main: OK; _WK_ON = True
+deck 请求分支: OK, len = 60
+sdk_cg import: FAIL -> FileNotFoundError: Could not find module 'C:\Users\Swcmb\AppData\Local\Temp\opencode\subclean\sdk_cg\cg.dll' (or one of its dependencies). Try using the full path with constructor syntax.
+  => 首个需要 would_ko 标注的决策会在 search_agent.would_ko_flags 内部此处抛出

@@ -1,0 +1,27 @@
+{
+  "n_sims": 40,
+  "n_det": 2,
+  "threads": 2,
+  "paired_decisions": 5,
+  "engine": "sdk_cg.game + .engine-shim libcg (make() 不可用：shim __init__ 为空桩)",
+  "modes": {
+    "greedy": {
+      "samples": 5,
+      "mean_ms": 60.3,
+      "p50_ms": 44.3,
+      "p95_ms": 73.4,
+      "max_ms": 103.1,
+      "over_100ms": 1,
+      "fits_100ms": false
+    },
+    "mcts": {
+      "samples": 5,
+      "mean_ms": 2504.9,
+      "p50_ms": 40.9,
+      "p95_ms": 5577.7,
+      "max_ms": 6835.3,
+      "over_100ms": 2,
+      "fits_100ms": false
+    }
+  }
+}

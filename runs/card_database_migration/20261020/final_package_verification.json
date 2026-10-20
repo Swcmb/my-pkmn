@@ -1,0 +1,112 @@
+{
+  "tar": {
+    "path": "D:\\pkmn-kaggle\\submission_rl_transformer2_db_migrated.tar.gz",
+    "exists": true,
+    "size_bytes": 75126979,
+    "sha256": "8d4ec3ccdebd563c259efa12bfe1061493dcaff7c1f0154fcfff6f128d58ae71",
+    "members": {
+      "EN_Card_Data.csv": 170873,
+      "attack_data.py": 39651,
+      "buff_data.py": 1379,
+      "card_features.py": 6914,
+      "deck.csv": 321,
+      "decks.py": 5008,
+      "effect_data.py": 54952,
+      "enc_constants.py": 5812,
+      "encoding.py": 83913,
+      "main.py": 2883,
+      "model.pt": 81239775,
+      "policy.py": 44889,
+      "sdk_cg": 0,
+      "sdk_cg/__init__.py": 0,
+      "sdk_cg/api.py": 26933,
+      "sdk_cg/game.py": 2225,
+      "sdk_cg/sim.py": 3721,
+      "sdk_cg/utils.py": 1970,
+      "search_agent.py": 24258
+    },
+    "n_members": 19,
+    "proprietary_binaries": []
+  },
+  "checks": {
+    "deck_matches_best_deck": true,
+    "library_matches_migrated_authority": true,
+    "deck_lines": 60,
+    "sdk_cg_py_only": true,
+    "model_pt_keys": [
+      "global_step",
+      "net",
+      "net_config"
+    ],
+    "global_step_matches": true,
+    "net_config_matches": true,
+    "n_tensors": 88,
+    "tensors_bitwise_equal": true,
+    "first_tensor_shapes_equal": true
+  },
+  "runtime": {
+    "exit": 0,
+    "stdout_json": [
+      "{\"pkg\": \"D:\\\\pkmn-kaggle\\\\runs\\\\card_database_migration\\\\20261020\\\\final_pkg_verify\", \"deck_len\": 60, \"games\": [{\"seat\": 0, \"accepted\": true, \"steps\": 84, \"result\": 1, \"illegal_shape\": 0, \"exceptions\": []}, {\"seat\": 1, \"accepted\": true, \"steps\": 113, \"result\": 1, \"illegal_shape\": 0, \"exceptions\": [\"IndexError: \"]}], \"first_decision\": [1], \"consecutive\": [[0], [4], [5], [5], [6]], \"would_ko\": {\"calls\": 40, \"nonempty\": 0, \"positive_ko\": 0}, \"loads\": [\"cg.dll\"], \"game_initialize_calls\": 1}"
+    ],
+    "stderr_tail": [],
+    "detail": {
+      "pkg": "D:\\pkmn-kaggle\\runs\\card_database_migration\\20261020\\final_pkg_verify",
+      "deck_len": 60,
+      "games": [
+        {
+          "seat": 0,
+          "accepted": true,
+          "steps": 84,
+          "result": 1,
+          "illegal_shape": 0,
+          "exceptions": []
+        },
+        {
+          "seat": 1,
+          "accepted": true,
+          "steps": 113,
+          "result": 1,
+          "illegal_shape": 0,
+          "exceptions": [
+            "IndexError: "
+          ]
+        }
+      ],
+      "first_decision": [
+        1
+      ],
+      "consecutive": [
+        [
+          0
+        ],
+        [
+          4
+        ],
+        [
+          5
+        ],
+        [
+          5
+        ],
+        [
+          6
+        ]
+      ],
+      "would_ko": {
+        "calls": 40,
+        "nonempty": 0,
+        "positive_ko": 0
+      },
+      "loads": [
+        "cg.dll"
+      ],
+      "game_initialize_calls": 1
+    }
+  },
+  "versions": {
+    "python": "3.12.14",
+    "torch": "2.14.0+cu130",
+    "numpy": "2.5.3"
+  }
+}

@@ -101,6 +101,27 @@ def opp_sequence(opp_weights, n_games, seed):
     return seq
 
 
+_NATIVE_AVAILABLE = None
+
+
+def _native_encode_available():
+    """原生编码需要 encode_native 模块 + 引擎的 GetBinaryObs/AdvanceLog 导出。
+    官方 kaggle_environments 引擎没有这两个符号，此时回退 Python 编码（语义相同的慢路径）。"""
+    global _NATIVE_AVAILABLE
+    if _NATIVE_AVAILABLE is None:
+        try:
+            import importlib.util
+            if importlib.util.find_spec("encode_native") is None:
+                _NATIVE_AVAILABLE = False
+            else:
+                from .env import _native_handles
+                _holder, lib = _native_handles()
+                _NATIVE_AVAILABLE = hasattr(lib, "GetBinaryObs") and hasattr(lib, "AdvanceLog")
+        except Exception:
+            _NATIVE_AVAILABLE = False
+    return _NATIVE_AVAILABLE
+
+
 def _gate_env(deck_a, deck_b, encoder, seed):
     """A TwoSidedSelfPlayEnv pinned to ONE ordered deck pair (seat0 = deck_a, seat1 = deck_b) --
     the gate drives BOTH seats externally, so the two-sided env (which exposes every decision as
@@ -112,7 +133,8 @@ def _gate_env(deck_a, deck_b, encoder, seed):
         def _sample_decks(self):
             self._deck_idx = (0, 1)
             return self.decks[0], self.decks[1]
-    return _Pinned(decks=[deck_a, deck_b], encoder=encoder, seed=seed, native_encode=True)
+    return _Pinned(decks=[deck_a, deck_b], encoder=encoder, seed=seed,
+                   native_encode=_native_encode_available())
 
 
 @torch.no_grad()
@@ -216,6 +238,14 @@ def gated_winrate(net, teacher, pool, n_games, enc, device, seed=1234, mode="mir
 import numpy as np
 import torch
 
+
+
+def _field_candidates(n_decks, n_games):
+    """Field gate 的候选牌组序列：固定轮转，纯函数（每次 gate 完全相同），均匀覆盖池。
+    mirror 模式下每个元素展开为 (c, c)，cross 模式下与 opp_sequence 逐局配对。"""
+    if n_decks <= 0:
+        raise ValueError("n_decks must be positive")
+    return [g % n_decks for g in range(n_games)]
 
 
 @torch.no_grad()

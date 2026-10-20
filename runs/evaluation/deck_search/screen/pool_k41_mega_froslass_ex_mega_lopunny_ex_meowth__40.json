@@ -1,0 +1,69 @@
+{
+  "cand_ckpt": "runs\\train-20m-e16-1m\\ckpt_999424.pt",
+  "cand_step": 999424,
+  "mode": "mirror",
+  "games": 8,
+  "seed": 20261019,
+  "live": 1,
+  "turn_cap": 200,
+  "pool_json": "runs/evaluation/deck_search/pools/pool_k41_mega_froslass_ex_mega_lopunny_ex_meowth__40.json",
+  "device": "cuda",
+  "torch": "2.14.0+cu130",
+  "results": [
+    {
+      "opponent": "random",
+      "label": "random_legal",
+      "games": 8,
+      "mode": "mirror",
+      "seed": 20261019,
+      "meta": {},
+      "wins": 3,
+      "losses": 5,
+      "decided": 8,
+      "draws": 0,
+      "errs": 0,
+      "err_samples": [],
+      "draw_breakdown": {
+        "turn_cap": 0,
+        "max_steps": 0,
+        "true_draw": 0
+      },
+      "winrate": 0.375,
+      "winrate_ci95": [
+        0.13684428582359737,
+        0.6942576053973727
+      ],
+      "winrate_all_games": 0.375,
+      "seat_balance": {
+        "games_seat0": 4,
+        "games_seat1": 4,
+        "wins_seat0": 1,
+        "wins_seat1": 2,
+        "wr_seat0": 0.25,
+        "wr_seat1": 0.5
+      },
+      "illegal": {
+        "clamp": 0,
+        "forfeit": 0,
+        "total": 0,
+        "rate_per_decision": 0.0,
+        "clamp_candidate": 0,
+        "clamp_opponent": 0,
+        "forfeit_candidate": 0,
+        "forfeit_opponent": 0
+      },
+      "length": {
+        "mean_applies": 115.875,
+        "median_applies": 110.5,
+        "p95_applies": 168.1,
+        "max_applies": 173,
+        "mean_turn": 46.75,
+        "median_turn": 45.0,
+        "p95_turn": 75.39999999999999,
+        "max_turn": 81
+      },
+      "elapsed_s": 3.305319309234619,
+      "games_per_s": 2.420341047731477
+    }
+  ]
+}
