@@ -94,6 +94,8 @@ def main():
     ap.add_argument("--games", type=int, default=60, help="每队每方向、每种子的局数")
     ap.add_argument("--seeds", default="20261211,20261212")
     ap.add_argument("--quick", action="store_true", help="只验证跑通，结论无效")
+    ap.add_argument("--resume", action="store_true",
+                    help="沿用 --out-json 里已完成的格，只补跑缺的（崩溃后用）")
     ap.add_argument("--out-json", default=os.path.join(SESS, "distill", "strong_deck_eval.json"))
     ap.add_argument("--out-md", default=os.path.join(SESS, "distill", "strong_deck_eval.md"))
     a = ap.parse_args()
@@ -140,42 +142,87 @@ def main():
     h.CAND_CKPT = os.path.abspath(a.ckpt)
     ship = read_deck(SHIP_DECK)
 
+    def build_ev(results, done):
+        return {"candidate_ckpt": os.path.abspath(a.ckpt), "candidate_sha256": sha(a.ckpt),
+                "candidate_global_step": step, "candidate_net_config": cfg,
+                "ship_deck": os.path.abspath(SHIP_DECK), "ship_deck_sha256": sha(SHIP_DECK),
+                "seeds": seeds, "games_per_seed_per_direction": games, "quick": a.quick,
+                "turn_cap": os.environ.get("PKMN_TURN_CAP"),
+                "native_encode": False, "would_ko": True, "device": str(dev),
+                "cells_done": done, "cells_total": len(decks) * 2,
+                "random_reference": {"wr": RANDOM_REF_WR, "ci95": RANDOM_REF_CI,
+                                     "note": "对随机合法策略的既有基线，并列呈现，不与本节混算"},
+                "reconstruction_confidence": conf}
+
+    def save(results, done):
+        """每格落一次盘：一次 CUDA 抖动不该把已跑完的 11/12 格一起带走。"""
+        with open(a.out_json, "w", encoding="utf-8") as f:
+            json.dump({"evidence": build_ev(results, done), "results": results},
+                      f, ensure_ascii=False, indent=1)
+        write_md(a.out_md, build_ev(results, done), results)
+
+    os.makedirs(os.path.dirname(os.path.abspath(a.out_json)), exist_ok=True)
+    os.makedirs(os.path.dirname(os.path.abspath(a.out_md)), exist_ok=True)
+    done_cells = 0
     results = []
-    for label, path, kind in decks:
+    if a.resume and os.path.exists(a.out_json):
+        prev = json.load(open(a.out_json, encoding="utf-8"))
+        results = prev.get("results", [])
+        done_cells = len(results)
+        print(f"[strong-eval] --resume：沿用已有 {done_cells} 格结果", flush=True)
+    finished = {(r["deck_label"], r["direction"]) for r in results}
+
+    for di, (label, path, kind) in enumerate(decks):
         deck = read_deck(path)
         for direction in ("forward", "reverse"):
+            if (label, direction) in finished:
+                print(f"[strong-eval] skip {label} {direction}（已在结果里）", flush=True)
+                continue
             pool = [ship] if direction == "forward" else [deck]
             npool = [deck] if direction == "forward" else [ship]
             runs = []
             for sd in seeds:
                 print(f"[strong-eval] {label} {direction} seed={sd} games={games}", flush=True)
-                runs.append(h.run_one("random", games, sd, pool, npool, dev, ct, enc,
-                                      1, "cross", net, a.ckpt))
+                try:
+                    runs.append(h.run_one("random", games, sd, pool, npool, dev, ct, enc,
+                                          1, "cross", net, a.ckpt))
+                except Exception as e:
+                    # 单格异常（如瞬时 CUDA 故障）记进 cells_error，整轮继续
+                    print(f"    !! {label} {direction} seed={sd} 失败："
+                          f"{type(e).__name__}: {str(e)[:160]}", flush=True)
+                    torch.cuda.empty_cache()
+            if not runs:
+                results.append({"deck_label": label, "direction": direction, "cells_error":
+                                "所有种子均失败，本格无数据", "wr": None, "ci95": [0.0, 1.0],
+                                "decided": 0, "games": 0, "draws": 0, "errs": 0,
+                                "illegal": 0, "turn_cap": 0, "mean_turn": 0.0,
+                                "seat0": {"games": 0, "wins": 0}, "seat1": {"games": 0, "wins": 0},
+                                "per_seed": [], "deck_path": os.path.abspath(path),
+                                "deck_sha256": sha(path), "deck_kind": kind,
+                                "candidate_pilots": ("best_deck" if direction == "forward"
+                                                     else "该副牌"),
+                                "opponent_policy": "random_legal"})
+                done_cells += 1
+                save(results, done_cells)
+                continue
             m = merge(runs)
             m.update({"deck_label": label, "direction": direction, "deck_path": os.path.abspath(path),
                       "deck_sha256": sha(path), "deck_kind": kind,
+                      "seeds_ok": [r["seed"] for r in runs],
                       "candidate_pilots": ("best_deck" if direction == "forward" else "该副牌"),
                       "opponent_policy": "random_legal"})
             results.append(m)
+            done_cells += 1
+            save(results, done_cells)
             print(f"    -> wr={'-' if m['wr'] is None else round(m['wr'], 4)} "
                   f"CI[{m['ci95'][0]:.4f},{m['ci95'][1]:.4f}] decided={m['decided']} "
                   f"errs={m['errs']} illegal={m['illegal']} turn_cap={m['turn_cap']}", flush=True)
 
-    ev = {"candidate_ckpt": os.path.abspath(a.ckpt), "candidate_sha256": sha(a.ckpt),
-          "candidate_global_step": step, "candidate_net_config": cfg,
-          "ship_deck": os.path.abspath(SHIP_DECK), "ship_deck_sha256": sha(SHIP_DECK),
-          "seeds": seeds, "games_per_seed_per_direction": games, "quick": a.quick,
-          "turn_cap": os.environ.get("PKMN_TURN_CAP"),
-          "native_encode": False, "would_ko": True, "device": str(dev),
-          "random_reference": {"wr": RANDOM_REF_WR, "ci95": RANDOM_REF_CI,
-                               "note": "对随机合法策略的既有基线，并列呈现，不与本节混算"},
-          "reconstruction_confidence": conf}
-    os.makedirs(os.path.dirname(a.out_json), exist_ok=True)
-    with open(a.out_json, "w", encoding="utf-8") as f:
-        json.dump({"evidence": ev, "results": results}, f, ensure_ascii=False, indent=1)
-    write_md(a.out_md, ev, results)
-    print("\n[saved]", a.out_json)
+    save(results, done_cells)
+    print(f"\n[saved] {done_cells}/{len(decks) * 2} 格 -> {a.out_json}")
     print("[saved]", a.out_md)
+    if done_cells < len(decks) * 2:
+        print(f"WARNING: 仅完成 {done_cells}/{len(decks) * 2} 格，报告不完整")
     if a.quick:
         print("[quick] 仅供脚本验证，不作为结论")
 
